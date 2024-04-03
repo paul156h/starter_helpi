@@ -27,6 +27,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <p>James Paul Healy</p>
         <p> 
           Matthew Montalvo 
         </p>  
