@@ -24,6 +24,9 @@ function App() {
   function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
     setKey(event.target.value);
   }
+  function navigateToCareerAssessmentPage() {
+    window.location.href = '/Basic-Career-assessment';
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -60,6 +63,7 @@ function App() {
           Submit
         </Button>
       </Form>
+      <Button className="Basic-Career-Assessment-Button" onClick={navigateToCareerAssessmentPage}>Basic Career Asessment Page</Button>
     </div>
   );
 }
