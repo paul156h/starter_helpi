@@ -1,0 +1,11 @@
+.navLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+}
+
+.home-btn {
+  background-color: aqua;
+  margin: 0 1rem;
+}

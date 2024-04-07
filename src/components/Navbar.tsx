@@ -1,24 +1,20 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "./Navbar.css";
 
-function Navbar() {
+export function Navbar() {
   return (
-    <div className="navbar">
-      <div className="navbar-logo">CISC275</div>
-      <ul className="navbar-menu">
-        <Button>
-          <Link to="/">Home</Link>
-        </Button>
-        <Button>
-          <Link to="/BasicPage">Basic Page</Link>
-        </Button>
-        <Button>
-          <Link to="/BasicPage">Basic Page</Link>
-        </Button>
-      </ul>
+    <div className="navLinks">
+      <Link to="/">
+        <Button className="home-btn">Home</Button>
+      </Link>
+      <Link to="/basicPage">
+        <Button className="home-btn">Basic</Button>
+      </Link>
+      <Link to="/detailedPage">
+        <Button className="home-btn">Detailed</Button>
+      </Link>
     </div>
   );
 }
-
-export default Navbar;
