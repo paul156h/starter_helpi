@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import "./HomePage.css";
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
@@ -29,9 +28,9 @@ export function HomePage() {
   }
   return (
     <div>
-      <header className="App-header">
+      <div className="mainHome">
         <h1>THIS IS HOME PAGE</h1>
-      </header>
+      </div>
       <Form>
         <Form.Label>API Key:</Form.Label>
         <Form.Control

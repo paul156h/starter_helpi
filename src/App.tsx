@@ -1,6 +1,5 @@
 import "./App.css";
 import "./components/Navbar.css";
-import { Button, Form } from "react-bootstrap";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { HomePage } from "./pages/homePage";
 import { BasicPage } from "./pages/basicPage";

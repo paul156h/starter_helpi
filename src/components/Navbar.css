@@ -2,10 +2,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1rem;
+  padding: 1rem;
+  background-color: #1c768f;
 }
 
 .home-btn {
-  background-color: aqua;
+  background-color: #fa991c;
   margin: 0 1rem;
+  border: none;
+  padding: 0.5rem 0.9rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  color: #fff;
 }
