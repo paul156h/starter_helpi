@@ -2,9 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import { HomePage } from "./pages/homePage";
-import { BasicPage } from "./pages/basicPage";
-import { DetailedPage } from "./pages/detailedPage";
+
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
