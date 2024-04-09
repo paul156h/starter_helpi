@@ -3,7 +3,7 @@
 > react-scripts test --coverage
 
 FAIL src/App.test.tsx
-  ✕ renders learn react link (48 ms)
+  ✕ renders learn react link (49 ms)
 
   ● renders learn react link
 
@@ -76,12 +76,6 @@ FAIL src/App.test.tsx
                 [0mSubmit[0m
               [36m</button>[39m
             [36m</form>[39m
-            [36m<button[39m
-              [33mclass[39m=[32m"Basic-Career-Assessment-Button btn btn-primary"[39m
-              [33mtype[39m=[32m"button"[39m
-            [36m>[39m
-              [0mBasic Career Asessment Page[0m
-            [36m</button>[39m
           [36m</div>[39m
         [36m</main>[39m
       [36m</div>[39m
@@ -108,7 +102,7 @@ FAIL src/App.test.tsx
 ---------------------|---------|----------|---------|---------|-------------------
 File                 | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 ---------------------|---------|----------|---------|---------|-------------------
-All files            |   33.33 |    16.66 |   36.36 |   33.33 |                   
+All files            |   34.61 |    16.66 |      40 |   34.61 |                   
  src                 |   15.38 |        0 |      50 |   15.38 |                   
   App.tsx            |     100 |      100 |     100 |     100 |                   
   Layout.jsx         |     100 |      100 |     100 |     100 |                   
@@ -116,13 +110,13 @@ All files            |   33.33 |    16.66 |   36.36 |   33.33 |
   reportWebVitals.ts |       0 |        0 |       0 |       0 | 3-10              
  src/components      |     100 |      100 |     100 |     100 |                   
   Navbar.tsx         |     100 |      100 |     100 |     100 |                   
- src/pages           |   46.15 |       50 |   16.66 |   46.15 |                   
+ src/pages           |      50 |       50 |      20 |      50 |                   
   basicPage.tsx      |       0 |      100 |       0 |       0 | 4                 
   detailedPage.tsx   |       0 |      100 |       0 |       0 | 4                 
-  homePage.tsx       |   54.54 |       50 |      25 |   54.54 | 10,18-27          
+  homePage.tsx       |      60 |       50 |   33.33 |      60 | 10,18-24          
 ---------------------|---------|----------|---------|---------|-------------------
 Test Suites: 1 failed, 1 total
 Tests:       1 failed, 1 total
 Snapshots:   0 total
-Time:        2.231 s
+Time:        2.287 s
 Ran all test suites.
