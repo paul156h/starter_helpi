@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import "./HomePage.css";
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
@@ -29,7 +29,23 @@ export function HomePage() {
   return (
     <div>
       <div className="mainHome">
-        <h1>THIS IS HOME PAGE</h1>
+        <h1>Home Page</h1>
+        <Container>
+          <Row>
+            <Col>
+              <header>Basic Questions Page</header>
+              <p>
+                The "Basic" button will take you to the Basic Questions Page. The basic questions will take less time to complete and give you a general analysis of what career paths you should consider.
+              </p>
+            </Col>
+            <Col>
+              <header>Detailed Questions Page</header>
+              <p>
+                The "Detailed" button will take you to the Detailed Questions Page. The detailed questions will take more time and will give you a more in depth analysis of the career path you should consider.
+              </p>
+            </Col>
+          </Row>
+        </Container>
       </div>
       <Form>
         <Form.Label>API Key:</Form.Label>
