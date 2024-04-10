@@ -30,22 +30,22 @@ export function HomePage() {
     <div>
       <div className="mainHome">
         <h1>Home Page</h1>
-        <Container>
-          <Row>
-            <Col>
-              <header>Basic Questions Page</header>
+        <div>
+          <div className="row">
+            <div className="column">
+            <header>Basic Questions Page</header>
               <p>
                 The "Basic" button will take you to the Basic Questions Page. The basic questions will take less time to complete and give you a general analysis of what career paths you should consider.
               </p>
-            </Col>
-            <Col>
-              <header>Detailed Questions Page</header>
+            </div>
+            <div className="column">
+            <header>Detailed Questions Page</header>
               <p>
                 The "Detailed" button will take you to the Detailed Questions Page. The detailed questions will take more time and will give you a more in depth analysis of the career path you should consider.
               </p>
-            </Col>
-          </Row>
-        </Container>
+            </div>
+          </div>
+        </div>
       </div>
       <Form>
         <Form.Label>API Key:</Form.Label>
@@ -59,12 +59,6 @@ export function HomePage() {
           Submit
         </Button>
       </Form>
-      <Button
-        className="Basic-Career-Assessment-Button"
-        onClick={navigateToCareerAssessmentPage}
-      >
-        Basic Career Asessment Page
-      </Button>
     </div>
   );
 }
