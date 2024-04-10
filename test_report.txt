@@ -3,7 +3,7 @@
 > react-scripts test --coverage
 
 FAIL src/App.test.tsx
-  ✕ renders learn react link (48 ms)
+  ✕ renders learn react link (50 ms)
 
   ● renders learn react link
 
@@ -52,8 +52,34 @@ FAIL src/App.test.tsx
               [33mclass[39m=[32m"mainHome"[39m
             [36m>[39m
               [36m<h1>[39m
-                [0mTHIS IS HOME PAGE[0m
+                [0mHome Page[0m
               [36m</h1>[39m
+              [36m<div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"row"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"column"[39m
+                  [36m>[39m
+                    [36m<header>[39m
+                      [0mBasic Questions Page[0m
+                    [36m</header>[39m
+                    [36m<p>[39m
+                      [0mThe "Basic" button will take you to the Basic Questions Page. The basic questions will take less time to complete and give you a general analysis of what career paths you should consider.[0m
+                    [36m</p>[39m
+                  [36m</div>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"column"[39m
+                  [36m>[39m
+                    [36m<header>[39m
+                      [0mDetailed Questions Page[0m
+                    [36m</header>[39m
+                    [36m<p>[39m
+                      [0mThe "Detailed" button will take you to the Detailed Questions Page. The detailed questions will take more time and will give you a more in depth analysis of the career path you should consider.[0m
+                    [36m</p>[39m
+                  [36m</div>[39m
+                [36m</div>[39m
+              [36m</div>[39m
             [36m</div>[39m
             [36m<form[39m
               [33mclass[39m=[32m""[39m
@@ -118,5 +144,5 @@ All files            |   34.61 |    16.66 |      40 |   34.61 |
 Test Suites: 1 failed, 1 total
 Tests:       1 failed, 1 total
 Snapshots:   0 total
-Time:        2.312 s
+Time:        2.282 s
 Ran all test suites.
