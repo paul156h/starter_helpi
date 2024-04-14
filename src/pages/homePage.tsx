@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import "./HomePage.css";
 import job1 from "../images/job1.jpg";
@@ -7,36 +7,47 @@ import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
 
-//local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 let keyData = "";
 const saveKeyData = "MYKEY";
-const prevKey = localStorage.getItem(saveKeyData); //so it'll look like: MYKEY: <api_key_value here> in the local storage when you inspect
+const prevKey = localStorage.getItem(saveKeyData);
 if (prevKey !== null) {
   keyData = JSON.parse(prevKey);
 }
 
 export function HomePage() {
-  const [key, setKey] = useState<string>(keyData); //for api key input
+  const [key, setKey] = useState<string>(keyData);
 
-  //sets the local storage item to the api key the user inputed
   function handleSubmit() {
     localStorage.setItem(saveKeyData, JSON.stringify(key));
-    window.location.reload(); //when making a mistake and changing the key again, I found that I have to reload the whole site before openai refreshes what it has stores for the local storage variable
+    window.location.reload();
   }
 
-  //whenever there's a change it'll store the api key in a local state called key but it won't be set in the local storage until the user clicks the submit button
   function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
     setKey(event.target.value);
   }
-  const panels = document.querySelectorAll(".panel");
-  panels.forEach((panel) => {
-    panel.addEventListener("click", () => {
-      removeActiveClasses();
-      panel.classList.add("active");
+
+  useEffect(() => {
+    const panels = document.querySelectorAll(".panel");
+    panels.forEach((panel) => {
+      panel.addEventListener("click", () => {
+        removeActiveClasses();
+        panel.classList.add("active");
+      });
     });
-  });
+
+    // Cleanup function to remove event listeners
+    return () => {
+      panels.forEach((panel) => {
+        panel.removeEventListener("click", () => {
+          removeActiveClasses();
+          panel.classList.add("active");
+        });
+      });
+    };
+  }, []); // Empty dependency array ensures this effect runs only once after initial render
 
   function removeActiveClasses() {
+    const panels = document.querySelectorAll(".panel");
     panels.forEach((panel) => {
       panel.classList.remove("active");
     });
@@ -47,19 +58,19 @@ export function HomePage() {
       <div className="body">
         <div className="container">
           <div id="panel1" className="panel active">
-            <h1>Expanding Cards1</h1>
+            <h1>Become A Scientist</h1>
           </div>
           <div id="panel2" className="panel">
-            <h1>Expanding Cards2</h1>
+            <h1>Become A Engineer</h1>
           </div>
           <div id="panel3" className="panel">
-            <h1>Expanding Cards3</h1>
+            <h1>Become A Doctor</h1>
           </div>
           <div id="panel4" className="panel">
-            <h1>Expanding Cards4</h1>
+            <h1>Become A Developer</h1>
           </div>
           <div id="panel5" className="panel">
-            <h1>Expanding Cards3</h1>
+            <h1>Explore Your Career Choice</h1>
           </div>
         </div>
       </div>
@@ -78,7 +89,7 @@ export function HomePage() {
             <p>
               The "Detailed" button will take you to the Detailed Questions
               Page. The detailed questions will take more time and will give you
-              a more in depth analysis of the career path you should consider.
+              a more in-depth analysis of the career path you should consider.
             </p>
           </div>
         </div>
