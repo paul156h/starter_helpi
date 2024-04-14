@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import "./HomePage.css";
+import job1 from "../images/job1.jpg";
+import job2 from "../images/job2.jpg";
+import job3 from "../images/job3.jpg";
+import job4 from "../images/job4.jpg";
+import job5 from "../images/job5.jpg";
 
 //local storage and API Key: key should be entered in by the user and will be stored in local storage (NOT session storage)
 let keyData = "";
@@ -23,27 +28,62 @@ export function HomePage() {
   function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
     setKey(event.target.value);
   }
+  const panels = document.querySelectorAll(".panel");
+  panels.forEach((panel) => {
+    panel.addEventListener("click", () => {
+      removeActiveClasses();
+      panel.classList.add("active");
+    });
+  });
+
+  function removeActiveClasses() {
+    panels.forEach((panel) => {
+      panel.classList.remove("active");
+    });
+  }
+
   return (
     <div>
-      <div className="mainHome">
-        <h1>Home Page</h1>
-        <div>
-          <div className="row">
-            <div className="column">
-            <header>Basic Questions Page</header>
-              <p>
-                The "Basic" button will take you to the Basic Questions Page. The basic questions will take less time to complete and give you a general analysis of what career paths you should consider.
-              </p>
-            </div>
-            <div className="column">
-            <header>Detailed Questions Page</header>
-              <p>
-                The "Detailed" button will take you to the Detailed Questions Page. The detailed questions will take more time and will give you a more in depth analysis of the career path you should consider.
-              </p>
-            </div>
+      <div className="body">
+        <div className="container">
+          <div id="panel1" className="panel active">
+            <h1>Expanding Cards1</h1>
+          </div>
+          <div id="panel2" className="panel">
+            <h1>Expanding Cards2</h1>
+          </div>
+          <div id="panel3" className="panel">
+            <h1>Expanding Cards3</h1>
+          </div>
+          <div id="panel4" className="panel">
+            <h1>Expanding Cards4</h1>
+          </div>
+          <div id="panel5" className="panel">
+            <h1>Expanding Cards3</h1>
           </div>
         </div>
       </div>
+      <div>
+        <div className="row">
+          <div className="column">
+            <header>Basic Questions Page</header>
+            <p>
+              The "Basic" button will take you to the Basic Questions Page. The
+              basic questions will take less time to complete and give you a
+              general analysis of what career paths you should consider.
+            </p>
+          </div>
+          <div className="column">
+            <header>Detailed Questions Page</header>
+            <p>
+              The "Detailed" button will take you to the Detailed Questions
+              Page. The detailed questions will take more time and will give you
+              a more in depth analysis of the career path you should consider.
+            </p>
+          </div>
+        </div>
+      </div>
+
       <Form>
         <Form.Label>API Key:</Form.Label>
         <Form.Control
