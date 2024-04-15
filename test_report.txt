@@ -3,7 +3,7 @@
 > react-scripts test --coverage
 
 FAIL src/App.test.tsx
-  ✕ renders learn react link (50 ms)
+  ✕ renders learn react link (66 ms)
 
   ● renders learn react link
 
@@ -13,71 +13,123 @@ FAIL src/App.test.tsx
     [36m<body>[39m
       [36m<div>[39m
         [36m<div[39m
-          [33mclass[39m=[32m"navLinks"[39m
+          [33mclass[39m=[32m"navBar"[39m
         [36m>[39m
-          [36m<a[39m
-            [33mhref[39m=[32m"#/"[39m
+          [36m<div>[39m
+            [36m<img[39m
+              [33malt[39m=[32m""[39m
+              [33mclass[39m=[32m"logo"[39m
+              [33msrc[39m=[32m"job-Logo.png"[39m
+            [36m/>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"navLinks"[39m
           [36m>[39m
-            [36m<button[39m
-              [33mclass[39m=[32m"home-btn btn btn-primary"[39m
-              [33mtype[39m=[32m"button"[39m
+            [36m<a[39m
+              [33mhref[39m=[32m"#/"[39m
             [36m>[39m
-              [0mHome[0m
-            [36m</button>[39m
-          [36m</a>[39m
-          [36m<a[39m
-            [33mhref[39m=[32m"#/basicPage"[39m
-          [36m>[39m
-            [36m<button[39m
-              [33mclass[39m=[32m"home-btn btn btn-primary"[39m
-              [33mtype[39m=[32m"button"[39m
+              [36m<button[39m
+                [33mclass[39m=[32m"home-btn btn btn-primary"[39m
+                [33mtype[39m=[32m"button"[39m
+              [36m>[39m
+                [0mHome[0m
+              [36m</button>[39m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mhref[39m=[32m"#/basicPage"[39m
             [36m>[39m
-              [0mBasic[0m
-            [36m</button>[39m
-          [36m</a>[39m
-          [36m<a[39m
-            [33mhref[39m=[32m"#/detailedPage"[39m
-          [36m>[39m
-            [36m<button[39m
-              [33mclass[39m=[32m"home-btn btn btn-primary"[39m
-              [33mtype[39m=[32m"button"[39m
+              [36m<button[39m
+                [33mclass[39m=[32m"basic-btn btn btn-primary"[39m
+                [33mtype[39m=[32m"button"[39m
+              [36m>[39m
+                [0mBasic[0m
+              [36m</button>[39m
+            [36m</a>[39m
+            [36m<a[39m
+              [33mhref[39m=[32m"#/detailedPage"[39m
             [36m>[39m
-              [0mDetailed[0m
-            [36m</button>[39m
-          [36m</a>[39m
+              [36m<button[39m
+                [33mclass[39m=[32m"detailed-btn btn btn-primary"[39m
+                [33mtype[39m=[32m"button"[39m
+              [36m>[39m
+                [0mDetailed[0m
+              [36m</button>[39m
+            [36m</a>[39m
+          [36m</div>[39m
         [36m</div>[39m
         [36m<main>[39m
           [36m<div>[39m
             [36m<div[39m
-              [33mclass[39m=[32m"mainHome"[39m
+              [33mclass[39m=[32m"body"[39m
             [36m>[39m
-              [36m<h1>[39m
-                [0mHome Page[0m
-              [36m</h1>[39m
-              [36m<div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"container"[39m
+              [36m>[39m
                 [36m<div[39m
-                  [33mclass[39m=[32m"row"[39m
+                  [33mclass[39m=[32m"panel active"[39m
+                  [33mid[39m=[32m"panel1"[39m
                 [36m>[39m
-                  [36m<div[39m
-                    [33mclass[39m=[32m"column"[39m
-                  [36m>[39m
-                    [36m<header>[39m
-                      [0mBasic Questions Page[0m
-                    [36m</header>[39m
-                    [36m<p>[39m
-                      [0mThe "Basic" button will take you to the Basic Questions Page. The basic questions will take less time to complete and give you a general analysis of what career paths you should consider.[0m
-                    [36m</p>[39m
-                  [36m</div>[39m
-                  [36m<div[39m
-                    [33mclass[39m=[32m"column"[39m
-                  [36m>[39m
-                    [36m<header>[39m
-                      [0mDetailed Questions Page[0m
-                    [36m</header>[39m
-                    [36m<p>[39m
-                      [0mThe "Detailed" button will take you to the Detailed Questions Page. The detailed questions will take more time and will give you a more in depth analysis of the career path you should consider.[0m
-                    [36m</p>[39m
-                  [36m</div>[39m
+                  [36m<h1>[39m
+                    [0mBecome A Scientist[0m
+                  [36m</h1>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"panel"[39m
+                  [33mid[39m=[32m"panel2"[39m
+                [36m>[39m
+                  [36m<h1>[39m
+                    [0mBecome A Engineer[0m
+                  [36m</h1>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"panel"[39m
+                  [33mid[39m=[32m"panel3"[39m
+                [36m>[39m
+                  [36m<h1>[39m
+                    [0mBecome A Doctor[0m
+                  [36m</h1>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"panel"[39m
+                  [33mid[39m=[32m"panel4"[39m
+                [36m>[39m
+                  [36m<h1>[39m
+                    [0mBecome A Developer[0m
+                  [36m</h1>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"panel"[39m
+                  [33mid[39m=[32m"panel5"[39m
+                [36m>[39m
+                  [36m<h1>[39m
+                    [0mExplore Your Career Choice[0m
+                  [36m</h1>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"row"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"column"[39m
+                [36m>[39m
+                  [36m<header>[39m
+                    [0mBasic Questions Page[0m
+                  [36m</header>[39m
+                  [36m<p>[39m
+                    [0mThe "Basic" button will take you to the Basic Questions Page. The basic questions will take less time to complete and give you a general analysis of what career paths you should consider.[0m
+                  [36m</p>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"column"[39m
+                [36m>[39m
+                  [36m<header>[39m
+                    [0mDetailed Questions Page[0m
+                  [36m</header>[39m
+                  [36m<p>[39m
+                    [0mThe "Detailed" button will take you to the Detailed Questions Page. The detailed questions will take more time and will give you a more in-depth analysis of the career path you should consider.[0m
+                  [36m</p>[39m
                 [36m</div>[39m
               [36m</div>[39m
             [36m</div>[39m
@@ -125,26 +177,26 @@ FAIL src/App.test.tsx
       at _run10000 (node_modules/@jest/core/build/cli/index.js:320:7)
       at runCLI (node_modules/@jest/core/build/cli/index.js:173:3)
 
-------------------------|---------|----------|---------|---------|-------------------
-File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
-------------------------|---------|----------|---------|---------|-------------------
-All files               |   28.12 |    16.66 |   28.57 |   28.12 |                   
- src                    |   15.38 |        0 |      50 |   15.38 |                   
-  App.tsx               |     100 |      100 |     100 |     100 |                   
-  Layout.jsx            |     100 |      100 |     100 |     100 |                   
-  index.tsx             |       0 |      100 |     100 |       0 | 8-20              
-  reportWebVitals.ts    |       0 |        0 |       0 |       0 | 3-10              
- src/components         |   14.28 |      100 |      20 |   14.28 |                   
-  BasicQuestions.tsx    |       0 |      100 |       0 |       0 | 6-10              
-  DetailedQuestions.tsx |       0 |      100 |       0 |       0 | 5-11              
-  Navbar.tsx            |     100 |      100 |     100 |     100 |                   
- src/pages              |      50 |       50 |      20 |      50 |                   
-  basicPage.tsx         |       0 |      100 |       0 |       0 | 4                 
-  detailedPage.tsx      |       0 |      100 |       0 |       0 | 5                 
-  homePage.tsx          |      60 |       50 |   33.33 |      60 | 10,18-24          
-------------------------|---------|----------|---------|---------|-------------------
+------------------------|---------|----------|---------|---------|---------------------
+File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s   
+------------------------|---------|----------|---------|---------|---------------------
+All files               |   34.78 |    16.66 |   36.36 |   34.78 |                     
+ src                    |   15.38 |        0 |      50 |   15.38 |                     
+  App.tsx               |     100 |      100 |     100 |     100 |                     
+  Layout.jsx            |     100 |      100 |     100 |     100 |                     
+  index.tsx             |       0 |      100 |     100 |       0 | 8-20                
+  reportWebVitals.ts    |       0 |        0 |       0 |       0 | 3-10                
+ src/components         |   14.28 |      100 |      20 |   14.28 |                     
+  BasicQuestions.tsx    |       0 |      100 |       0 |       0 | 6-10                
+  DetailedQuestions.tsx |       0 |      100 |       0 |       0 | 5-11                
+  Navbar.tsx            |     100 |      100 |     100 |     100 |                     
+ src/pages              |      50 |       50 |   38.46 |      50 |                     
+  basicPage.tsx         |       0 |      100 |       0 |       0 | 4                   
+  detailedPage.tsx      |       0 |      100 |       0 |       0 | 5                   
+  homePage.tsx          |   54.16 |       50 |   45.45 |   54.16 | 9,16-21,28-29,37-47 
+------------------------|---------|----------|---------|---------|---------------------
 Test Suites: 1 failed, 1 total
 Tests:       1 failed, 1 total
 Snapshots:   0 total
-Time:        2.537 s
+Time:        2.571 s
 Ran all test suites.
