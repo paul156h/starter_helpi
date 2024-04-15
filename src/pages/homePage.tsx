@@ -30,7 +30,6 @@ export function HomePage() {
       });
     });
 
-    // Cleanup function to remove event listeners
     return () => {
       panels.forEach((panel) => {
         panel.removeEventListener("click", () => {
@@ -39,7 +38,7 @@ export function HomePage() {
         });
       });
     };
-  }, []); // Empty dependency array ensures this effect runs only once after initial render
+  }, []);
 
   function removeActiveClasses() {
     const panels = document.querySelectorAll(".panel");
@@ -50,6 +49,9 @@ export function HomePage() {
 
   return (
     <div>
+      <div className="title">
+        <h1>Welcome To Dream Job</h1>
+      </div>
       <div className="body">
         <div className="container">
           <div id="panel1" className="panel active">
