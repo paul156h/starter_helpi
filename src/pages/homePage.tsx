@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import "./HomePage.css";
-import job1 from "../images/job1.jpg";
-import job2 from "../images/job2.jpg";
-import job3 from "../images/job3.jpg";
-import job4 from "../images/job4.jpg";
-import job5 from "../images/job5.jpg";
 
 let keyData = "";
 const saveKeyData = "MYKEY";
