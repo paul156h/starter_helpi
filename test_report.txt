@@ -3,7 +3,7 @@
 > react-scripts test --coverage
 
 FAIL src/App.test.tsx
-  ✕ renders learn react link (55 ms)
+  ✕ renders learn react link (84 ms)
 
   ● renders learn react link
 
@@ -135,8 +135,34 @@ FAIL src/App.test.tsx
                 [36m>[39m
                   [36m<img[39m
                     [33malt[39m=[32m"giveImage"[39m
-                    [33msrc[39m=[32m"job1.jpg"[39m
+                    [33msrc[39m=[32m"job3.jpg"[39m
                   [36m/>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"detailedInfoPage"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"detailedInfoBox"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"detailedInfoImg"[39m
+                [36m>[39m
+                  [36m<img[39m
+                    [33malt[39m=[32m"giveImage"[39m
+                    [33msrc[39m=[32m"job4.jpg"[39m
+                  [36m/>[39m
+                [36m</div>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"detailedInfo"[39m
+                [36m>[39m
+                  [36m<h1>[39m
+                    [0mDetailed Questions Page[0m
+                  [36m</h1>[39m
+                  [36m<p>[39m
+                    [0mThe "Detailed" button will take you to the Detailed Questions Page. The detailed questions will take more time and will give you a more in-depth analysis of the career path you should consider.[0m
+                  [36m</p>[39m
                 [36m</div>[39m
               [36m</div>[39m
             [36m</div>[39m
@@ -200,10 +226,10 @@ All files               |   34.78 |    16.66 |   36.36 |   34.78 |
  src/pages              |      50 |       50 |   38.46 |      50 |                      
   basicPage.tsx         |       0 |      100 |       0 |       0 | 4                    
   detailedPage.tsx      |       0 |      100 |       0 |       0 | 5                    
-  homePage.tsx          |   54.16 |       50 |   45.45 |   54.16 | 10,17-22,29-30,37-47 
+  homePage.tsx          |   54.16 |       50 |   45.45 |   54.16 | 11,18-23,30-31,38-48 
 ------------------------|---------|----------|---------|---------|----------------------
 Test Suites: 1 failed, 1 total
 Tests:       1 failed, 1 total
 Snapshots:   0 total
-Time:        2.46 s
+Time:        2.335 s
 Ran all test suites.
