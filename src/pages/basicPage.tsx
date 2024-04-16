@@ -7,8 +7,8 @@ export function BasicPage() {
       <h1>Basic Questionnaire</h1>
       <hr></hr>
       <BasicQuestions question="(add question 1 here)" questionNumber="1" answer1="yes" answer2="no" answer3="maybe" answer4="idk bruh"></BasicQuestions>
-      <BasicQuestions question="(add question 2 here)" questionNumber="2" answer1="yes" answer2="no" answer3="maybe" answer4="idk bruh"></BasicQuestions>
-      <BasicQuestions question="(add question 3 here)" questionNumber="3" answer1="yes" answer2="no" answer3="maybe" answer4="idk bruh"></BasicQuestions>
+      <BasicQuestions question="How comfortable are you with public speaking?" questionNumber="2" answer1="yes" answer2="no" answer3="maybe" answer4="idk bruh"></BasicQuestions>
+      <BasicQuestions question="About how much money would you like to earn?" questionNumber="3" answer1="yes" answer2="no" answer3="maybe" answer4="idk bruh"></BasicQuestions>
       <BasicQuestions question="(add question 4 here)" questionNumber="4" answer1="yes" answer2="no" answer3="maybe" answer4="idk bruh"></BasicQuestions>
       <BasicQuestions question="(add question 5 here)" questionNumber="5" answer1="yes" answer2="no" answer3="maybe" answer4="idk bruh"></BasicQuestions>
       <BasicQuestions question="(add question 6 here)" questionNumber="6" answer1="yes" answer2="no" answer3="maybe" answer4="idk bruh"></BasicQuestions>
