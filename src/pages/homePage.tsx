@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import "./HomePage.css";
+import job1 from "../images/job1.jpg";
 
 let keyData = "";
 const saveKeyData = "MYKEY";
@@ -30,7 +31,6 @@ export function HomePage() {
       });
     });
 
-    // Cleanup function to remove event listeners
     return () => {
       panels.forEach((panel) => {
         panel.removeEventListener("click", () => {
@@ -39,7 +39,7 @@ export function HomePage() {
         });
       });
     };
-  }, []); // Empty dependency array ensures this effect runs only once after initial render
+  }, []);
 
   function removeActiveClasses() {
     const panels = document.querySelectorAll(".panel");
@@ -50,6 +50,9 @@ export function HomePage() {
 
   return (
     <div>
+      <div className="title">
+        <h1>Welcome To Dream Job</h1>
+      </div>
       <div className="body">
         <div className="container">
           <div id="panel1" className="panel active">
@@ -69,8 +72,24 @@ export function HomePage() {
           </div>
         </div>
       </div>
-      <div>
-        <div className="row">
+      <div className="basicInfoPage">
+        <div className="basicInfoBox">
+          <div className="basicInfo">
+            <h1>Basic Questions Page</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
+              commodi error molestiae consequuntur impedit distinctio doloremque
+              vitae similique dignissimos velit eos, aliquam odio veniam fugit
+              voluptates officiis vel animi exercitationem ullam. Tempora neque
+              rem deserunt inventore distinctio architecto error totam iste
+              dolores laborum beatae vel, recusandae sunt dolore vero velit!
+            </p>
+          </div>
+          <div className="BasicInfoImg">
+            <img src={job1}></img>
+          </div>
+        </div>
+        {/* <div className="row">
           <div className="column">
             <header>Basic Questions Page</header>
             <p>
@@ -87,7 +106,7 @@ export function HomePage() {
               a more in-depth analysis of the career path you should consider.
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <Form>
