@@ -77,16 +77,13 @@ export function HomePage() {
           <div className="basicInfo">
             <h1>Basic Questions Page</h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
-              commodi error molestiae consequuntur impedit distinctio doloremque
-              vitae similique dignissimos velit eos, aliquam odio veniam fugit
-              voluptates officiis vel animi exercitationem ullam. Tempora neque
-              rem deserunt inventore distinctio architecto error totam iste
-              dolores laborum beatae vel, recusandae sunt dolore vero velit!
+              The "Basic" button will take you to the Basic Questions Page. The
+              basic questions will take less time to complete and give you a
+              general analysis of what career paths you should consider.
             </p>
           </div>
           <div className="BasicInfoImg">
-            <img src={job1}></img>
+            <img src={job1} alt="giveImage"></img>
           </div>
         </div>
         {/* <div className="row">
