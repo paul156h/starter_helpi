@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import "./HomePage.css";
-import job1 from "../images/job1.jpg";
+import job3 from "../images/job3.jpg";
+import job4 from "../images/job4.jpg";
 
 let keyData = "";
 const saveKeyData = "MYKEY";
@@ -83,9 +84,44 @@ export function HomePage() {
             </p>
           </div>
           <div className="BasicInfoImg">
-            <img src={job1} alt="giveImage"></img>
+            <img src={job3} alt="giveImage"></img>
           </div>
         </div>
+
+        {/* <div className="row">
+          <div className="column">
+            <header>Basic Questions Page</header>
+            <p>
+              The "Basic" button will take you to the Basic Questions Page. The
+              basic questions will take less time to complete and give you a
+              general analysis of what career paths you should consider.
+            </p>
+          </div>
+          <div className="column">
+            <header>Detailed Questions Page</header>
+            <p>
+              The "Detailed" button will take you to the Detailed Questions
+              Page. The detailed questions will take more time and will give you
+              a more in-depth analysis of the career path you should consider.
+            </p>
+          </div>
+        </div> */}
+      </div>
+      <div className="detailedInfoPage">
+        <div className="detailedInfoBox">
+          <div className="detailedInfoImg">
+            <img src={job4} alt="giveImage"></img>
+          </div>
+          <div className="detailedInfo">
+            <h1>Detailed Questions Page</h1>
+            <p>
+              The "Detailed" button will take you to the Detailed Questions
+              Page. The detailed questions will take more time and will give you
+              a more in-depth analysis of the career path you should consider.
+            </p>
+          </div>
+        </div>
+
         {/* <div className="row">
           <div className="column">
             <header>Basic Questions Page</header>
