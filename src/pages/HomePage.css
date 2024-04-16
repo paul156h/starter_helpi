@@ -12,9 +12,6 @@
   padding: 10px;
   font-weight: 900;
 }
-.title h1 {
-  display: block;
-}
 .body {
   display: flex;
   justify-content: center;
@@ -124,4 +121,39 @@
 
 .row {
   display: flex;
+}
+
+/*---------BASIC Info Slide--------------*/
+.basicInfoPage {
+  min-height: 100vh;
+  width: 80%;
+  margin: auto;
+  padding: 3rem 0;
+}
+
+.basicInfoBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1c768f;
+  height: 81vh;
+}
+
+.basicInfo {
+  width: 40%;
+  padding: 0 0 0 4rem;
+}
+
+.basicInfo h1 {
+  padding-bottom: 4px;
+}
+
+.BasicInfoImg {
+  margin: auto;
+  width: 40%;
+}
+
+.BasicInfoImg img {
+  width: 125%;
+  height: 81vh;
 }
