@@ -4,9 +4,14 @@ import { useState } from "react";
 
 export function BasicPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
+  const [submitted, setSubmitted] = useState<boolean>(false);
 
   const handleNextQuestion = () => {
     setCurrentQuestion((prevQuestion) => prevQuestion + 1);
+  };
+
+  const handleSubmit = () => { 
+    setSubmitted(true);
   };
   return (
     //The Basic Page will have questions be answered in mulitple choice form
@@ -42,7 +47,11 @@ export function BasicPage() {
       <hr></hr> {currentQuestion === 10 && (
       <BasicQuestions question="What would you rather do with your free time?" questionNumber="10" answers={["Learn a new skill", "Relax", "Have fun with a hobby", "Spend the time with friends/loved ones"]}></BasicQuestions>
       )}
-      {currentQuestion < 10 && (<Button onClick = {handleNextQuestion}>Next</Button>)}
+      {currentQuestion < 10 && !submitted ? (
+        <Button onClick = {handleNextQuestion}>Next</Button>
+        ) : (
+          <Button onClick={handleSubmit}>Submit</Button>
+        )}
     </>
     //this can be stylized later to look better, but for now this is the basic setup
   );
