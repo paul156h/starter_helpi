@@ -12,6 +12,7 @@ export function BasicPage() {
 
   const handleSubmit = () => { 
     setSubmitted(true);
+
   };
   return (
     //The Basic Page will have questions be answered in mulitple choice form

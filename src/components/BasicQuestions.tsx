@@ -15,7 +15,7 @@ export function BasicQuestions({question,questionNumber, answers}:
                 <Form.Check
                 key = {index}
                 type = "radio"
-                id = {'question-${questionNumber}-${index}'}
+                id = {answer}
                 label = {answer}
                 value={answer}
                 checked={input === answer}
