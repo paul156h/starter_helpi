@@ -3,7 +3,7 @@
 > react-scripts test --coverage
 
 FAIL src/App.test.tsx
-  ✕ renders learn react link (74 ms)
+  ✕ renders learn react link (78 ms)
 
   ● renders learn react link
 
@@ -129,6 +129,16 @@ FAIL src/App.test.tsx
                   [36m<p>[39m
                     [0mThe "Basic" button will take you to the Basic Questions Page. The basic questions will take less time to complete and give you a general analysis of what career paths you should consider.[0m
                   [36m</p>[39m
+                  [36m<a[39m
+                    [33mhref[39m=[32m"#/basicPage"[39m
+                  [36m>[39m
+                    [36m<button[39m
+                      [33mclass[39m=[32m"basic-btn-hm btn btn-primary"[39m
+                      [33mtype[39m=[32m"button"[39m
+                    [36m>[39m
+                      [0mTake Our Basic Quiz[0m
+                    [36m</button>[39m
+                  [36m</a>[39m
                 [36m</div>[39m
                 [36m<div[39m
                   [33mclass[39m=[32m"BasicInfoImg"[39m
@@ -163,6 +173,16 @@ FAIL src/App.test.tsx
                   [36m<p>[39m
                     [0mThe "Detailed" button will take you to the Detailed Questions Page. The detailed questions will take more time and will give you a more in-depth analysis of the career path you should consider.[0m
                   [36m</p>[39m
+                  [36m<a[39m
+                    [33mhref[39m=[32m"#/detailedPage"[39m
+                  [36m>[39m
+                    [36m<button[39m
+                      [33mclass[39m=[32m"detailed-btn-hm btn btn-primary"[39m
+                      [33mtype[39m=[32m"button"[39m
+                    [36m>[39m
+                      [0mTake Our Detailed Quiz[0m
+                    [36m</button>[39m
+                  [36m</a>[39m
                 [36m</div>[39m
               [36m</div>[39m
             [36m</div>[39m
@@ -226,10 +246,10 @@ All files               |   34.78 |    16.66 |   36.36 |   34.78 |
  src/pages              |      50 |       50 |   38.46 |      50 |                      
   basicPage.tsx         |       0 |      100 |       0 |       0 | 4                    
   detailedPage.tsx      |       0 |      100 |       0 |       0 | 5                    
-  homePage.tsx          |   54.16 |       50 |   45.45 |   54.16 | 11,18-23,30-31,38-48 
+  homePage.tsx          |   54.16 |       50 |   45.45 |   54.16 | 12,19-24,31-32,39-49 
 ------------------------|---------|----------|---------|---------|----------------------
 Test Suites: 1 failed, 1 total
 Tests:       1 failed, 1 total
 Snapshots:   0 total
-Time:        2.547 s
+Time:        2.482 s
 Ran all test suites.
