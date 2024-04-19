@@ -10,14 +10,14 @@ export function BasicQuestions({question,questionNumber, answers, currentQuestio
 
     return(
     <div>
-        <p>Question {questionNumber}: {question}</p>
+        {questionNumber !== currentQuestion ? "" : <p>Question {questionNumber}: {question}</p>}
         <Form>
             {answers.map((answer, index) => (
                 <Form.Check
                 key = {index}
                 type = "radio"
                 id = {answer}
-                label = {answer}
+                label = {questionNumber === currentQuestion ? answer : ""}
                 hidden={questionNumber !== currentQuestion}
                 value={answer}
                 checked={input === answer}
