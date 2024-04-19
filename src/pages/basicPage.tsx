@@ -6,7 +6,6 @@ import {ProgressBar} from "../components/progressBar";
 export function BasicPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
   const [submitted, setSubmitted] = useState<boolean>(false);
-  const [numAnswered, setNumAnswered] = useState<number>(0);
 
   const handleNextQuestion = () => {
     setCurrentQuestion((prevQuestion) => prevQuestion + 1);
@@ -14,9 +13,6 @@ export function BasicPage() {
   const handlePrevQuestion = () => {
     setCurrentQuestion((prevQuestion) => prevQuestion - 1);
   };
-  const updateAnswered = () =>{
-
-  }
 
   const handleSubmit = () => { 
     setSubmitted(true);
@@ -24,11 +20,11 @@ export function BasicPage() {
   return (
     //The Basic Page will have questions be answered in mulitple choice form
     <>
-    <ProgressBar numAnswered={numAnswered}></ProgressBar>
+    <ProgressBar numAnswered={0}></ProgressBar>
       <h1>Basic Questionnaire</h1>
-      <BasicQuestions question="How much experience do you have with working?" questionNumber= {1} answers = {["I have had several different jobs at different places", "I have only had a 2-3 different jobs", "I have only had one singlular job my whole life","I have never had a job before"]} currentQuestion={currentQuestion}></BasicQuestions>
-      
-      <BasicQuestions question="How comfortable are you with public speaking?" questionNumber={2} answers= {["I'm extremely comfortable and am willing to do it", "I'm fine with it whenever I have to do it", "I would rather not have to do it", "I cannot get myself to do this even if I tried"]} currentQuestion={currentQuestion}></BasicQuestions>
+      <BasicQuestions question="How much experience do you have with working?" questionNumber= {1} answers = {["I have had several different jobs at different places", "I have only had a 2-3 different jobs", "I have only had one singlular job my whole life","I have never had a job before"]} currentQuestion={currentQuestion} ></BasicQuestions>
+
+      <BasicQuestions question="How comfortable are you with public speaking?" questionNumber={2} answers= {["I'm extremely comfortable and am willing to do it", "I'm fine with it whenever I have to do it", "I would rather not have to do it", "I cannot get myself to do this even if I tried"]} currentQuestion={currentQuestion} ></BasicQuestions>
       
       <BasicQuestions question="About how much money would you like to earn?" questionNumber={3} answers = {["I want to become really, really rich", "I would like to be able to buy whatever I want and still live a comfortable life", "I'm fine with any amount as long as I live comfortably", "Money doesn't have an impact on my decision"]} currentQuestion={currentQuestion}></BasicQuestions>
       
@@ -40,11 +36,11 @@ export function BasicPage() {
       
       <BasicQuestions question="How good are you at planning?" questionNumber={7} answers= {["I usually have a schedule planning literally every part of my day out", "I make sure to keep the big events in check but don't worry about the little parts of my schedule", "I try to keep my plan organized but usually don't do a good job with it", "I don't keep a schedule and I deal with things as they come"]} currentQuestion={currentQuestion}></BasicQuestions>
 
-      <BasicQuestions question="Which of the following sounds the most interesting?" questionNumber={8} answers= {["Electronic & Programs", "History & Culture", "Biology & Anatomy", "Sports & Fitness"]} currentQuestion={currentQuestion}></BasicQuestions>
+      <BasicQuestions question="Which of the following sounds the most interesting?" questionNumber={8} answers= {["Electronic & Programs", "History & Culture", "Biology & Anatomy", "Sports & Fitness"]} currentQuestion={currentQuestion} ></BasicQuestions>
       
       <BasicQuestions question="How much are you willing to do any sort of manual labor?" questionNumber={9} answers={["I would prefer to do manual labor in my job", "I am fine with some manual labor in my job", "I would prefer not to have manual labor in my job", "I will never want to do any manual labor in my job"]} currentQuestion={currentQuestion}></BasicQuestions>
       
-      <BasicQuestions question="What would you rather do with your free time?" questionNumber={10} answers={["Learn a new skill", "Relax", "Have fun with a hobby", "Spend the time with friends/loved ones"]} currentQuestion={currentQuestion}></BasicQuestions>
+      <BasicQuestions question="What would you rather do with your free time?" questionNumber={10} answers={["Learn a new skill", "Relax", "Have fun with a hobby", "Spend the time with friends/loved ones"]} currentQuestion={currentQuestion} ></BasicQuestions>
       
       <div>
       {currentQuestion > 1 ? (<Button onClick={handlePrevQuestion}>Prev </Button>) : <hr></hr>}
@@ -57,7 +53,5 @@ export function BasicPage() {
         )}
       </div>
     </>
-    //there should be a prev and a next button always on screen, and when on page 1 the prev disapears and on page 10 the next becomes submit which
-    //is only active if it can see that all other options have been answered
   );
 }
