@@ -1,9 +1,11 @@
 import React from "react";
 import { DetailedQuestions } from "../components/DetailedQuestions";
+import {ProgressBar} from "../components/progressBar";
 
 export function DetailedPage() {
   return (
     <>
+    <ProgressBar></ProgressBar>
       <h1>Detailed Questionnaire</h1>
       <hr></hr>
       <DetailedQuestions question="What was your favorite and least favorite subjects in high school/college?" questionNumber="1"></DetailedQuestions>
