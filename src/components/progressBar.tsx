@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Form } from "react-bootstrap";
 
 
 export function ProgressBar({numAnswered}: {numAnswered:number}): JSX.Element{
     const [progress, setProgress] = useState<number>(numAnswered);
+    function updateProgress(numAnswered: number){
+        setProgress(numAnswered);
+    }
 
     return(
         <div>

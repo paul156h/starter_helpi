@@ -50,7 +50,7 @@ export function DetailedPage() {
           <Button onClick={handleSubmit}>Submit</Button>
         )}
       </div>
+      {submitted ? <h1>Good job for submitting</h1> : ""}
     </>
-        //this can be stylized later to look better, but for now this is the basic setup
   );
 }

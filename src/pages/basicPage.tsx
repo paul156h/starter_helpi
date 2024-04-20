@@ -52,6 +52,7 @@ export function BasicPage() {
           <Button onClick={handleSubmit}>Submit</Button>
         )}
       </div>
+      {submitted ? <h1>Good job for submitting</h1> : ""}
     </>
   );
 }
