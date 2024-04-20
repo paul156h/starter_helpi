@@ -1,6 +1,3 @@
-import React, { useState } from "react";
-
-
 export function ProgressBar({numAnswered}: {numAnswered:number}): JSX.Element{
 
     return(
