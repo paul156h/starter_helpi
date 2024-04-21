@@ -25,7 +25,11 @@ export function BasicPage() {
   return (
     //The Basic Page will have questions be answered in mulitple choice form
     <>
+    
     <ProgressBar numAnswered={numAnswered}></ProgressBar>
+    <div>
+      {numAnswered === 100 ? <center><h3>You Have Answered All Questions, Go to Last Page to Submit!</h3> </center> : <hr></hr>}
+      </div>
       <h1>Basic Questionnaire</h1>
       <BasicQuestions question="How much experience do you have with working?" questionNumber= {1} answers = {["I have had several different jobs at different places", "I have only had a 2-3 different jobs", "I have only had one singlular job my whole life","I have never had a job before"]} currentQuestion={currentQuestion} updateNumAnswered = {updateNumAnswered} ></BasicQuestions>
 
@@ -57,7 +61,7 @@ export function BasicPage() {
           <Button onClick={handleSubmit}>Submit</Button>
         )}
       </div>
-      {submitted ? <h1>Good job for submitting</h1> : ""}
+      {submitted ? <center><h1>Good Job for Submitting!</h1></center> : ""}
     </>
   );
 }

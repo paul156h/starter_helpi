@@ -24,6 +24,9 @@ export function DetailedPage() {
   return (
     <>
     <ProgressBar numAnswered={numAnswered}></ProgressBar>
+    <div>
+      {numAnswered === 100 ? <center><h3>You Have Answered All Questions, Go to Last Page to Submit!</h3> </center> : <hr></hr>}
+      </div>
       <h1>Detailed Questionnaire</h1>
       <DetailedQuestions question="What was your favorite and least favorite subjects in high school/college?" questionNumber={1} currentQuestion={currentQuestion} updateNumAnswered = {updateNumAnswered}></DetailedQuestions>
       
@@ -54,7 +57,7 @@ export function DetailedPage() {
           <Button onClick={handleSubmit}>Submit</Button>
         )}
       </div>
-      {submitted ? <h1>Good job for submitting</h1> : ""}
+      {submitted ? <center><h1>Good Job for Submitting</h1></center> : ""}
     </>
   );
 }
