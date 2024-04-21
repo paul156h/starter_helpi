@@ -4,14 +4,12 @@ import { Form } from "react-bootstrap";
 export function BasicQuestions({question,questionNumber, answers, currentQuestion, updateNumAnswered}:
 {question: string; questionNumber:number; answers:string[]; currentQuestion:number; updateNumAnswered: (value: number) => void }): JSX.Element {
     const [input, setInput] = useState<string>("");
+    const [alreadyAnswered, setAlreadyAnswered] = useState<boolean>(false);
     function updateInput(event: React.ChangeEvent<HTMLInputElement>){
         setInput(event.target.value);
-
-        if(input === ""){
-            updateNumAnswered(-10)
-        }
-        else{
-            updateNumAnswered(10)
+        if(!alreadyAnswered){
+            setAlreadyAnswered(true);
+            updateNumAnswered(10);
         }
     }
 

@@ -6,7 +6,7 @@ import {ProgressBar} from "../components/progressBar";
 export function BasicPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
   const [submitted, setSubmitted] = useState<boolean>(false);
-  const [numAnswered, setNumAnswered] = useState<number>(100);
+  const [numAnswered, setNumAnswered] = useState<number>(0);
 
   const updateNumAnswered = (value: number) => {
     setNumAnswered(numAnswered + value)
