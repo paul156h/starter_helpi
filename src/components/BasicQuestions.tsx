@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 
-export function BasicQuestions({question,questionNumber, answers, currentQuestion}:
-{question: string; questionNumber:number; answers:string[]; currentQuestion:number;}): JSX.Element {
+export function BasicQuestions({question,questionNumber, answers, currentQuestion, updateNumAnswered}:
+{question: string; questionNumber:number; answers:string[]; currentQuestion:number; updateNumAnswered: (value: number) => void }): JSX.Element {
     const [input, setInput] = useState<string>("");
     function updateInput(event: React.ChangeEvent<HTMLInputElement>){
         setInput(event.target.value);
+
+        if(input === ""){
+            updateNumAnswered(-10)
+        }
+        else{
+            updateNumAnswered(10)
+        }
     }
 
     return(
