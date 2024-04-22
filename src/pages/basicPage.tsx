@@ -1,4 +1,15 @@
 import { BasicQuestions } from "../components/BasicQuestions";
+import OpenAI from "openai";
+
+const openai = new OpenAI();
+const prompt = "Find a career for a person who said the following: ";
+
+async function results() {
+  const completion = await openai.chat.completions.create({
+    messages: [{role: "system", content: "You are a helpful assisant. Your answer will be used as the results of a career quiz"}, {role: "user", content: prompt}],
+    model: "gpt-4-turbo",
+  })
+}
 
 export function BasicPage() {
   return (
@@ -25,6 +36,7 @@ export function BasicPage() {
       <BasicQuestions question="How much are you willing to do any sort of manual labor?" questionNumber="9" answer1="I would prefer to do manual labor in my job" answer2="I am fine with some manual labor in my job" answer3="I would prefer not to have manual labor in my job" answer4="I will never want to do any manual labor in my job"></BasicQuestions>
       <hr></hr>
       <BasicQuestions question="What would you rather do with your free time?" questionNumber="10" answer1="Learn a new skill" answer2="Relax" answer3="Have fun with a hobby" answer4="Spend the time with friends/loved ones"></BasicQuestions>
+      completion.choices[0] 
     </>
     //this can be stylized later to look better, but for now this is the basic setup
   );
