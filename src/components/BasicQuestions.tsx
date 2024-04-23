@@ -11,6 +11,7 @@ export function BasicQuestions({question,questionNumber, answers, currentQuestio
             setAlreadyAnswered(true);
             updateNumAnswered(10);
         }
+
     }
 
     return(
