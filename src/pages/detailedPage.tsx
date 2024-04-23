@@ -54,7 +54,7 @@ export function DetailedPage() {
       {currentQuestion < 10 ? (
         <Button onClick = {handleNextQuestion}>Next</Button>
         ) : (
-          <Button onClick={handleSubmit}>Submit</Button>
+          <Button onClick={handleSubmit}disabled={numAnswered!==100}>Submit</Button>
         )}
       </div>
       {submitted ? <center><h1>Good Job for Submitting</h1></center> : ""}
