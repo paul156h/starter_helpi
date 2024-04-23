@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 
-export function BasicQuestions({question,questionNumber, answers, currentQuestion, updateNumAnswered}:
-{question: string; questionNumber:number; answers:string[]; currentQuestion:number; updateNumAnswered: (value: number) => void }): JSX.Element {
+export function BasicQuestions({question,questionNumber, answers, currentQuestion, updateNumAnswered, updateResultArray}:
+{question: string; questionNumber:number; answers:string[]; currentQuestion:number; updateNumAnswered: (value: number) => void; updateResultArray: (answer: string, num: number) => void }): JSX.Element {
     const [input, setInput] = useState<string>("");
     const [alreadyAnswered, setAlreadyAnswered] = useState<boolean>(false);
     function updateInput(event: React.ChangeEvent<HTMLInputElement>){
@@ -10,8 +10,8 @@ export function BasicQuestions({question,questionNumber, answers, currentQuestio
         if(!alreadyAnswered){
             setAlreadyAnswered(true);
             updateNumAnswered(10);
+            updateResultArray(input, questionNumber);
         }
-
     }
 
     return(
