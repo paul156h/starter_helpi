@@ -22,6 +22,11 @@ export function BasicPage() {
   const handleSubmit = () => { 
     setSubmitted(true);
   };
+
+  const resetQuiz = () => {
+    setCurrentQuestion(1);
+    setSubmitted(false);
+  }
   return (
     //The Basic Page will have questions be answered in mulitple choice form
     <>
@@ -59,6 +64,9 @@ export function BasicPage() {
         <Button onClick = {handleNextQuestion}>Next</Button>
         ) : (
           <Button onClick={handleSubmit} disabled={numAnswered!==100}>Submit</Button>
+        )}
+        {submitted&& (
+          <Button onClick={resetQuiz}>Reset Quiz</Button>
         )}
       </div>
       {submitted ? <center><h1>Good Job for Submitting!</h1></center> : ""}
