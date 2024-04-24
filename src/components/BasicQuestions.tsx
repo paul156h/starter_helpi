@@ -34,7 +34,7 @@ export function BasicQuestions({
         ""
       ) : (
         <div>
-          <p>
+          <p className="question-p">
             Question {questionNumber}: {question}
           </p>
           <img src={image} className="basicQ-img" alt="questionImg"></img>
