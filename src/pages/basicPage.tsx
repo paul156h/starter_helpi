@@ -29,6 +29,10 @@ export function BasicPage() {
   const handleSubmit = () => {
     setSubmitted(true);
   };
+  const resetQuiz = () => {
+    setCurrentQuestion(1);
+    setSubmitted(false);
+  };
   return (
     //The Basic Page will have questions be answered in mulitple choice form
     <>
@@ -201,6 +205,7 @@ export function BasicPage() {
               Submit
             </Button>
           )}
+          {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
         </div>
       </div>
       <ProgressBar numAnswered={numAnswered}></ProgressBar>
