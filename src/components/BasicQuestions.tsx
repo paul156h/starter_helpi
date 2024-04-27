@@ -33,17 +33,17 @@ export function BasicQuestions({
       {questionNumber !== currentQuestion ? (
         ""
       ) : (
-        <div>
+        <div className="quiz-box">
           <p className="question-p">
             Question {questionNumber}: {question}
           </p>
           <img src={image} className="basicQ-img" alt="questionImg"></img>
-          <Form>
+          <Form className="answerForm">
             {answers.map((answer, index) => (
               <Form.Check
                 key={index}
                 type="radio"
-                className=""
+                className="radiobutton"
                 id={answer}
                 label={questionNumber === currentQuestion ? answer : ""}
                 hidden={questionNumber !== currentQuestion}
