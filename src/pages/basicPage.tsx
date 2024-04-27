@@ -2,22 +2,51 @@ import { Button } from "react-bootstrap";
 import { BasicQuestions } from "../components/BasicQuestions";
 import { useState } from "react";
 import {ProgressBar} from "../components/progressBar";
-import OpenAI from "openai";
+//import OpenAI from "openai";
 
-const openai = new OpenAI();
+//const openai = new OpenAI();
 
-async function results(prompt: string) {
+async function results(answers:string): Promise<string> {
+  const apiKey = localStorage.getItem("MYKEY");
+  
+  const requestOptions: RequestInit = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: "gpt-4-turbo",
+      messages: [
+        {role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire"},
+       {role: "user", content: `Generate possible career choices for someone who said the following: ${answers}`}
+      ]
+    })
+  };
+
+  const response = await fetch("https://api.openai.com/v1/engines/davinci/completions", requestOptions);
+  const data: {choices?: {text: string }[] } = await response.json();
+
+  if (data.choices && data.choices.length > 0) {
+    const choicesList = data.choices.map((choice) => choice.text.trim());
+    return choicesList.join("\n");
+  } else {
+    return "No careers found"
+  }
+  
+
+}
+
+
+/*
+async function results(prompt: string){
   const completion = await openai.chat.completions.create({
     messages: [{role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire"},{role: "user", content: prompt}],
-    model: "gpt-4-turbo",
+    model: "gpt-4-turbo", 
   })
   return completion.choices[0].message.content;
 }
-
-function makeString(array: string[]) {
-  const result = "Generate a list of possible career options for a person who gave the following answers: " + array.toString;
-  return result;
-}
+*/
 
 export function BasicPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
@@ -25,6 +54,11 @@ export function BasicPage() {
   const [numAnswered, setNumAnswered] = useState<number>(0);
   const [resultArray, setResultArray] = useState<string[]>([]);
   const [resultString, setResultString] = useState<string>("");
+  const [careers, setCareers] = useState<string>("");
+
+  const updateCareers = (response: string) => {
+    setCareers(response);
+  }
 
   const updateResultString = (array: string[]) => {
     let result = "Generate a list of carreer choices based on the following quiz answers: "
@@ -46,7 +80,10 @@ export function BasicPage() {
     setCurrentQuestion((prevQuestion) => prevQuestion - 1);
   };
 
-  const handleSubmit = () => { 
+  const handleSubmit = async () => { 
+    updateResultString(resultArray);
+    const result = await results(resultString);
+    updateCareers(result);
     setSubmitted(true);
   };
   return (
@@ -90,7 +127,7 @@ export function BasicPage() {
       </div>
       {submitted ? <center>
         <h1>Good Job for Submitting!</h1>
-        <p>{results(resultString)}</p>
+        <p>{careers}</p> 
         </center> : ""}
     </>
   );
