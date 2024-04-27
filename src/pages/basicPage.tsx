@@ -33,10 +33,6 @@ export function BasicPage() {
   const resetQuiz = () => {
     setCurrentQuestion(1);
     setSubmitted(false);
-  }
-  const resetQuiz = () => {
-    setCurrentQuestion(1);
-    setSubmitted(false);
   };
   return (
     //The Basic Page will have questions be answered in mulitple choice form
@@ -195,14 +191,14 @@ export function BasicPage() {
         ></BasicQuestions>
       </div>
       <div className="container">
-        <div className="prev">
+        <div>
           {currentQuestion > 1 ? (
             <Button onClick={handlePrevQuestion}>Prev </Button>
           ) : (
             <hr></hr>
           )}
         </div>
-        <div className="next">
+        <div>
           {currentQuestion < 10 ? (
             <Button onClick={handleNextQuestion}>Next</Button>
           ) : (
@@ -212,36 +208,6 @@ export function BasicPage() {
           )}
           {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
         </div>
-      <BasicQuestions
-        question="What would you rather do with your free time?"
-        questionNumber={10}
-        image={job5}
-        answers={[
-          "Learn a new skill",
-          "Relax",
-          "Have fun with a hobby",
-          "Spend the time with friends/loved ones",
-        ]}
-        currentQuestion={currentQuestion}
-        updateNumAnswered={updateNumAnswered}
-      ></BasicQuestions>
-
-      <div>
-        {currentQuestion > 1 ? (
-          <Button onClick={handlePrevQuestion}>Prev </Button>
-        ) : (
-          <hr></hr>
-        )}
-      </div>
-      <div>
-        {currentQuestion < 10 ? (
-          <Button onClick={handleNextQuestion}>Next</Button>
-        ) : (
-          <Button onClick={handleSubmit} disabled={numAnswered!==100}>Submit</Button>
-        )}
-        {submitted&& (
-          <Button onClick={resetQuiz}>Reset Quiz</Button>
-        )}
       </div>
       <ProgressBar numAnswered={numAnswered}></ProgressBar>
 
