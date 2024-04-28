@@ -13,13 +13,13 @@ import job5 from "../images/job5.jpg";
 
 async function results(answers:string): Promise<string> {
   try{
+    answers = "I would like a job in cybersecurity"
     const apiKey = localStorage.getItem("MYKEY");
     console.log("API key from local storage:", apiKey);
     console.log("These are answers:", answers);
     if (!apiKey) {
       throw new Error("API key not found in local storage");
     }
-  
   const requestOptions: RequestInit = {
     method: "POST",
     headers: {
@@ -36,7 +36,7 @@ async function results(answers:string): Promise<string> {
       })
     };
 
-    const response = await fetch("https://api.openai.com/v1/engines/davinci/completions", requestOptions);
+    const response = await fetch("https://api.openai.com/v1/chat/completions", requestOptions);
     const data: {choices?: {text: string }[] } = await response.json();
 
     if (data.choices && data.choices.length > 0) {
@@ -65,7 +65,7 @@ export function BasicPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [numAnswered, setNumAnswered] = useState<number>(0);
-  const [resultArray, setResultArray] = useState<string[]>([]);
+  const [resultArray, setResultArray] = useState<string[]>(["","","","","","","","","","",""]);
   const [resultString, setResultString] = useState<string>("");
   const [careers, setCareers] = useState<string>("");
 
