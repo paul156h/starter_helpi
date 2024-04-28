@@ -9,6 +9,7 @@ export function BasicQuestions({
   answers,
   currentQuestion,
   updateNumAnswered,
+  updateResultArray,
 }: {
   question: string;
   questionNumber: number;
@@ -16,6 +17,7 @@ export function BasicQuestions({
   answers: string[];
   currentQuestion: number;
   updateNumAnswered: (value: number) => void;
+  updateResultArray: (value: string, num: number) => void;
 }): JSX.Element {
   const [input, setInput] = useState<string>("");
   const [alreadyAnswered, setAlreadyAnswered] = useState<boolean>(false);
@@ -24,6 +26,7 @@ export function BasicQuestions({
     setInput(event.target.value);
     if (!alreadyAnswered) {
       setAlreadyAnswered(true);
+      updateResultArray(input, questionNumber);
       updateNumAnswered(10);
     }
   }

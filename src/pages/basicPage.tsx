@@ -42,7 +42,6 @@ async function results(answers:string): Promise<string> {
 
 }
 
-
 /*
 async function results(prompt: string){
   const completion = await openai.chat.completions.create({
@@ -85,7 +84,10 @@ export function BasicPage() {
     setCurrentQuestion((prevQuestion) => prevQuestion - 1);
   };
 
-  const handleSubmit = () => { 
+  const handleSubmit = async () => { 
+    updateResultString(resultArray);
+    const result = await results(resultString);
+    setCareers(result);
     setSubmitted(true);
   };
 
@@ -93,6 +95,7 @@ export function BasicPage() {
     setCurrentQuestion(1);
     setSubmitted(false);
   }
+
   return (
     //The Basic Page will have questions be answered in mulitple choice form
     <>
@@ -119,6 +122,7 @@ export function BasicPage() {
         ]}
         currentQuestion={currentQuestion}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></BasicQuestions>
 
       <BasicQuestions
@@ -133,6 +137,7 @@ export function BasicPage() {
         ]}
         currentQuestion={currentQuestion}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></BasicQuestions>
 
       <BasicQuestions
@@ -147,6 +152,7 @@ export function BasicPage() {
         ]}
         currentQuestion={currentQuestion}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></BasicQuestions>
 
       <BasicQuestions
@@ -161,6 +167,7 @@ export function BasicPage() {
         ]}
         currentQuestion={currentQuestion}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></BasicQuestions>
 
       <BasicQuestions
@@ -175,6 +182,7 @@ export function BasicPage() {
         ]}
         currentQuestion={currentQuestion}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></BasicQuestions>
 
       <BasicQuestions
@@ -189,6 +197,7 @@ export function BasicPage() {
         ]}
         currentQuestion={currentQuestion}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></BasicQuestions>
 
       <BasicQuestions
@@ -203,6 +212,7 @@ export function BasicPage() {
         ]}
         currentQuestion={currentQuestion}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></BasicQuestions>
 
       <BasicQuestions
@@ -217,6 +227,7 @@ export function BasicPage() {
         ]}
         currentQuestion={currentQuestion}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></BasicQuestions>
 
       <BasicQuestions
@@ -231,6 +242,7 @@ export function BasicPage() {
         ]}
         currentQuestion={currentQuestion}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></BasicQuestions>
 
       <BasicQuestions
@@ -245,6 +257,7 @@ export function BasicPage() {
         ]}
         currentQuestion={currentQuestion}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></BasicQuestions>
 
       <div>
@@ -267,6 +280,12 @@ export function BasicPage() {
       {submitted ? (
         <center>
           <h1>Good Job for Submitting!</h1>
+          <p>
+            Here are your results:
+          </p>
+          <p>
+            {careers}
+          </p>
         </center>
       ) : (
         ""
