@@ -23,10 +23,11 @@ export function BasicQuestions({
   const [alreadyAnswered, setAlreadyAnswered] = useState<boolean>(false);
 
   function updateInput(event: React.ChangeEvent<HTMLInputElement>) {
-    setInput(event.target.value);
+    const updatedInput = event.target.value;
+    setInput(updatedInput);
     if (!alreadyAnswered) {
       setAlreadyAnswered(true);
-      updateResultArray(input, questionNumber);
+      updateResultArray(updatedInput, questionNumber);
       updateNumAnswered(10);
     }
   }
