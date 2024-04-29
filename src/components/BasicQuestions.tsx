@@ -43,7 +43,7 @@ export function BasicQuestions({
               <Form.Check
                 key={index}
                 type="radio"
-                className="radiobutton"
+                className={`radiobutton ${input === answer ? "selected" : ""}`}
                 id={answer}
                 label={questionNumber === currentQuestion ? answer : ""}
                 hidden={questionNumber !== currentQuestion}

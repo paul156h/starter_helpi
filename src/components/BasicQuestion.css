@@ -28,12 +28,21 @@
 
 .answerForm .radiobutton {
   padding: 4px 0 4px 8px;
-  background-color: #fa991c;
+  background-color: #264653;
   margin: 4px;
   display: flex;
   align-items: center;
   justify-content: left;
   border-radius: 10px;
+  transition: background-color 0.1s ease-in;
+}
+
+.answerForm .radiobutton:hover {
+  background-color: #2a9d8f;
+}
+.answerForm .radiobutton.selected {
+  /* New class for selected state */
+  background-color: #e3b505; /* Change this to the color you desire */
 }
 
 .form-check-label {
