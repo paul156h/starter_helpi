@@ -7,13 +7,12 @@ import job2 from "../images/job2.jpg";
 import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
-//import OpenAI from "openai";
+import OpenAI from "openai";
 
-//const openai = new OpenAI();
-
+const openai = new OpenAI();
+/*
 async function results(answers:string): Promise<string> {
   try{
-    answers = "I would like a job in cybersecurity"
     const apiKey = localStorage.getItem("MYKEY");
     console.log("API key from local storage:", apiKey);
     console.log("These are answers:", answers);
@@ -51,15 +50,19 @@ async function results(answers:string): Promise<string> {
   }
 }
 
-/*
-async function results(prompt: string){
+
+async function results(answers: string){
   const completion = await openai.chat.completions.create({
-    messages: [{role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire"},{role: "user", content: prompt}],
+    messages: [
+      {role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire."},
+      {role: "user", content: `Generate possible career choices for someone who said the following: ${answers}`},
+    ],
     model: "gpt-4-turbo", 
   })
   return completion.choices[0].message.content;
 }
 */
+
 
 export function BasicPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
@@ -79,8 +82,8 @@ export function BasicPage() {
   }
 
   const updateResultArray = (answer: string, num: number) => {
-    const tempArray = resultArray;
-    tempArray[num] = answer;
+    const tempArray = [...resultArray];
+    tempArray.splice(num, 1, answer)
     setResultArray(tempArray);
   }
 
@@ -105,6 +108,23 @@ export function BasicPage() {
   const resetQuiz = () => {
     setCurrentQuestion(1);
     setSubmitted(false);
+  }
+
+  async function results(answers: string) {
+    const completion = await openai.chat.completions.create({
+      messages: [
+        {role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire."},
+        {role: "user", content: `Generate possible career choices for someone who said the following: ${answers}`},
+      ],
+      model: "gpt-4-turbo", 
+    })
+    if(completion.choices[0].message.content !== null) {
+      updateCareers(completion.choices[0].message.content);
+      return careers;
+    } else {
+      updateCareers("No careers found");
+      return careers;
+    }
   }
 
   return (
