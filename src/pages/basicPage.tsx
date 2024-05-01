@@ -140,7 +140,7 @@ export function BasicPage() {
           image={job2}
           answers={[
             "I usually have a schedule planning literally every part of my day out",
-            "I make sure to keep the big events in check but don't worry about the little parts of my schedule",
+            "I prioritize and and keep track of big events but not about the daily tasks",
             "I try to keep my plan organized but usually don't do a good job with it",
             "I don't keep a schedule and I deal with things as they come",
           ]}
@@ -190,15 +190,15 @@ export function BasicPage() {
           updateNumAnswered={updateNumAnswered}
         ></BasicQuestions>
       </div>
-      <div className="container">
-        <div>
+      <div className="next-container">
+        <div className="prev">
           {currentQuestion > 1 ? (
             <Button onClick={handlePrevQuestion}>Prev </Button>
           ) : (
             <hr></hr>
           )}
         </div>
-        <div>
+        <div className="next">
           {currentQuestion < 10 ? (
             <Button onClick={handleNextQuestion}>Next</Button>
           ) : (
