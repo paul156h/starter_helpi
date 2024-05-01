@@ -42,7 +42,7 @@
 }
 .answerForm .radiobutton.selected {
   /* New class for selected state */
-  background-color: #e3b505; /* Change this to the color you desire */
+  background-color: #d49c2b; /* Change this to the color you desire */
 }
 
 .form-check-label {
