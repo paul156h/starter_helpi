@@ -10,59 +10,6 @@ import job5 from "../images/job5.jpg";
 import OpenAI from "openai";
 
 const openai = new OpenAI();
-/*
-async function results(answers:string): Promise<string> {
-  try{
-    const apiKey = localStorage.getItem("MYKEY");
-    console.log("API key from local storage:", apiKey);
-    console.log("These are answers:", answers);
-    if (!apiKey) {
-      throw new Error("API key not found in local storage");
-    }
-  const requestOptions: RequestInit = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
-      model: "gpt-4-turbo",
-        messages: [
-          {role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire."},
-          {role: "user", content: `Generate possible career choices for someone who said the following: ${answers}`},
-          {role: "results page", content: "Here are your results: insert list of results that you generate here"},
-        ]
-      })
-    };
-
-    const response = await fetch("https://api.openai.com/v1/chat/completions", requestOptions);
-    const data: {choices?: {text: string }[] } = await response.json();
-
-    if (data.choices && data.choices.length > 0) {
-      const choicesList = data.choices.map((choice) => choice.text.trim());
-      return choicesList.join("\n");
-    } else {
-      return "No careers found"
-    }
-  } catch (error) {
-      console.error("Error in results function", error);
-      return "An error occured while fetching career choices"
-  }
-}
-
-
-async function results(answers: string){
-  const completion = await openai.chat.completions.create({
-    messages: [
-      {role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire."},
-      {role: "user", content: `Generate possible career choices for someone who said the following: ${answers}`},
-    ],
-    model: "gpt-4-turbo", 
-  })
-  return completion.choices[0].message.content;
-}
-*/
-
 
 export function BasicPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
