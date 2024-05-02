@@ -40,15 +40,7 @@ export function BasicPage() {
       <div className="basic-title">
         <h1>Welcome To Our Basic Questions</h1>
       </div>
-      <div>
-        {numAnswered === 100 ? (
-          <center>
-            <h3>You Have Answered All Questions, Go to Last Page to Submit!</h3>{" "}
-          </center>
-        ) : (
-          <hr></hr>
-        )}
-      </div>
+      <ProgressBar numAnswered={numAnswered}></ProgressBar>
       <div className="question">
         <BasicQuestions
           question="How much experience do you have with working?"
@@ -190,6 +182,17 @@ export function BasicPage() {
           updateNumAnswered={updateNumAnswered}
         ></BasicQuestions>
       </div>
+      
+      <div>
+        {numAnswered === 100 ? (
+          <center>
+            <h2>You Have Answered All Questions, Go to Last Page to Submit!</h2>{" "}
+          </center>
+        ) : (
+          <hr></hr>
+        )}
+      </div>
+
       <div className="next-container">
         <div className="prev">
           {currentQuestion > 1 ? (
@@ -198,6 +201,7 @@ export function BasicPage() {
             <hr></hr>
           )}
         </div>
+
         <div className="next">
           {currentQuestion < 10 ? (
             <Button onClick={handleNextQuestion}>Next</Button>
@@ -209,7 +213,6 @@ export function BasicPage() {
           {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
         </div>
       </div>
-      <ProgressBar numAnswered={numAnswered}></ProgressBar>
 
       {submitted ? (
         <center>
