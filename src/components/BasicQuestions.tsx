@@ -37,7 +37,9 @@ export function BasicQuestions({
           <p className="question-p">
             Question {questionNumber}: {question}
           </p>
+          
           <img src={image} className="basicQ-img" alt="questionImg"></img>
+
           <Form className="answerForm">
             {answers.map((answer, index) => (
               <Form.Check
