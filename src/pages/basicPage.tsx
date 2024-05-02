@@ -9,7 +9,6 @@ import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
 import OpenAI from "openai";
 
-const openai = new OpenAI();
 /*
 async function results(answers:string): Promise<string> {
   try{
@@ -71,6 +70,7 @@ export function BasicPage() {
   const [resultArray, setResultArray] = useState<string[]>(["","","","","","","","","","",""]);
   const [resultString, setResultString] = useState<string>("");
   const [careers, setCareers] = useState<string>("");
+  
 
   const updateCareers = (response: string) => {
     setCareers(response);
@@ -111,12 +111,21 @@ export function BasicPage() {
   }
 
   async function results(answers: string) {
+    let Key = localStorage.getItem("MYKEY");
+    if(Key !== null) {
+      JSON.parse(Key);
+    }
+    if(Key === null) {
+      throw new Error("API key not found");
+    }
+    const openai = new OpenAI({apiKey: Key, dangerouslyAllowBrowser: true});
+
     const completion = await openai.chat.completions.create({
       messages: [
         {role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire."},
         {role: "user", content: `Generate possible career choices for someone who said the following: ${answers}`},
       ],
-      model: "gpt-4-turbo", 
+      model: "gpt-4-turbo",
     })
     if(completion.choices[0].message.content !== null) {
       updateCareers(completion.choices[0].message.content);
