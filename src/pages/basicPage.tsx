@@ -11,8 +11,6 @@ import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
 import OpenAI from "openai";
 
-const openai = new OpenAI();
-
 export function BasicPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
   const [submitted, setSubmitted] = useState<boolean>(false);
@@ -49,8 +47,10 @@ export function BasicPage() {
 
   const handleSubmit = async () => { 
     updateResultString(resultArray);
+    console.log(resultString);
     const result = await results(resultString);
     updateCareers(result);
+    console.log(careers);
     setSubmitted(true);
   };
 
@@ -60,13 +60,23 @@ export function BasicPage() {
   };
 
   async function results(answers: string) {
+    let Key = localStorage.getItem("MYKEY");
+    if(Key !== null) {
+      Key = JSON.parse(Key);
+    }
+    if(Key === null) {
+      throw new Error("API key not found");
+    }
+    const openai = new OpenAI({apiKey: Key, dangerouslyAllowBrowser: true});
+    console.log(Key);
     const completion = await openai.chat.completions.create({
       messages: [
         {role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire."},
         {role: "user", content: `Generate possible career choices for someone who said the following: ${answers}`},
       ],
-      model: "gpt-4-turbo", 
+      model: "gpt-4-turbo",
     })
+    //console.log(completion.choices[0].message.content);
     if(completion.choices[0].message.content !== null) {
       updateCareers(completion.choices[0].message.content);
       return careers;
@@ -121,20 +131,6 @@ export function BasicPage() {
           updateNumAnswered={updateNumAnswered}
           updateResultArray={updateResultArray}
         ></BasicQuestions>
-      <BasicQuestions
-        question="How comfortable are you with public speaking?"
-        questionNumber={2}
-        image={job2}
-        answers={[
-          "I'm extremely comfortable and am willing to do it",
-          "I'm fine with it whenever I have to do it",
-          "I would rather not have to do it",
-          "I cannot get myself to do this even if I tried",
-        ]}
-        currentQuestion={currentQuestion}
-        updateNumAnswered={updateNumAnswered}
-        updateResultArray={updateResultArray}
-      ></BasicQuestions>
 
         <BasicQuestions
           question="About how much money would you like to earn?"
@@ -150,20 +146,6 @@ export function BasicPage() {
           updateNumAnswered={updateNumAnswered}
           updateResultArray={updateResultArray}
         ></BasicQuestions>
-      <BasicQuestions
-        question="About how much money would you like to earn?"
-        image={job3}
-        questionNumber={3}
-        answers={[
-          "I want to become really, really rich",
-          "I would like to be able to buy whatever I want and still live a comfortable life",
-          "I'm fine with any amount as long as I live comfortably",
-          "Money doesn't have an impact on my decision",
-        ]}
-        currentQuestion={currentQuestion}
-        updateNumAnswered={updateNumAnswered}
-        updateResultArray={updateResultArray}
-      ></BasicQuestions>
 
         <BasicQuestions
           question="Which one of these words best describes you?"
@@ -179,20 +161,6 @@ export function BasicPage() {
           updateNumAnswered={updateNumAnswered}
           updateResultArray={updateResultArray}
         ></BasicQuestions>
-      <BasicQuestions
-        question="Which one of these words best describes you?"
-        questionNumber={4}
-        image={job4}
-        answers={[
-          "Center of Attention",
-          "Participating",
-          "In the crowd",
-          "Alone",
-        ]}
-        currentQuestion={currentQuestion}
-        updateNumAnswered={updateNumAnswered}
-        updateResultArray={updateResultArray}
-      ></BasicQuestions>
 
         <BasicQuestions
           question="How much would you like your job to help people?"
@@ -208,20 +176,6 @@ export function BasicPage() {
           updateNumAnswered={updateNumAnswered}
           updateResultArray={updateResultArray}
         ></BasicQuestions>
-      <BasicQuestions
-        question="How much would you like your job to help people?"
-        questionNumber={5}
-        image={job5}
-        answers={[
-          "I want it to be my sole purpose",
-          "I would really like if my job helped others in need",
-          "I would be fine if helping people was a side effect of me doing my job",
-          "I couldn't care less how my actions may impact someone",
-        ]}
-        currentQuestion={currentQuestion}
-        updateNumAnswered={updateNumAnswered}
-        updateResultArray={updateResultArray}
-      ></BasicQuestions>
 
         <BasicQuestions
           question="How many hours would you like to work"
@@ -237,20 +191,6 @@ export function BasicPage() {
           updateNumAnswered={updateNumAnswered}
           updateResultArray={updateResultArray}
         ></BasicQuestions>
-      <BasicQuestions
-        question="How many hours would you like to work"
-        questionNumber={6}
-        image={job1}
-        answers={[
-          "I'm fine with whatever I am assigned, even if I have to work overtime",
-          "I would like to work a 9-5 (or any other 8 hour period)",
-          "I would prefer to work a lot less than 8 hours a day",
-          "I would rather create my own hours and work to my own schedule",
-        ]}
-        currentQuestion={currentQuestion}
-        updateNumAnswered={updateNumAnswered}
-        updateResultArray={updateResultArray}
-      ></BasicQuestions>
 
         <BasicQuestions
           question="How good are you at planning?"
@@ -266,20 +206,6 @@ export function BasicPage() {
           updateNumAnswered={updateNumAnswered}
           updateResultArray={updateResultArray}
         ></BasicQuestions>
-      <BasicQuestions
-        question="How good are you at planning?"
-        questionNumber={7}
-        image={job2}
-        answers={[
-          "I usually have a schedule planning literally every part of my day out",
-          "I make sure to keep the big events in check but don't worry about the little parts of my schedule",
-          "I try to keep my plan organized but usually don't do a good job with it",
-          "I don't keep a schedule and I deal with things as they come",
-        ]}
-        currentQuestion={currentQuestion}
-        updateNumAnswered={updateNumAnswered}
-        updateResultArray={updateResultArray}
-      ></BasicQuestions>
 
       <BasicQuestions
         question="Which of the following sounds the most interesting?"
@@ -327,22 +253,24 @@ export function BasicPage() {
       ></BasicQuestions>
       </div>
 
-      <div>
-        {currentQuestion > 1 ? (
-          <Button onClick={handlePrevQuestion}>Prev </Button>
-        ) : (
-          <hr></hr>
-        )}
-      </div>
-      <div>
-        {currentQuestion < 10 ? (
-          <Button onClick={handleNextQuestion}>Next</Button>
-        ) : (
-          <Button onClick={handleSubmit} disabled={numAnswered!==100}>Submit</Button>
-        )}
-        {submitted&& (
-          <Button onClick={resetQuiz}>Reset Quiz</Button>
-        )}
+      <div className="next-container">
+        <div className="prev">
+          {currentQuestion > 1 ? (
+            <Button onClick={handlePrevQuestion}>Prev </Button>
+          ) : (
+            <hr></hr>
+          )}
+        </div>
+        <div className="next">
+          {currentQuestion < 10 ? (
+            <Button onClick={handleNextQuestion}>Next</Button>
+          ) : (
+            <Button onClick={handleSubmit} disabled={numAnswered !== 100}>
+              Submit
+            </Button>
+          )}
+          {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
+        </div>
       </div>
       <ProgressBar numAnswered={numAnswered}></ProgressBar>
 
