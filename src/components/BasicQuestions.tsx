@@ -37,17 +37,16 @@ export function BasicQuestions({
       {questionNumber !== currentQuestion ? (
         ""
       ) : (
-        <div className="quiz-box">
-          <p className="question-p">
+        <div>
+          <p>
             Question {questionNumber}: {question}
           </p>
           <img src={image} className="basicQ-img" alt="questionImg"></img>
-          <Form className="answerForm">
+          <Form>
             {answers.map((answer, index) => (
               <Form.Check
                 key={index}
                 type="radio"
-                className={`radiobutton ${input === answer ? "selected" : ""}`}
                 id={answer}
                 label={questionNumber === currentQuestion ? answer : ""}
                 hidden={questionNumber !== currentQuestion}

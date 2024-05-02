@@ -82,7 +82,6 @@ export function BasicPage() {
     }
   }
 
-  };
   return (
     //The Basic Page will have questions be answered in mulitple choice form
     <>
