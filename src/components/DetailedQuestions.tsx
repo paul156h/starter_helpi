@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
+import "./DetailedQuestions.css";
 
 
 export function DetailedQuestions({question,questionNumber,currentQuestion, updateNumAnswered}: {question: string; questionNumber:number;currentQuestion:number; updateNumAnswered: (value: number) => void}): JSX.Element {
@@ -18,10 +19,12 @@ export function DetailedQuestions({question,questionNumber,currentQuestion, upda
     }
     return(
         <div>
-            {questionNumber !== currentQuestion ? "" : <p>Question {questionNumber}: {question}</p>}
-            <Form.Group controlId="checkInput">
+            {questionNumber !== currentQuestion ? "" : <div className="quiz-box">
+                 <p className="question-p">Question {questionNumber}: {question}</p>
+                 <Form.Group controlId="checkInput">
                 <Form.Control type="text" value={input} hidden={questionNumber !== currentQuestion} onChange={updateInput} />
-            </Form.Group>
+                </Form.Group>
+                 </div>}
         </div>
     );
 }

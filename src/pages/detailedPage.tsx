@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { DetailedQuestions } from "../components/DetailedQuestions";
 import { ProgressBar } from "../components/progressBar";
 import { Button } from "react-bootstrap";
+import "./detailedPage.css";
 
 export function DetailedPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
@@ -23,17 +24,11 @@ export function DetailedPage() {
   };
   return (
     <>
-      <ProgressBar numAnswered={numAnswered}></ProgressBar>
-      <div>
-        {numAnswered === 100 ? (
-          <center>
-            <h3>You Have Answered All Questions, Go to Last Page to Submit!</h3>{" "}
-          </center>
-        ) : (
-          <hr></hr>
-        )}
+    <div className="detailed-title">
+        <h1>Welcome To Our Detailed Questions</h1>
       </div>
-      <h1>Detailed Questionnaire</h1>
+      <ProgressBar numAnswered={numAnswered}></ProgressBar>
+      <div className="question">
       <DetailedQuestions
         question="What was your favorite and least favorite subjects in high school/college?"
         questionNumber={1}
@@ -103,14 +98,28 @@ export function DetailedPage() {
         currentQuestion={currentQuestion}
         updateNumAnswered={updateNumAnswered}
       ></DetailedQuestions>
+      </div>
+
       <div>
+        {numAnswered === 100 ? (
+          <center>
+            <h2>You Have Answered All Questions, Go to Last Page to Submit!</h2>{" "}
+          </center>
+        ) : (
+          <hr></hr>
+        )}
+      </div>
+
+      <div className="next-container">
+      <div className="prev">
         {currentQuestion > 1 ? (
           <Button onClick={handlePrevQuestion}>Prev </Button>
         ) : (
           <hr></hr>
         )}
       </div>
-      <div>
+
+      <div className="next"></div>
         {currentQuestion < 10 ? (
           <Button onClick={handleNextQuestion}>Next</Button>
         ) : (
