@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { DetailedQuestions } from "../components/DetailedQuestions";
 import { ProgressBar } from "../components/progressBar";
 import { Button } from "react-bootstrap";
+import "./detailedPage.css";
 
 export function DetailedPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
@@ -23,8 +24,9 @@ export function DetailedPage() {
   };
   return (
     <>
-      <ProgressBar numAnswered={numAnswered}></ProgressBar>
-      <div>
+      <div className="detailed-title">
+        <h1>Detailed Questionnaire</h1>
+
         {numAnswered === 100 ? (
           <center>
             <h3>You Have Answered All Questions, Go to Last Page to Submit!</h3>{" "}
@@ -33,7 +35,7 @@ export function DetailedPage() {
           <hr></hr>
         )}
       </div>
-      <h1>Detailed Questionnaire</h1>
+      <div className="question"></div>
       <DetailedQuestions
         question="What was your favorite and least favorite subjects in high school/college?"
         questionNumber={1}
@@ -119,6 +121,8 @@ export function DetailedPage() {
           </Button>
         )}
       </div>
+      <ProgressBar numAnswered={numAnswered}></ProgressBar>
+
       {submitted ? (
         <center>
           <h1>Good Job for Submitting</h1>

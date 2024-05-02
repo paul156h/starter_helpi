@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.detailed-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.question {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
