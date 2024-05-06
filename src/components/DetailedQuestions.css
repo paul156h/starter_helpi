@@ -1,0 +1,21 @@
+.detailedQ-img {
+    height: 55vh;
+    width: 700px;
+  }
+  
+  .question-p {
+    width: 750px;
+    font-size: 23px;
+    padding: 10px 0;
+    color: #fff;
+  }
+  .quiz-box {
+    width: 800px;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    margin: auto;
+    background-color: #1c768f;
+    border-radius: 30px;
+    padding: 10px 30px 30px 30px;
+  }
