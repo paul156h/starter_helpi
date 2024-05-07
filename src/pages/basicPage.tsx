@@ -19,17 +19,18 @@ export function BasicPage() {
   const [resultString, setResultString] = useState<string>("");
   const [careers, setCareers] = useState<string>("");
 
+
   const updateCareers = (response: string) => {
     setCareers(response);
   }
 
   const updateResultString = (array: string[]) => {
     let temp = array.toString();
+    console.log(temp);
     setResultString(temp);
   }
 
   const updateResultArray = (answer: string, num: number) => {
-    console.log("made it here");
     const tempArray = [...resultArray];
     tempArray.splice(num, 1, answer)
     setResultArray(tempArray);
@@ -47,6 +48,7 @@ export function BasicPage() {
   };
 
   const handleSubmit = async () => { 
+    
     updateResultString(resultArray);
     const result = await results(resultString);
     updateCareers(result);
@@ -68,10 +70,11 @@ export function BasicPage() {
       throw new Error("API key not found");
     }
     const openai = new OpenAI({apiKey: Key, dangerouslyAllowBrowser: true});
+    try {
     const completion = await openai.chat.completions.create({
       messages: [
         {role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire."},
-        {role: "user", content: `Generate possible career choices for someone who said the following: ${answers}`},
+        {role: "user", content: `Generate possible career choices for someone who responded to the quiz questions6: ${answers}`},
       ],
       model: "gpt-4-turbo",
     })
@@ -83,6 +86,10 @@ export function BasicPage() {
       updateCareers("No careers found");
       return careers;
     }
+  } catch {
+    console.log("An error occured while searching for careers")
+    return careers;
+  }
   }
 
   return (
@@ -279,9 +286,7 @@ export function BasicPage() {
           <p>
             Here are your results:
           </p>
-          <p>
-            {careers}
-          </p>
+          {}
         </center>
       ) : (
         ""
