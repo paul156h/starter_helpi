@@ -26,8 +26,8 @@ export function BasicPage() {
 
   const updateResultString = (array: string[]) => {
     let temp = array.toString();
-    console.log(temp);
     setResultString(temp);
+    console.log(resultString);
   }
 
   const updateResultArray = (answer: string, num: number) => {
@@ -52,6 +52,7 @@ export function BasicPage() {
     updateResultString(resultArray);
     const result = await results(resultString);
     updateCareers(result);
+    console.log(careers);
     setSubmitted(true);
   };
 
@@ -73,8 +74,8 @@ export function BasicPage() {
     try {
     const completion = await openai.chat.completions.create({
       messages: [
-        {role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire."},
-        {role: "user", content: `Generate possible career choices for someone who responded to the quiz questions6: ${answers}`},
+        {role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire. The questions are as follows: Question 1: How much experience do you have with working?; Question 2: How comfortable are you with public speaking?; Question 3: About how much money would you like to earn?; Question 4: Which one of these words best describes you?; Question 5: How much would you like your job to help people?; Question 6: How many hours would you like to work; Question 7: How good are you at planning?; Question 8: Which of the following sounds the most interesting?; Question 9: How much are you willing to do any sort of manual labor?; Question 10: What would you rather do with your free time?"},
+        {role: "user", content: `Generate possible career choices for someone who responded to the quiz questions with these answers: ${answers}`},
       ],
       model: "gpt-4-turbo",
     })
