@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+ import { Button } from "react-bootstrap";
 import { BasicQuestions } from "../components/BasicQuestions";
 import { useState } from "react";
 import { ProgressBar } from "../components/progressBar";
@@ -9,11 +9,30 @@ import job2 from "../images/job2.jpg";
 import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
+import OpenAI from "openai";
 
 export function BasicPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [numAnswered, setNumAnswered] = useState<number>(0);
+  const [resultArray, setResultArray] = useState<string[]>(["","","","","","","","","","",""]);
+  const [resultString, setResultString] = useState<string>("");
+  const [careers, setCareers] = useState<string>("");
+
+  const updateCareers = (response: string) => {
+    setCareers(response);
+  }
+
+  const updateResultString = (array: string[]) => {
+    let result = "Generate a list of carreer choices based on the following quiz answers: "
+    setResultString(result + array.toString);
+  }
+
+  const updateResultArray = (answer: string, num: number) => {
+    const tempArray = [...resultArray];
+    tempArray.splice(num, 1, answer)
+    setResultArray(tempArray);
+  }
 
   const updateNumAnswered = (value: number) => {
     setNumAnswered(numAnswered + value);
@@ -26,7 +45,12 @@ export function BasicPage() {
     setCurrentQuestion((prevQuestion) => prevQuestion - 1);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => { 
+    updateResultString(resultArray);
+    console.log(resultString);
+    const result = await results(resultString);
+    updateCareers(result);
+    console.log(careers);
     setSubmitted(true);
   };
 
@@ -34,21 +58,41 @@ export function BasicPage() {
     setCurrentQuestion(1);
     setSubmitted(false);
   };
+
+  async function results(answers: string) {
+    let Key = localStorage.getItem("MYKEY");
+    if(Key !== null) {
+      Key = JSON.parse(Key);
+    }
+    if(Key === null) {
+      throw new Error("API key not found");
+    }
+    const openai = new OpenAI({apiKey: Key, dangerouslyAllowBrowser: true});
+    console.log(Key);
+    const completion = await openai.chat.completions.create({
+      messages: [
+        {role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire."},
+        {role: "user", content: `Generate possible career choices for someone who said the following: ${answers}`},
+      ],
+      model: "gpt-4-turbo",
+    })
+    //console.log(completion.choices[0].message.content);
+    if(completion.choices[0].message.content !== null) {
+      updateCareers(completion.choices[0].message.content);
+      return careers;
+    } else {
+      updateCareers("No careers found");
+      return careers;
+    }
+  }
+
   return (
     //The Basic Page will have questions be answered in mulitple choice form
     <>
       <div className="basic-title">
         <h1>Welcome To Our Basic Questions</h1>
       </div>
-      <div>
-        {numAnswered === 100 ? (
-          <center>
-            <h3>You Have Answered All Questions, Go to Last Page to Submit!</h3>{" "}
-          </center>
-        ) : (
-          <hr></hr>
-        )}
-      </div>
+      <ProgressBar numAnswered={numAnswered}></ProgressBar>
       <div className="question">
         <BasicQuestions
           question="How much experience do you have with working?"
@@ -62,6 +106,7 @@ export function BasicPage() {
           ]}
           currentQuestion={currentQuestion}
           updateNumAnswered={updateNumAnswered}
+          updateResultArray={updateResultArray}
         ></BasicQuestions>
 
         <BasicQuestions
@@ -76,6 +121,7 @@ export function BasicPage() {
           ]}
           currentQuestion={currentQuestion}
           updateNumAnswered={updateNumAnswered}
+          updateResultArray={updateResultArray}
         ></BasicQuestions>
 
         <BasicQuestions
@@ -90,6 +136,7 @@ export function BasicPage() {
           ]}
           currentQuestion={currentQuestion}
           updateNumAnswered={updateNumAnswered}
+          updateResultArray={updateResultArray}
         ></BasicQuestions>
 
         <BasicQuestions
@@ -104,6 +151,7 @@ export function BasicPage() {
           ]}
           currentQuestion={currentQuestion}
           updateNumAnswered={updateNumAnswered}
+          updateResultArray={updateResultArray}
         ></BasicQuestions>
 
         <BasicQuestions
@@ -118,6 +166,7 @@ export function BasicPage() {
           ]}
           currentQuestion={currentQuestion}
           updateNumAnswered={updateNumAnswered}
+          updateResultArray={updateResultArray}
         ></BasicQuestions>
 
         <BasicQuestions
@@ -132,6 +181,7 @@ export function BasicPage() {
           ]}
           currentQuestion={currentQuestion}
           updateNumAnswered={updateNumAnswered}
+          updateResultArray={updateResultArray}
         ></BasicQuestions>
 
         <BasicQuestions
@@ -146,50 +196,64 @@ export function BasicPage() {
           ]}
           currentQuestion={currentQuestion}
           updateNumAnswered={updateNumAnswered}
+          updateResultArray={updateResultArray}
         ></BasicQuestions>
 
-        <BasicQuestions
-          question="Which of the following sounds the most interesting?"
-          questionNumber={8}
-          image={job3}
-          answers={[
-            "Electronic & Programs",
-            "History & Culture",
-            "Biology & Anatomy",
-            "Sports & Fitness",
-          ]}
-          currentQuestion={currentQuestion}
-          updateNumAnswered={updateNumAnswered}
-        ></BasicQuestions>
+      <BasicQuestions
+        question="Which of the following sounds the most interesting?"
+        questionNumber={8}
+        image={job3}
+        answers={[
+          "Electronic & Programs",
+          "History & Culture",
+          "Biology & Anatomy",
+          "Sports & Fitness",
+        ]}
+        currentQuestion={currentQuestion}
+        updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
+      ></BasicQuestions>
 
-        <BasicQuestions
-          question="How much are you willing to do any sort of manual labor?"
-          questionNumber={9}
-          image={job4}
-          answers={[
-            "I would prefer to do manual labor in my job",
-            "I am fine with some manual labor in my job",
-            "I would prefer not to have manual labor in my job",
-            "I will never want to do any manual labor in my job",
-          ]}
-          currentQuestion={currentQuestion}
-          updateNumAnswered={updateNumAnswered}
-        ></BasicQuestions>
+      <BasicQuestions
+        question="How much are you willing to do any sort of manual labor?"
+        questionNumber={9}
+        image={job4}
+        answers={[
+          "I would prefer to do manual labor in my job",
+          "I am fine with some manual labor in my job",
+          "I would prefer not to have manual labor in my job",
+          "I will never want to do any manual labor in my job",
+        ]}
+        currentQuestion={currentQuestion}
+        updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
+      ></BasicQuestions>
 
-        <BasicQuestions
-          question="What would you rather do with your free time?"
-          questionNumber={10}
-          image={job5}
-          answers={[
-            "Learn a new skill",
-            "Relax",
-            "Have fun with a hobby",
-            "Spend the time with friends/loved ones",
-          ]}
-          currentQuestion={currentQuestion}
-          updateNumAnswered={updateNumAnswered}
-        ></BasicQuestions>
+      <BasicQuestions
+        question="What would you rather do with your free time?"
+        questionNumber={10}
+        image={job5}
+        answers={[
+          "Learn a new skill",
+          "Relax",
+          "Have fun with a hobby",
+          "Spend the time with friends/loved ones",
+        ]}
+        currentQuestion={currentQuestion}
+        updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
+      ></BasicQuestions>
       </div>
+      <div>
+        {numAnswered === 100 ? (
+          <center>
+            <h2>You Have Answered All Questions, Go to Last Page to Submit!</h2>{" "}
+          </center>
+        ) : (
+          <hr></hr>
+        )}
+      </div>
+
       <div className="next-container">
         <div className="prev">
           {currentQuestion > 1 ? (
@@ -198,6 +262,7 @@ export function BasicPage() {
             <hr></hr>
           )}
         </div>
+
         <div className="next">
           {currentQuestion < 10 ? (
             <Button onClick={handleNextQuestion}>Next</Button>
@@ -209,11 +274,16 @@ export function BasicPage() {
           {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
         </div>
       </div>
-      <ProgressBar numAnswered={numAnswered}></ProgressBar>
 
       {submitted ? (
         <center>
           <h1>Good Job for Submitting!</h1>
+          <p>
+            Here are your results:
+          </p>
+          <p>
+            {careers}
+          </p>
         </center>
       ) : (
         ""
