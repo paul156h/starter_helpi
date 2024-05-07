@@ -27,7 +27,7 @@ export function BasicQuestions({
     setInput(updatedInput);
     if (!alreadyAnswered) {
       setAlreadyAnswered(true);
-      updateResultArray(updatedInput, questionNumber);
+      updateResultArray(updatedInput, questionNumber-1);
       updateNumAnswered(10);
     }
   }

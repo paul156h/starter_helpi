@@ -15,7 +15,7 @@ export function BasicPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [numAnswered, setNumAnswered] = useState<number>(0);
-  const [resultArray, setResultArray] = useState<string[]>(["","","","","","","","","","",""]);
+  const [resultArray, setResultArray] = useState<string[]>(["","","","","","","","","",""]);
   const [resultString, setResultString] = useState<string>("");
   const [careers, setCareers] = useState<string>("");
 
@@ -24,11 +24,12 @@ export function BasicPage() {
   }
 
   const updateResultString = (array: string[]) => {
-    let result = "Generate a list of carreer choices based on the following quiz answers: "
-    setResultString(result + array.toString);
+    console.log(array.toString());
+    setResultString(array.toString());
   }
 
   const updateResultArray = (answer: string, num: number) => {
+    console.log("made it here");
     const tempArray = [...resultArray];
     tempArray.splice(num, 1, answer)
     setResultArray(tempArray);
