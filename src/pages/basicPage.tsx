@@ -24,8 +24,8 @@ export function BasicPage() {
   }
 
   const updateResultString = (array: string[]) => {
-    console.log(array.toString());
-    setResultString(array.toString());
+    let temp = array.toString();
+    setResultString(temp);
   }
 
   const updateResultArray = (answer: string, num: number) => {
@@ -48,10 +48,8 @@ export function BasicPage() {
 
   const handleSubmit = async () => { 
     updateResultString(resultArray);
-    console.log(resultString);
     const result = await results(resultString);
     updateCareers(result);
-    console.log(careers);
     setSubmitted(true);
   };
 
@@ -61,6 +59,7 @@ export function BasicPage() {
   };
 
   async function results(answers: string) {
+    console.log(answers);
     let Key = localStorage.getItem("MYKEY");
     if(Key !== null) {
       Key = JSON.parse(Key);
@@ -69,7 +68,6 @@ export function BasicPage() {
       throw new Error("API key not found");
     }
     const openai = new OpenAI({apiKey: Key, dangerouslyAllowBrowser: true});
-    console.log(Key);
     const completion = await openai.chat.completions.create({
       messages: [
         {role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire."},
@@ -77,7 +75,7 @@ export function BasicPage() {
       ],
       model: "gpt-4-turbo",
     })
-    //console.log(completion.choices[0].message.content);
+    console.log(completion.choices[0].message.content);
     if(completion.choices[0].message.content !== null) {
       updateCareers(completion.choices[0].message.content);
       return careers;
