@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { BasicQuestions } from "../components/BasicQuestions";
 import { useState } from "react";
 import { ProgressBar } from "../components/progressBar";
@@ -10,6 +10,13 @@ import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
 import OpenAI from "openai";
+
+let keyData = "";
+const saveKeyData = "MYKEY";
+const prevKey = localStorage.getItem(saveKeyData);
+if (prevKey !== null) {
+  keyData = JSON.parse(prevKey);
+}
 
 export function BasicPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
@@ -65,12 +72,19 @@ export function BasicPage() {
     updateCareers(result);
     console.log(careers);
     setSubmitted(true);
+    localStorage.setItem(saveKeyData, JSON.stringify(key));
+    window.location.reload();
   };
 
   const resetQuiz = () => {
     setCurrentQuestion(1);
     setSubmitted(false);
   };
+  const [key, setKey] = useState<string>(keyData);
+
+  function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
+    setKey(event.target.value);
+  }
 
   async function results(answers: string) {
     let Key = localStorage.getItem("MYKEY");
@@ -304,6 +318,27 @@ export function BasicPage() {
       ) : (
         ""
       )}
+      <div className="footer">
+        <p>
+          <div>
+            <Form className="api-key-form">
+              <Form.Label className="center-label">API Key:</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Insert API Key Here"
+                onChange={changeKey}
+              ></Form.Control>
+              <div>
+                <Button className="Submit-Button" onClick={handleSubmit}>
+                  Submit
+                </Button>
+              </div>
+              Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James
+              Healy, and Matthew Montalvo
+            </Form>
+          </div>
+        </p>
+      </div>
     </>
   );
 }

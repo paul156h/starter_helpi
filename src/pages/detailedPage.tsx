@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DetailedQuestions } from "../components/DetailedQuestions";
 import { ProgressBar } from "../components/progressBar";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import "./detailedPage.css";
 import "./detailedPage.css";
 import job1 from "../images/job1.jpg";
@@ -9,6 +9,13 @@ import job2 from "../images/job2.jpg";
 import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
+
+let keyData = "";
+const saveKeyData = "MYKEY";
+const prevKey = localStorage.getItem(saveKeyData);
+if (prevKey !== null) {
+  keyData = JSON.parse(prevKey);
+}
 
 export function DetailedPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
@@ -27,7 +34,14 @@ export function DetailedPage() {
 
   const handleSubmit = () => {
     setSubmitted(true);
+    localStorage.setItem(saveKeyData, JSON.stringify(key));
+    window.location.reload();
   };
+  const [key, setKey] = useState<string>(keyData);
+
+  function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
+    setKey(event.target.value);
+  }
   return (
     <>
       <div className="detailed-title">
@@ -152,6 +166,25 @@ export function DetailedPage() {
       ) : (
         ""
       )}
+      <div className="footer">
+      <p>
+      <div>
+      <Form className="api-key-form">
+        <Form.Label className="center-label">API Key:</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Insert API Key Here"
+          onChange={changeKey}
+        ></Form.Control>
+        
+        <div>
+        <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
+        </div>
+      Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James Healy, and Matthew Montalvo 
+      </Form>
+      </div>
+      </p>
+      </div>
     </>
   );
 }
