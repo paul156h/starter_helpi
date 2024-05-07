@@ -144,7 +144,6 @@ export function DetailedPage() {
           </Button>
         )}
       </div>
-      <ProgressBar numAnswered={numAnswered}></ProgressBar>
 
       {submitted ? (
         <center>
