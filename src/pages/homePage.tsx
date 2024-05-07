@@ -3,6 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import "./HomePage.css";
 import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
+import { Link } from "react-router-dom";
 
 let keyData = "";
 const saveKeyData = "MYKEY";
@@ -82,30 +83,15 @@ export function HomePage() {
               basic questions will take less time to complete and give you a
               general analysis of what career paths you should consider.
             </p>
+            <Link to="/basicPage">
+              <Button className="basic-btn-hm">Take Our Basic Quiz</Button>
+            </Link>
           </div>
+
           <div className="BasicInfoImg">
             <img src={job3} alt="giveImage"></img>
           </div>
         </div>
-
-        {/* <div className="row">
-          <div className="column">
-            <header>Basic Questions Page</header>
-            <p>
-              The "Basic" button will take you to the Basic Questions Page. The
-              basic questions will take less time to complete and give you a
-              general analysis of what career paths you should consider.
-            </p>
-          </div>
-          <div className="column">
-            <header>Detailed Questions Page</header>
-            <p>
-              The "Detailed" button will take you to the Detailed Questions
-              Page. The detailed questions will take more time and will give you
-              a more in-depth analysis of the career path you should consider.
-            </p>
-          </div>
-        </div> */}
       </div>
       <div className="detailedInfoPage">
         <div className="detailedInfoBox">
@@ -119,27 +105,13 @@ export function HomePage() {
               Page. The detailed questions will take more time and will give you
               a more in-depth analysis of the career path you should consider.
             </p>
+            <Link to="/detailedPage">
+              <Button className="detailed-btn-hm">
+                Take Our Detailed Quiz
+              </Button>
+            </Link>
           </div>
         </div>
-
-        {/* <div className="row">
-          <div className="column">
-            <header>Basic Questions Page</header>
-            <p>
-              The "Basic" button will take you to the Basic Questions Page. The
-              basic questions will take less time to complete and give you a
-              general analysis of what career paths you should consider.
-            </p>
-          </div>
-          <div className="column">
-            <header>Detailed Questions Page</header>
-            <p>
-              The "Detailed" button will take you to the Detailed Questions
-              Page. The detailed questions will take more time and will give you
-              a more in-depth analysis of the career path you should consider.
-            </p>
-          </div>
-        </div> */}
       </div>
       <div className="footer">
       <p>
