@@ -18,7 +18,15 @@ export function BasicPage() {
   const [resultArray, setResultArray] = useState<string[]>(["","","","","","","","","",""]);
   const [resultString, setResultString] = useState<string>("");
   const [careers, setCareers] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
+  const updateSubmitted = (bool: boolean) => {
+    setSubmitted(bool);
+  }
+
+  const updateLoading = (bool: boolean) => {
+    setLoading(bool);
+  }
 
   const updateCareers = (response: string) => {
     setCareers(response);
@@ -27,7 +35,6 @@ export function BasicPage() {
   const updateResultString = (array: string[]) => {
     let temp = array.toString();
     setResultString(temp);
-    console.log(resultString);
   }
 
   const updateResultArray = (answer: string, num: number) => {
@@ -48,12 +55,13 @@ export function BasicPage() {
   };
 
   const handleSubmit = async () => { 
-    
+    updateLoading(true);
     updateResultString(resultArray);
     const result = await results(resultString);
     updateCareers(result);
     console.log(careers);
-    setSubmitted(true);
+    updateSubmitted(true);
+    updateLoading(false);
   };
 
   const resetQuiz = () => {
@@ -88,7 +96,7 @@ export function BasicPage() {
       return careers;
     }
   } catch {
-    console.log("An error occured while searching for careers")
+    updateCareers("An error occured while searching for careers");
     return careers;
   }
   }
@@ -284,9 +292,12 @@ export function BasicPage() {
       {submitted ? (
         <center>
           <h1>Good Job for Submitting!</h1>
-          <p>
-            Here are your results:
-          </p>
+          {loading ? (
+            <p>loading...</p>
+          ) : (
+            <p>{careers}</p>
+          )
+          }
           {}
         </center>
       ) : (
