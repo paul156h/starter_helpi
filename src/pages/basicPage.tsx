@@ -1,4 +1,4 @@
- import { Button, Form } from "react-bootstrap";
+ import { Button} from "react-bootstrap";
 import { BasicQuestions } from "../components/BasicQuestions";
 import { useState } from "react";
 import { ProgressBar } from "../components/progressBar";
@@ -10,13 +10,6 @@ import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
 import OpenAI from "openai";
-
-let keyData = "";
-const saveKeyData = "MYKEY";
-const prevKey = localStorage.getItem(saveKeyData);
-if (prevKey !== null) {
-  keyData = JSON.parse(prevKey);
-}
 
 export function BasicPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
@@ -61,11 +54,6 @@ export function BasicPage() {
     setLoading(true);
     setSubmitted(false);
   };
-  const [key, setKey] = useState<string>(keyData);
-
-  function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
-    setKey(event.target.value);
-  }
 
   async function results(answers: string[]) {
     console.log(answers);
@@ -265,7 +253,7 @@ export function BasicPage() {
       ></BasicQuestions>
       </div>
       <div>
-        {numAnswered === 100 ? (
+        {(numAnswered === 100)&&(!submitted)&&(currentQuestion!==10) ? (
           <center>
             <h2>You Have Answered All Questions, Go to Last Page to Submit!</h2>{" "}
           </center>
@@ -295,7 +283,6 @@ export function BasicPage() {
         </div>
       
       </div>
-      
       
       {submitted ? (
         <center>
