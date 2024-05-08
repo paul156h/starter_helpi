@@ -16,9 +16,8 @@ export function BasicPage() {
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [numAnswered, setNumAnswered] = useState<number>(0);
   const [resultArray, setResultArray] = useState<string[]>(["","","","","","","","","",""]);
-  const [resultString, setResultString] = useState<string>("");
   const [careers, setCareers] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const updateSubmitted = (bool: boolean) => {
     setSubmitted(bool);
@@ -30,11 +29,6 @@ export function BasicPage() {
 
   const updateCareers = (response: string) => {
     setCareers(response);
-  }
-
-  const updateResultString = (array: string[]) => {
-    let temp = array.toString();
-    setResultString(temp);
   }
 
   const updateResultArray = (answer: string, num: number) => {
@@ -54,21 +48,14 @@ export function BasicPage() {
     setCurrentQuestion((prevQuestion) => prevQuestion - 1);
   };
 
-  const handleSubmit = () => { 
-    updateLoading(true);
-    updateResultString(resultArray);
-    results(resultString);
-    console.log(careers);
-    updateSubmitted(true);
-    updateLoading(false);
-  };
-
   const resetQuiz = () => {
     setCurrentQuestion(1);
+    setNumAnswered(0);
+    setLoading(true);
     setSubmitted(false);
   };
 
-  async function results(answers: string) {
+  async function results(answers: string[]) {
     console.log(answers);
     let Key = localStorage.getItem("MYKEY");
     if(Key !== null) {
@@ -81,20 +68,31 @@ export function BasicPage() {
     try {
     const completion = await openai.chat.completions.create({
       messages: [
-        {role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire. The questions are as follows: Question 1: How much experience do you have with working?; Question 2: How comfortable are you with public speaking?; Question 3: About how much money would you like to earn?; Question 4: Which one of these words best describes you?; Question 5: How much would you like your job to help people?; Question 6: How many hours would you like to work; Question 7: How good are you at planning?; Question 8: Which of the following sounds the most interesting?; Question 9: How much are you willing to do any sort of manual labor?; Question 10: What would you rather do with your free time?"},
-        {role: "user", content: `Generate possible career choices for someone who responded to the quiz questions with these answers: ${answers}`},
+        {role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire."},
+        {role: "user", content: `The questions are as follows: Question 1: How much experience do you have with working?; Question 2: How comfortable are you with public speaking?; Question 3: About how much money would you like to earn?; Question 4: Which one of these words best describes you?; Question 5: How much would you like your job to help people?; Question 6: How many hours would you like to work; Question 7: How good are you at planning?; Question 8: Which of the following sounds the most interesting?; Question 9: How much are you willing to do any sort of manual labor?; Question 10: What would you rather do with your free time? Generate possible career choices for someone who responded to the quiz questions. Their answers are for those questions are stored in this array: ${answers}.`},
       ],
       model: "gpt-4-turbo",
     })
     if(completion.choices[0].message.content !== null) {
       updateCareers(completion.choices[0].message.content);
-      console.log(careers);
+      updateLoading(false);
+
     } else {
       updateCareers("No careers found");
+      updateLoading(false);
+
     }
   } catch {
-    updateCareers("An error occured while searching for careers");  }
+    updateCareers("An error occured while searching for careers");
+    updateLoading(false);
   }
+  }
+
+  const handleSubmit = () => { 
+    updateSubmitted(true);
+    results(resultArray);
+    console.log(careers);
+  };
 
   return (
     //The Basic Page will have questions be answered in mulitple choice form
@@ -287,14 +285,12 @@ export function BasicPage() {
       <div>
       {submitted ? (
         <center>
-          <h1>Good Job for Submitting!</h1>
           {loading ? (
-            <p>loading...</p>
+            <p>loading your results</p>
           ) : (
             <p>Here are your results: {careers}</p>
           )
           }
-          {}
         </center>
       ) : (
         ""
