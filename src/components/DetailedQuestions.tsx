@@ -1,8 +1,20 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
+import "./DetailedQuestions.css";
 
 
-export function DetailedQuestions({question,questionNumber,currentQuestion, updateNumAnswered}: {question: string; questionNumber:number;currentQuestion:number; updateNumAnswered: (value: number) => void}): JSX.Element {
+export function DetailedQuestions({
+    question,
+    questionNumber,
+    image,
+    currentQuestion,
+    updateNumAnswered}:{
+        question: string;
+        questionNumber:number;
+        currentQuestion:number;
+        image: string;
+        updateNumAnswered: (value: number) => void})
+        : JSX.Element {
     const [input, setInput] = useState<string>("");
     const [alreadyAnswered, setAlreadyAnswered] = useState<boolean>(false);
     function updateInput(event: React.ChangeEvent<HTMLInputElement>){
@@ -18,10 +30,15 @@ export function DetailedQuestions({question,questionNumber,currentQuestion, upda
     }
     return(
         <div>
-            {questionNumber !== currentQuestion ? "" : <p>Question {questionNumber}: {question}</p>}
-            <Form.Group controlId="checkInput">
+            {questionNumber !== currentQuestion ? "" : <div className="quiz-box">
+                 <p className="question-p">Question {questionNumber}: {question}</p>
+
+                 <img src={image} className="detailedQ-img" alt="questionImg"></img>
+
+                 <Form.Group controlId="checkInput">
                 <Form.Control type="text" value={input} hidden={questionNumber !== currentQuestion} onChange={updateInput} />
-            </Form.Group>
+                </Form.Group>
+                 </div>}
         </div>
     );
 }

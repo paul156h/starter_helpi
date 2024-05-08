@@ -206,6 +206,23 @@
   height: 81vh;
 }
 
+/*-------Footer--------*/
+.footer P {
+  font-size: 20px;
+  background-color: #1c768f;
+  color: #f4f9fa;
+  font-weight: 900;
+  text-align: center;
+}
+.api-key-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.center-label {
+  text-align: center;
+}
 .basic-btn-hm,
 .detailed-btn-hm {
   background-color: #fa991c;
@@ -222,4 +239,22 @@
 .basic-btn-hm:hover,
 .detailed-btn-hm:hover {
   color: #fff;
+}
+
+/*-------Footer--------*/
+.footer P {
+  font-size: 20px;
+  background-color: #1c768f;
+  color: #f4f9fa;
+  font-weight: 900;
+  text-align: center;
+}
+.api-key-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.center-label {
+  text-align: center;
 }
