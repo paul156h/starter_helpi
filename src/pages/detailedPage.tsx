@@ -1,25 +1,41 @@
 import React, { useState } from "react";
 import { DetailedQuestions } from "../components/DetailedQuestions";
 import { ProgressBar } from "../components/progressBar";
-import { Button, Form } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import "./detailedPage.css";
+
 import job1 from "../images/job1.jpg";
 import job2 from "../images/job2.jpg";
 import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
-
-let keyData = "";
-const saveKeyData = "MYKEY";
-const prevKey = localStorage.getItem(saveKeyData);
-if (prevKey !== null) {
-  keyData = JSON.parse(prevKey);
-}
+import OpenAI from "openai";
 
 export function DetailedPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [numAnswered, setNumAnswered] = useState<number>(0);
+  const [resultArray, setResultArray] = useState<string[]>(["","","","","","","","","",""]);
+  const [careers, setCareers] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const updateSubmitted = (bool: boolean) => {
+    setSubmitted(bool);
+  }
+
+  const updateLoading = (bool: boolean) => {
+    setLoading(bool);
+  }
+
+  const updateCareers = (response: string) => {
+    setCareers(response);
+  }
+
+  const updateResultArray = (answer: string, num: number) => {
+    const tempArray = [...resultArray];
+    tempArray.splice(num, 1, answer)
+    setResultArray(tempArray);
+  }
 
   const updateNumAnswered = (value: number) => {
     setNumAnswered(numAnswered + value);
@@ -31,16 +47,45 @@ export function DetailedPage() {
     setCurrentQuestion((prevQuestion) => prevQuestion - 1);
   };
 
-  const handleSubmit = () => {
-    setSubmitted(true);
-    localStorage.setItem(saveKeyData, JSON.stringify(key));
-    window.location.reload();
-  };
-  const [key, setKey] = useState<string>(keyData);
+  async function results(answers: string[]) {
+    console.log(answers);
+    let Key = localStorage.getItem("MYKEY");
+    if(Key !== null) {
+      Key = JSON.parse(Key);
+    }
+    if(Key === null) {
+      throw new Error("API key not found");
+    }
+    const openai = new OpenAI({apiKey: Key, dangerouslyAllowBrowser: true});
+    try {
+    const completion = await openai.chat.completions.create({
+      messages: [
+        {role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire."},
+        {role: "user", content: `The questions are as follows: Question 1: What was your favorite and least favorite subjects in high school/college?; Question 2: How much of an impact will the amount of money you could potentially earn from your career impact your decision?; Question 3: Would you rather be the leader a team or be one of the workers of a team?; Question 4: Would you want to create a difference in the world with your job or are you content with just getting your job done?; Question 5: Would you rather have a job where you are constantly communicating with customers or one where you can keep to yourself?; Question 6: What part of the world would you like to live while working?; Question 7: How many hours a day are you willing to work(including unpaid overtime)?; Question 8: What is your level of expertise with computers and electronics?; Question 9: Would you be willing to have a career with something that includes a lot of manual labor?; Question 10: Would you like to make your own work schedule and work off your own terms or are you content with having a predetermined schedule every week? Generate possible career choices for someone who responded to the quiz questions. Their answers are for those questions are stored in this array: ${answers}.`},
+      ],
+      model: "gpt-4-turbo",
+    })
+    if(completion.choices[0].message.content !== null) {
+      updateCareers(completion.choices[0].message.content);
+      updateLoading(false);
 
-  function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
-    setKey(event.target.value);
+    } else {
+      updateCareers("No careers found");
+      updateLoading(false);
+
+    }
+  } catch {
+    updateCareers("An error occured while searching for careers");
+    updateLoading(false);
   }
+  }
+
+  const handleSubmit = () => { 
+    updateSubmitted(true);
+    results(resultArray);
+    console.log(careers);
+  };
+
   return (
     <>
     <div className="detailed-title">
@@ -54,6 +99,7 @@ export function DetailedPage() {
         currentQuestion={currentQuestion}
         image={job1}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></DetailedQuestions>
 
       <DetailedQuestions
@@ -62,6 +108,7 @@ export function DetailedPage() {
         currentQuestion={currentQuestion}
         image={job2}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></DetailedQuestions>
 
       <DetailedQuestions
@@ -70,6 +117,7 @@ export function DetailedPage() {
         currentQuestion={currentQuestion}
         image={job3}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></DetailedQuestions>
 
       <DetailedQuestions
@@ -78,6 +126,7 @@ export function DetailedPage() {
         currentQuestion={currentQuestion}
         image={job4}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></DetailedQuestions>
 
       <DetailedQuestions
@@ -86,6 +135,7 @@ export function DetailedPage() {
         currentQuestion={currentQuestion}
         image={job5}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></DetailedQuestions>
 
       <DetailedQuestions
@@ -94,6 +144,7 @@ export function DetailedPage() {
         currentQuestion={currentQuestion}
         image={job1}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></DetailedQuestions>
 
       <DetailedQuestions
@@ -102,6 +153,7 @@ export function DetailedPage() {
         currentQuestion={currentQuestion}
         image={job2}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></DetailedQuestions>
 
       <DetailedQuestions
@@ -110,6 +162,7 @@ export function DetailedPage() {
         currentQuestion={currentQuestion}
         image={job3}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></DetailedQuestions>
 
       <DetailedQuestions
@@ -118,6 +171,7 @@ export function DetailedPage() {
         currentQuestion={currentQuestion}
         image={job4}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></DetailedQuestions>
 
       <DetailedQuestions
@@ -126,6 +180,7 @@ export function DetailedPage() {
         currentQuestion={currentQuestion}
         image={job5}
         updateNumAnswered={updateNumAnswered}
+        updateResultArray={updateResultArray}
       ></DetailedQuestions>
       </div>
 
@@ -159,30 +214,16 @@ export function DetailedPage() {
       </div>
       {submitted ? (
         <center>
-          <h1>Good Job for Submitting</h1>
+          {loading ? (
+            <p>loading your results</p>
+          ) : (
+            <p>Here are your results: {careers}</p>
+          )
+          }
         </center>
       ) : (
         ""
       )}
-      <div className="footer">
-      <p>
-      <div>
-      <Form className="api-key-form">
-        <Form.Label className="center-label">API Key:</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Insert API Key Here"
-          onChange={changeKey}
-        ></Form.Control>
-        
-        <div>
-        <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
-        </div>
-      Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James Healy, and Matthew Montalvo 
-      </Form>
-      </div>
-      </p>
-      </div>
     </>
   );
 }
