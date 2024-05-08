@@ -54,11 +54,10 @@ export function BasicPage() {
     setCurrentQuestion((prevQuestion) => prevQuestion - 1);
   };
 
-  const handleSubmit = async () => { 
+  const handleSubmit = () => { 
     updateLoading(true);
     updateResultString(resultArray);
-    const result = await results(resultString);
-    updateCareers(result);
+    results(resultString);
     console.log(careers);
     updateSubmitted(true);
     updateLoading(false);
@@ -87,18 +86,14 @@ export function BasicPage() {
       ],
       model: "gpt-4-turbo",
     })
-    console.log(completion.choices[0].message.content);
     if(completion.choices[0].message.content !== null) {
       updateCareers(completion.choices[0].message.content);
-      return careers;
+      console.log(careers);
     } else {
       updateCareers("No careers found");
-      return careers;
     }
   } catch {
-    updateCareers("An error occured while searching for careers");
-    return careers;
-  }
+    updateCareers("An error occured while searching for careers");  }
   }
 
   return (
@@ -288,14 +283,15 @@ export function BasicPage() {
         </div>
       </div>
       <ProgressBar numAnswered={numAnswered}></ProgressBar>
-
+      
+      <div>
       {submitted ? (
         <center>
           <h1>Good Job for Submitting!</h1>
           {loading ? (
             <p>loading...</p>
           ) : (
-            <p>{careers}</p>
+            <p>Here are your results: {careers}</p>
           )
           }
           {}
@@ -303,6 +299,7 @@ export function BasicPage() {
       ) : (
         ""
       )}
+      </div>
     </>
   );
 }
