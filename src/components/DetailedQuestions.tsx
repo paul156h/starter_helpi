@@ -8,17 +8,21 @@ export function DetailedQuestions({
     questionNumber,
     image,
     currentQuestion,
-    updateNumAnswered}:{
+    updateNumAnswered,
+    updateResultArray,
+    }:{
         question: string;
         questionNumber:number;
         currentQuestion:number;
         image: string;
-        updateNumAnswered: (value: number) => void})
-        : JSX.Element {
+        updateNumAnswered: (value: number) => void
+        updateResultArray: (value: string, num: number) => void;    
+    }) : JSX.Element {
     const [input, setInput] = useState<string>("");
     const [alreadyAnswered, setAlreadyAnswered] = useState<boolean>(false);
     function updateInput(event: React.ChangeEvent<HTMLInputElement>){
         setInput(event.target.value);
+        updateResultArray(input, questionNumber);
         if(alreadyAnswered && event.target.value === ""){
             setAlreadyAnswered(false);
             updateNumAnswered(-10)

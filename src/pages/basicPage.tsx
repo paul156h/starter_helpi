@@ -1,4 +1,4 @@
- import { Button, Form } from "react-bootstrap";
+ import { Button} from "react-bootstrap";
 import { BasicQuestions } from "../components/BasicQuestions";
 import { useState } from "react";
 import { ProgressBar } from "../components/progressBar";
@@ -11,28 +11,24 @@ import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
 import OpenAI from "openai";
 
-let keyData = "";
-const saveKeyData = "MYKEY";
-const prevKey = localStorage.getItem(saveKeyData);
-if (prevKey !== null) {
-  keyData = JSON.parse(prevKey);
-}
-
 export function BasicPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [numAnswered, setNumAnswered] = useState<number>(0);
-  const [resultArray, setResultArray] = useState<string[]>(["","","","","","","","","","",""]);
-  const [resultString, setResultString] = useState<string>("");
+  const [resultArray, setResultArray] = useState<string[]>(["","","","","","","","","",""]);
   const [careers, setCareers] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const updateSubmitted = (bool: boolean) => {
+    setSubmitted(bool);
+  }
+
+  const updateLoading = (bool: boolean) => {
+    setLoading(bool);
+  }
 
   const updateCareers = (response: string) => {
     setCareers(response);
-  }
-
-  const updateResultString = (array: string[]) => {
-    let result = "Generate a list of carreer choices based on the following quiz answers: "
-    setResultString(result + array.toString);
   }
 
   const updateResultArray = (answer: string, num: number) => {
@@ -52,28 +48,15 @@ export function BasicPage() {
     setCurrentQuestion((prevQuestion) => prevQuestion - 1);
   };
 
-  const handleSubmit = async () => { 
-    updateResultString(resultArray);
-    console.log(resultString);
-    const result = await results(resultString);
-    updateCareers(result);
-    console.log(careers);
-    setSubmitted(true);
-    localStorage.setItem(saveKeyData, JSON.stringify(key));
-    window.location.reload();
-  };
-
   const resetQuiz = () => {
     setCurrentQuestion(1);
+    setNumAnswered(0);
+    setLoading(true);
     setSubmitted(false);
   };
-  const [key, setKey] = useState<string>(keyData);
 
-  function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
-    setKey(event.target.value);
-  }
-
-  async function results(answers: string) {
+  async function results(answers: string[]) {
+    console.log(answers);
     let Key = localStorage.getItem("MYKEY");
     if(Key !== null) {
       Key = JSON.parse(Key);
@@ -82,23 +65,34 @@ export function BasicPage() {
       throw new Error("API key not found");
     }
     const openai = new OpenAI({apiKey: Key, dangerouslyAllowBrowser: true});
-    console.log(Key);
+    try {
     const completion = await openai.chat.completions.create({
       messages: [
         {role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire."},
-        {role: "user", content: `Generate possible career choices for someone who said the following: ${answers}`},
+        {role: "user", content: `The questions are as follows: Question 1: How much experience do you have with working?; Question 2: How comfortable are you with public speaking?; Question 3: About how much money would you like to earn?; Question 4: Which one of these words best describes you?; Question 5: How much would you like your job to help people?; Question 6: How many hours would you like to work; Question 7: How good are you at planning?; Question 8: Which of the following sounds the most interesting?; Question 9: How much are you willing to do any sort of manual labor?; Question 10: What would you rather do with your free time? Generate possible career choices for someone who responded to the quiz questions. Their answers are for those questions are stored in this array: ${answers}.`},
       ],
       model: "gpt-4-turbo",
     })
-    //console.log(completion.choices[0].message.content);
     if(completion.choices[0].message.content !== null) {
       updateCareers(completion.choices[0].message.content);
-      return careers;
+      updateLoading(false);
+
     } else {
       updateCareers("No careers found");
-      return careers;
+      updateLoading(false);
+
     }
+  } catch {
+    updateCareers("An error occured while searching for careers");
+    updateLoading(false);
   }
+  }
+
+  const handleSubmit = () => { 
+    updateSubmitted(true);
+    results(resultArray);
+    console.log(careers);
+  };
 
   return (
     //The Basic Page will have questions be answered in mulitple choice form
@@ -259,7 +253,7 @@ export function BasicPage() {
       ></BasicQuestions>
       </div>
       <div>
-        {numAnswered === 100 ? (
+        {(numAnswered === 100)&&(!submitted)&&(currentQuestion!==10) ? (
           <center>
             <h2>You Have Answered All Questions, Go to Last Page to Submit!</h2>{" "}
           </center>
@@ -289,39 +283,19 @@ export function BasicPage() {
         </div>
       
       </div>
-
+      
       {submitted ? (
         <center>
-          <h1>Good Job for Submitting!</h1>
-          <p>
-            Here are your results:
-          </p>
-          <p>
-            {careers}
-          </p>
+          {loading ? (
+            <p>loading your results</p>
+          ) : (
+            <p>Here are your results: {careers}</p>
+          )
+          }
         </center>
       ) : (
         ""
       )}
-            <div className="footer">
-      <p>
-      <div>
-      <Form className="api-key-form">
-        <Form.Label className="center-label">API Key:</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Insert API Key Here"
-          onChange={changeKey}
-        ></Form.Control>
-        
-        <div>
-        <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
-        </div>
-      Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James Healy, and Matthew Montalvo 
-      </Form>
-      </div>
-      </p>
-      </div>
     </>
   );
 }
