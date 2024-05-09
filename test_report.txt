@@ -340,24 +340,24 @@ FAIL src/App.test.tsx
 ------------------------|---------|----------|---------|---------|----------------------
 File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s    
 ------------------------|---------|----------|---------|---------|----------------------
-All files               |   17.39 |        6 |    18.6 |   17.91 |                      
+All files               |   10.32 |     1.69 |   17.02 |   10.59 |                      
  src                    |   15.38 |        0 |      50 |   15.38 |                      
   App.tsx               |     100 |      100 |     100 |     100 |                      
   Layout.jsx            |     100 |      100 |     100 |     100 |                      
   index.tsx             |       0 |      100 |     100 |       0 | 8-20                 
   reportWebVitals.ts    |       0 |        0 |       0 |       0 | 3-10                 
- src/components         |    4.54 |        0 |   14.28 |    4.54 |                      
+ src/components         |    4.34 |        0 |   14.28 |    4.34 |                      
   BasicQuestions.tsx    |       0 |        0 |       0 |       0 | 22-49                
-  DetailedQuestions.tsx |       0 |        0 |       0 |       0 | 18-31                
+  DetailedQuestions.tsx |       0 |        0 |       0 |       0 | 21-35                
   Navbar.tsx            |     100 |      100 |     100 |     100 |                      
   progressBar.tsx       |       0 |      100 |       0 |       0 | 8                    
- src/pages              |   20.38 |       10 |   15.62 |   21.21 |                      
-  basicPage.tsx         |    7.14 |     5.55 |       0 |     7.4 | 18-103               
-  detailedPage.tsx      |   17.39 |       10 |       0 |   19.04 | 16-44                
+ src/pages              |   10.92 |     2.56 |   13.88 |    11.3 |                      
+  basicPage.tsx         |       0 |        0 |       0 |       0 | 15-97                
+  detailedPage.tsx      |       0 |        0 |       0 |       0 | 15-89                
   homePage.tsx          |   54.16 |       50 |   45.45 |   54.16 | 12,19-24,31-32,39-49 
 ------------------------|---------|----------|---------|---------|----------------------
 Test Suites: 1 failed, 1 total
 Tests:       1 failed, 1 total
 Snapshots:   0 total
-Time:        2.913 s
+Time:        2.952 s
 Ran all test suites.
