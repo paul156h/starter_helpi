@@ -284,7 +284,7 @@ export function BasicPage() {
             <h2>You Have Answered All Questions, Go to Last Page to Submit!</h2>{" "}
           </center>
         ) : (
-          <hr></hr>
+          <></>
         )}
       </div>
 
@@ -322,8 +322,9 @@ export function BasicPage() {
         <p>
           <div>
             <Form className="api-key-form">
-              <Form.Label className="center-label">API Key:</Form.Label>
+              <Form.Label className="center-label">API Key</Form.Label>
               <Form.Control
+                className="api-input"
                 type="password"
                 placeholder="Insert API Key Here"
                 onChange={changeKey}
@@ -333,8 +334,10 @@ export function BasicPage() {
                   Submit
                 </Button>
               </div>
-              Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James
-              Healy, and Matthew Montalvo
+              <p className="copyRight">
+                Copyright 2024 | Designed by Nazmul Hossain, Brandon Cell, James
+                Healy, and Matthew Montalvo
+              </p>
             </Form>
           </div>
         </p>
