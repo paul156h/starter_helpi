@@ -40,7 +40,7 @@ export function DetailedQuestions({
                  <img src={image} className="detailedQ-img" alt="questionImg"></img>
 
                  <Form.Group controlId="checkInput">
-                <Form.Control type="text" value={input} hidden={questionNumber !== currentQuestion} onChange={updateInput} />
+                <Form.Control type="text" value={input} hidden={questionNumber !== currentQuestion} onChange={updateInput} className="textbox" />
                 </Form.Group>
                  </div>}
         </div>
