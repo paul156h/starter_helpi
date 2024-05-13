@@ -9,6 +9,8 @@ import job2 from "../images/job2.jpg";
 import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
+import loadingbar from "../images/loadingbar.gif";
+
 import OpenAI from "openai";
 
 let keyData = "";
@@ -300,11 +302,15 @@ export function BasicPage() {
         </div>
       
       </div>
-      
+      <center>
+      </center>
       {submitted ? (
         <center>
           {loading ? (
-            <p>loading your results</p>
+            <div>
+              <img src={loadingbar} className="loading-image" alt="loadingImg"></img>
+              <p>Loading your Results!</p>
+            </div>
           ) : (
             <p>Here are your results: {careers}</p>
           )
