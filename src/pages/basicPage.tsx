@@ -27,6 +27,11 @@ export function BasicPage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [key, setKey] = useState<string>(keyData);
 
+  function handleSubmit() {
+    localStorage.setItem(saveKeyData, JSON.stringify(key));
+    window.location.reload();
+  }
+
   const updateSubmitted = (bool: boolean) => {
     setSubmitted(bool);
   }
@@ -100,7 +105,7 @@ export function BasicPage() {
   }
   }
 
-  const handleSubmit = () => { 
+  const handleSubmitAnswers = () => { 
     updateSubmitted(true);
     results(resultArray);
     console.log(careers);
@@ -320,7 +325,7 @@ export function BasicPage() {
         ></Form.Control>
         
         <div>
-        <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
+        <Button className="Submit-Button" onClick={handleSubmitAnswers}>Submit</Button>
         </div>
       Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James Healy, and Matthew Montalvo 
       </Form>
