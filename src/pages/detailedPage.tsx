@@ -94,7 +94,7 @@ export function DetailedPage() {
       <ProgressBar numAnswered={numAnswered}></ProgressBar>
       <div className="question">
       <DetailedQuestions
-        question="What was your favorite and least favorite subjects in high school/college?"
+        question="What were your favorite and least favorite subjects in high school/college?"
         questionNumber={1}
         currentQuestion={currentQuestion}
         image={job1}
@@ -185,7 +185,7 @@ export function DetailedPage() {
       </div>
 
       <div>
-        {numAnswered === 100 ? (
+        {(numAnswered === 100)&&(!submitted)&&(currentQuestion!==10) ? (
           <center>
             <h2>You Have Answered All Questions, Go to Last Page to Submit!</h2>{" "}
           </center>
@@ -212,10 +212,11 @@ export function DetailedPage() {
           </Button>
         )}
       </div>
+      
       {submitted ? (
         <center>
           {loading ? (
-            <p>loading your results</p>
+            <p>Loading your Results</p>
           ) : (
             <p>Here are your results: {careers}</p>
           )

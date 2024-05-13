@@ -287,7 +287,7 @@ export function BasicPage() {
       {submitted ? (
         <center>
           {loading ? (
-            <p>loading your results</p>
+            <p>Loading your Results!</p>
           ) : (
             <p>Here are your results: {careers}</p>
           )
