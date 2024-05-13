@@ -3,9 +3,11 @@
   padding: 0;
   box-sizing: border-box;
 }
-.image {
-  height: 55vh;
-  width: 700px;
+
+
+.loading-image {
+  height: 20vh;
+  width: 350px;
 }
 
 .basic-title {

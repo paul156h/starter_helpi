@@ -3,6 +3,12 @@
     padding: 0;
     box-sizing: border-box;
   }
+
+  .loading-image {
+    height: 20vh;
+    width: 350px;
+  }
+
   .detailed-title {
     display: flex;
     justify-content: center;
