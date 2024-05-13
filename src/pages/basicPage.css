@@ -3,6 +3,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+.image {
+  height: 55vh;
+  width: 700px;
+}
+
 .basic-title {
   display: flex;
   justify-content: center;

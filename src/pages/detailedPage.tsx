@@ -9,6 +9,8 @@ import job2 from "../images/job2.jpg";
 import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
+import loading from "../images/loading.gif";
+
 import OpenAI from "openai";
 
 export function DetailedPage() {
