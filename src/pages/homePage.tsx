@@ -117,9 +117,8 @@ export function HomePage() {
         <p>
           <div>
             <Form className="api-key-form">
-              <Form.Label className="center-label">API Key</Form.Label>
+              <Form.Label className="center-label">API Key:</Form.Label>
               <Form.Control
-                className="api-input"
                 type="password"
                 placeholder="Insert API Key Here"
                 onChange={changeKey}
@@ -129,10 +128,8 @@ export function HomePage() {
                   Submit
                 </Button>
               </div>
-              <p className="copyRight">
-                Copyright 2024 | Designed by Nazmul Hossain, Brandon Cell, James
-                Healy, and Matthew Montalvo
-              </p>
+              Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James
+              Healy, and Matthew Montalvo
             </Form>
           </div>
         </p>

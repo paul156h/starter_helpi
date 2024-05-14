@@ -27,7 +27,7 @@ export function BasicQuestions({
     setInput(updatedInput);
     if (!alreadyAnswered) {
       setAlreadyAnswered(true);
-      updateResultArray(updatedInput, questionNumber-1);
+      updateResultArray(updatedInput, questionNumber - 1);
       updateNumAnswered(10);
     }
   }
@@ -41,7 +41,7 @@ export function BasicQuestions({
           <p className="question-p">
             Question {questionNumber}: {question}
           </p>
-          
+
           <img src={image} className="basicQ-img" alt="questionImg"></img>
 
           <Form className="answerForm">
