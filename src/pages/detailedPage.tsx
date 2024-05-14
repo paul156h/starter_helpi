@@ -124,132 +124,135 @@ export function DetailedPage() {
 
   return (
     <>
-      <div className="detailed-title">
-        <h1>Welcome To Our Detailed Questions</h1>
-      </div>
-      <ProgressBar numAnswered={numAnswered}></ProgressBar>
-      <div className="question">
-        <DetailedQuestions
-          question="What were your favorite and least favorite subjects in high school/college?"
-          questionNumber={1}
-          currentQuestion={currentQuestion}
-          image={job1}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></DetailedQuestions>
 
-        <DetailedQuestions
-          question="How much of an impact will the amount of money you could potentially earn from your career impact your decision?"
-          questionNumber={2}
-          currentQuestion={currentQuestion}
-          image={job2}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></DetailedQuestions>
-
-        <DetailedQuestions
-          question="Would you rather be the leader a team or be one of the workers of a team?"
-          questionNumber={3}
-          currentQuestion={currentQuestion}
-          image={job3}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></DetailedQuestions>
-
-        <DetailedQuestions
-          question="Would you want to create a difference in the world with your job or are you content with just getting your job done?"
-          questionNumber={4}
-          currentQuestion={currentQuestion}
-          image={job4}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></DetailedQuestions>
-
-        <DetailedQuestions
-          question="Would you rather have a job where you are constantly communicating with customers or one where you can keep to yourself?"
-          questionNumber={5}
-          currentQuestion={currentQuestion}
-          image={job5}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></DetailedQuestions>
-
-        <DetailedQuestions
-          question="What part of the world would you like to live while working?"
-          questionNumber={6}
-          currentQuestion={currentQuestion}
-          image={job1}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></DetailedQuestions>
-
-        <DetailedQuestions
-          question="How many hours a day are you willing to work(including unpaid overtime)?"
-          questionNumber={7}
-          currentQuestion={currentQuestion}
-          image={job2}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></DetailedQuestions>
-
-        <DetailedQuestions
-          question="What is your level of expertise with computers and electronics?"
-          questionNumber={8}
-          currentQuestion={currentQuestion}
-          image={job3}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></DetailedQuestions>
-
-        <DetailedQuestions
-          question="Would you be willing to have a career with something that includes a lot of manual labor?"
-          questionNumber={9}
-          currentQuestion={currentQuestion}
-          image={job4}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></DetailedQuestions>
-
-        <DetailedQuestions
-          question="Would you like to make your own work schedule and work off your own terms or are you content with having a predetermined schedule every week?"
-          questionNumber={10}
-          currentQuestion={currentQuestion}
-          image={job5}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></DetailedQuestions>
-      </div>
-
-      <div>
-        {numAnswered === 100 && !submitted && currentQuestion !== 10 ? (
-          <center>
-            <h2>You Have Answered All Questions, Go to Last Page to Submit!</h2>{" "}
-          </center>
-        ) : (
-          <></>
-        )}
-      </div>
-
-      <div className="next-container">
-        <div className="prev">
-          {currentQuestion > 1 ? (
-            <Button onClick={handlePrevQuestion}>Prev </Button>
+      {!submitted ? (
+        <>
+        <div className="detailed-title">
+          <h1>Welcome To Our Detailed Questions</h1>
+        </div>
+        <ProgressBar numAnswered={numAnswered}></ProgressBar>
+        <div className="question">
+          <DetailedQuestions
+            question="What were your favorite and least favorite subjects in high school/college?"
+            questionNumber={1}
+            currentQuestion={currentQuestion}
+            image={job1}
+            updateNumAnswered={updateNumAnswered}
+            updateResultArray={updateResultArray}
+          ></DetailedQuestions>
+  
+          <DetailedQuestions
+            question="How much of an impact will the amount of money you could potentially earn from your career impact your decision?"
+            questionNumber={2}
+            currentQuestion={currentQuestion}
+            image={job2}
+            updateNumAnswered={updateNumAnswered}
+            updateResultArray={updateResultArray}
+          ></DetailedQuestions>
+  
+          <DetailedQuestions
+            question="Would you rather be the leader a team or be one of the workers of a team?"
+            questionNumber={3}
+            currentQuestion={currentQuestion}
+            image={job3}
+            updateNumAnswered={updateNumAnswered}
+            updateResultArray={updateResultArray}
+          ></DetailedQuestions>
+  
+          <DetailedQuestions
+            question="Would you want to create a difference in the world with your job or are you content with just getting your job done?"
+            questionNumber={4}
+            currentQuestion={currentQuestion}
+            image={job4}
+            updateNumAnswered={updateNumAnswered}
+            updateResultArray={updateResultArray}
+          ></DetailedQuestions>
+  
+          <DetailedQuestions
+            question="Would you rather have a job where you are constantly communicating with customers or one where you can keep to yourself?"
+            questionNumber={5}
+            currentQuestion={currentQuestion}
+            image={job5}
+            updateNumAnswered={updateNumAnswered}
+            updateResultArray={updateResultArray}
+          ></DetailedQuestions>
+  
+          <DetailedQuestions
+            question="What part of the world would you like to live while working?"
+            questionNumber={6}
+            currentQuestion={currentQuestion}
+            image={job1}
+            updateNumAnswered={updateNumAnswered}
+            updateResultArray={updateResultArray}
+          ></DetailedQuestions>
+  
+          <DetailedQuestions
+            question="How many hours a day are you willing to work(including unpaid overtime)?"
+            questionNumber={7}
+            currentQuestion={currentQuestion}
+            image={job2}
+            updateNumAnswered={updateNumAnswered}
+            updateResultArray={updateResultArray}
+          ></DetailedQuestions>
+  
+          <DetailedQuestions
+            question="What is your level of expertise with computers and electronics?"
+            questionNumber={8}
+            currentQuestion={currentQuestion}
+            image={job3}
+            updateNumAnswered={updateNumAnswered}
+            updateResultArray={updateResultArray}
+          ></DetailedQuestions>
+  
+          <DetailedQuestions
+            question="Would you be willing to have a career with something that includes a lot of manual labor?"
+            questionNumber={9}
+            currentQuestion={currentQuestion}
+            image={job4}
+            updateNumAnswered={updateNumAnswered}
+            updateResultArray={updateResultArray}
+          ></DetailedQuestions>
+  
+          <DetailedQuestions
+            question="Would you like to make your own work schedule and work off your own terms or are you content with having a predetermined schedule every week?"
+            questionNumber={10}
+            currentQuestion={currentQuestion}
+            image={job5}
+            updateNumAnswered={updateNumAnswered}
+            updateResultArray={updateResultArray}
+          ></DetailedQuestions>
+        </div>
+  
+        <div>
+          {numAnswered === 100 && !submitted && currentQuestion !== 10 ? (
+            <center>
+              <h2>You Have Answered All Questions, Go to Last Page to Submit!</h2>{" "}
+            </center>
           ) : (
-            <hr></hr>
+            <></>
           )}
         </div>
-
-        <div className="next"></div>
-        {currentQuestion < 10 ? (
-          <Button onClick={handleNextQuestion}>Next</Button>
-        ) : (
-          <Button onClick={handleSubmitAnswers} disabled={numAnswered !== 100}>
-            Submit
-          </Button>
-        )}
-      </div>
-
-      {submitted ? (
+  
+        <div className="next-container">
+          <div className="prev">
+            {currentQuestion > 1 ? (
+              <Button onClick={handlePrevQuestion}>Prev </Button>
+            ) : (
+              <hr></hr>
+            )}
+          </div>
+  
+          <div className="next"></div>
+          {currentQuestion < 10 ? (
+            <Button onClick={handleNextQuestion}>Next</Button>
+          ) : (
+            <Button onClick={handleSubmitAnswers} disabled={numAnswered !== 100}>
+              Submit
+            </Button>
+          )}
+        </div>
+        </>
+      ) : (
         <center>
           {loading ? (
             <div>
@@ -264,8 +267,6 @@ export function DetailedPage() {
             <p>Here are your results: {careers}</p>
           )}
         </center>
-      ) : (
-        ""
       )}
       <div className="footer">
       <p>
