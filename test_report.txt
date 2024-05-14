@@ -100,7 +100,7 @@
       at runCLI (node_modules/@jest/core/build/cli/index.js:173:3)
 
 FAIL src/App.test.tsx
-  ✕ renders learn react link (123 ms)
+  ✕ renders learn react link (125 ms)
 
   ● renders learn react link
 
@@ -294,10 +294,10 @@ FAIL src/App.test.tsx
                     [36m<label[39m
                       [33mclass[39m=[32m"center-label form-label"[39m
                     [36m>[39m
-                      [0mAPI Key:[0m
+                      [0mAPI Key[0m
                     [36m</label>[39m
                     [36m<input[39m
-                      [33mclass[39m=[32m"form-control"[39m
+                      [33mclass[39m=[32m"api-input form-control"[39m
                       [33mplaceholder[39m=[32m"Insert API Key Here"[39m
                       [33mtype[39m=[32m"password"[39m
                     [36m/>[39m
@@ -340,7 +340,7 @@ FAIL src/App.test.tsx
 ------------------------|---------|----------|---------|---------|----------------------
 File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s    
 ------------------------|---------|----------|---------|---------|----------------------
-All files               |   13.87 |     4.54 |   15.68 |    14.2 |                      
+All files               |   13.11 |     4.54 |   15.38 |    13.4 |                      
  src                    |   15.38 |        0 |      50 |   15.38 |                      
   App.tsx               |     100 |      100 |     100 |     100 |                      
   Layout.jsx            |     100 |      100 |     100 |     100 |                      
@@ -348,16 +348,16 @@ All files               |   13.87 |     4.54 |   15.68 |    14.2 |
   reportWebVitals.ts    |       0 |        0 |       0 |       0 | 3-10                 
  src/components         |    4.34 |        0 |   14.28 |    4.34 |                      
   BasicQuestions.tsx    |       0 |        0 |       0 |       0 | 22-49                
-  DetailedQuestions.tsx |       0 |        0 |       0 |       0 | 21-35                
+  DetailedQuestions.tsx |       0 |        0 |       0 |       0 | 20-33                
   Navbar.tsx            |     100 |      100 |     100 |     100 |                      
   progressBar.tsx       |       0 |      100 |       0 |       0 | 8                    
- src/pages              |   15.32 |     6.52 |    12.5 |   15.78 |                      
-  basicPage.tsx         |    6.77 |     4.34 |       0 |    7.01 | 20-116               
-  detailedPage.tsx      |     7.4 |     4.76 |       0 |    7.69 | 20-108               
+ src/pages              |   14.28 |     6.52 |   12.19 |   14.68 |                      
+  basicPage.tsx         |    5.79 |     4.34 |       0 |    5.97 | 17-29,36-152         
+  detailedPage.tsx      |     7.4 |     4.76 |       0 |    7.69 | 20-125               
   homePage.tsx          |   54.16 |       50 |   45.45 |   54.16 | 12,19-24,31-32,39-49 
 ------------------------|---------|----------|---------|---------|----------------------
 Test Suites: 1 failed, 1 total
 Tests:       1 failed, 1 total
 Snapshots:   0 total
-Time:        3.011 s
+Time:        2.863 s
 Ran all test suites.
