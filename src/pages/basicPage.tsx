@@ -13,19 +13,35 @@ import loadingbar from "../images/loadingbar.gif";
 
 import OpenAI from "openai";
 
-function addNewLineBeforeNumbers(inputString: string) {
+function addNewLineBeforeNumbers(inputString: string): string {
+  // Remove all occurrences of "**" from the input string
+  const stringWithoutStars = inputString.replace(/\*\*/g, "");
+
+  // Regular expression to match "1.", "2.", "3.", "4.", "5" with optional period
   const regex = /(\d+\.)|(\d+)/g;
+
+  // Execute the regex on the string without stars
   let match;
   let lastIndex = 0;
   let modifiedString = "";
 
-  while ((match = regex.exec(inputString)) !== null) {
+  while ((match = regex.exec(stringWithoutStars)) !== null) {
+    // Get the index of the matched substring
     const matchIndex = match.index;
-    modifiedString += inputString.substring(lastIndex, matchIndex);
-    modifiedString += "\n" + match[0];
+
+    // Append the substring from the last index to the current match index
+    modifiedString += stringWithoutStars.substring(lastIndex, matchIndex);
+
+    // Add a <br> tag before the matched substring
+    modifiedString += match[0];
+
+    // Update the last index
     lastIndex = matchIndex + match[0].length;
   }
-  modifiedString += inputString.substring(lastIndex);
+
+  // Append the remaining part of the string
+  modifiedString += stringWithoutStars.substring(lastIndex);
+
   return modifiedString;
 }
 
@@ -116,7 +132,7 @@ export function BasicPage() {
         messages: [
           {
             role: "system",
-            content: `You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire. Go to New Line after every career. Every Time you answer, your answer must be in this format: 
+            content: `You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire. Every Time you answer, your answer must be in this format: 
             1.___Career One___: Then explain why in short simple sentences, avoid corporate jargon. 
             2.___Career Two___: Then explain why in short simple sentences, avoid corporate jargon. 
             3.___Career Three___: Then explain why in short simple sentences, avoid corporate jargon. 
@@ -131,7 +147,13 @@ export function BasicPage() {
         model: "gpt-4-turbo",
       });
       if (completion.choices[0].message.content !== null) {
-        updateCareers(completion.choices[0].message.content);
+        // Remove "**" from the content before formatting
+        const contentWithoutStars =
+          completion.choices[0].message.content.replace(/\*\*/g, "");
+
+        // Format careers with new lines before each career suggestion
+        const formattedCareers = addNewLineBeforeNumbers(contentWithoutStars);
+        updateCareers(formattedCareers);
         updateLoading(false);
       } else {
         updateCareers("No careers found");
@@ -320,7 +342,7 @@ export function BasicPage() {
       <div className="next-container">
         <div className="prev">
           {currentQuestion > 1 ? (
-            <Button onClick={handlePrevQuestion}>Prev </Button>
+            <Button onClick={handlePrevQuestion}>Previous</Button>
           ) : (
             <hr></hr>
           )}
@@ -352,13 +374,16 @@ export function BasicPage() {
           ) : (
             <div className="resultBox">
               <h3>These Careers Are Best Suited For You</h3>
-              <p>{addNewLineBeforeNumbers(careers)}</p>{" "}
+              {careers.split("\n").map((career, index) => (
+                <p key={index}>{career}</p>
+              ))}
             </div>
           )}
         </center>
       ) : (
         ""
       )}
+      {console.log(careers)}
 
       <div className="footer">
       <p>

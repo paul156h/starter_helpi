@@ -49,6 +49,12 @@
   background-color: #1c768f;
 }
 
+.form-check-label {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
 .footer P {
   font-size: 20px;
   background-color: #1c768f;
@@ -103,5 +109,14 @@
   background-color: #fa991c;
   padding: 20px;
   border-radius: 20px;
+}
+.resultBox h3 {
+  color: #000;
+  font-size: 25px;
+}
+
+.resultBox p {
   color: #fff;
+  padding-top: 5px;
+  line-height: 0.7cm;
 }
