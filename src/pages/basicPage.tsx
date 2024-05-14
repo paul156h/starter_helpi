@@ -292,7 +292,7 @@ export function BasicPage() {
           {currentQuestion < 10 ? (
             <Button onClick={handleNextQuestion}>Next</Button>
           ) : (
-            <Button onClick={handleSubmit} disabled={numAnswered !== 100}>
+            <Button onClick={handleSubmitAnswers} disabled={numAnswered !== 100}>
               Submit
             </Button>
           )}
@@ -325,7 +325,7 @@ export function BasicPage() {
         ></Form.Control>
         
         <div>
-        <Button className="Submit-Button" onClick={handleSubmitAnswers}>Submit</Button>
+        <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
         </div>
       Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James Healy, and Matthew Montalvo 
       </Form>
