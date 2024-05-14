@@ -248,13 +248,44 @@
   color: #f4f9fa;
   font-weight: 900;
   text-align: center;
+  padding-bottom: 5px;
 }
 .api-key-form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 15px;
+  padding: 5px 0;
 }
 
 .center-label {
   text-align: center;
+  padding: 10px 0;
+}
+
+.api-input {
+  border-radius: 15px;
+  padding: 5px 20px;
+  border: none;
+  width: 300px;
+}
+
+.Submit-Button {
+  background-color: #fa991c;
+  margin: 0.5rem 0;
+  border: none;
+  padding: 0.5rem 2rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  color: #000;
+  transition: padding 0.1s ease-in;
+  font-size: 15px;
+}
+
+.Submit-Button:hover {
+  color: #fff;
+}
+
+.footer P {
+  font-size: 15px;
 }
