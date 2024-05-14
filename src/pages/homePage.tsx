@@ -117,8 +117,9 @@ export function HomePage() {
         <p>
           <div>
             <Form className="api-key-form">
-              <Form.Label className="center-label">API Key:</Form.Label>
+              <Form.Label className="center-label">API Key</Form.Label>
               <Form.Control
+                className="api-input"
                 type="password"
                 placeholder="Insert API Key Here"
                 onChange={changeKey}

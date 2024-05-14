@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { DetailedQuestions } from "../components/DetailedQuestions";
-import { ProgressBar } from "../components/progressBar";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import "./detailedPage.css";
-import { Form } from "react-bootstrap";
 import { ProgressBar } from "../components/progressBar";
 
 import job1 from "../images/job1.jpg";
@@ -11,7 +9,16 @@ import job2 from "../images/job2.jpg";
 import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
+import loadingbar from "../images/loadingbar.gif";
+
 import OpenAI from "openai";
+
+let keyData = "";
+const saveKeyData = "MYKEY";
+const prevKey = localStorage.getItem(saveKeyData);
+if (prevKey !== null) {
+  keyData = JSON.parse(prevKey);
+}
 
 export function DetailedPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
@@ -32,6 +39,12 @@ export function DetailedPage() {
   ]);
   const [careers, setCareers] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
+  const [key, setKey] = useState<string>(keyData);
+
+  function handleSubmit() {
+    localStorage.setItem(saveKeyData, JSON.stringify(key));
+    window.location.reload();
+  }
 
   const updateSubmitted = (bool: boolean) => {
     setSubmitted(bool);
@@ -60,7 +73,6 @@ export function DetailedPage() {
   const handlePrevQuestion = () => {
     setCurrentQuestion((prevQuestion) => prevQuestion - 1);
   };
-  const [key, setKey] = useState<string>(keyData);
 
   function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
     setKey(event.target.value);
@@ -104,7 +116,7 @@ export function DetailedPage() {
     }
   }
 
-  const handleSubmit = () => {
+  const handleSubmitAnswers = () => {
     updateSubmitted(true);
     results(resultArray);
     console.log(careers);
@@ -118,7 +130,7 @@ export function DetailedPage() {
       <ProgressBar numAnswered={numAnswered}></ProgressBar>
       <div className="question">
         <DetailedQuestions
-          question="What was your favorite and least favorite subjects in high school/college?"
+          question="What were your favorite and least favorite subjects in high school/college?"
           questionNumber={1}
           currentQuestion={currentQuestion}
           image={job1}
@@ -209,12 +221,12 @@ export function DetailedPage() {
       </div>
 
       <div>
-        {numAnswered === 100 ? (
+        {numAnswered === 100 && !submitted && currentQuestion !== 10 ? (
           <center>
             <h2>You Have Answered All Questions, Go to Last Page to Submit!</h2>{" "}
           </center>
         ) : (
-          <hr></hr>
+          <></>
         )}
       </div>
 
@@ -236,10 +248,18 @@ export function DetailedPage() {
           </Button>
         )}
       </div>
+
       {submitted ? (
         <center>
           {loading ? (
-            <p>loading your results</p>
+            <div>
+              <img
+                src={loadingbar}
+                className="loading-image"
+                alt="loadingImg"
+              ></img>
+              <p>Loading your Results</p>
+            </div>
           ) : (
             <p>Here are your results: {careers}</p>
           )}
@@ -259,14 +279,12 @@ export function DetailedPage() {
                 onChange={changeKey}
               ></Form.Control>
               <div>
-                <Button className="Submit-Button" onClick={handleSubmit}>
+                <Button className="Submit-Button" onClick={handleSubmitAnswers}>
                   Submit
                 </Button>
               </div>
-              <p className="copyRight">
-                Copyright 2024 | Designed by Nazmul Hossain, Brandon Cell, James
-                Healy, and Matthew Montalvo
-              </p>
+              Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James
+              Healy, and Matthew Montalvo
             </Form>
           </div>
         </p>

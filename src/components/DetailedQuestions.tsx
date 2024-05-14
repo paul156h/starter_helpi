@@ -44,10 +44,12 @@ export function DetailedQuestions({
 
           <Form.Group controlId="checkInput">
             <Form.Control
+              placeholder="Write Your Answer Here"
               type="text"
               value={input}
               hidden={questionNumber !== currentQuestion}
               onChange={updateInput}
+              className="textbox"
             />
           </Form.Group>
         </div>

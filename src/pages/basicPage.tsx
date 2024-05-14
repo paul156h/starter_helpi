@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { BasicQuestions } from "../components/BasicQuestions";
 import { useState } from "react";
 import { ProgressBar } from "../components/progressBar";
@@ -9,7 +9,32 @@ import job2 from "../images/job2.jpg";
 import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
+import loadingbar from "../images/loadingbar.gif";
+
 import OpenAI from "openai";
+
+function addNewLineBeforeNumbers(inputString: string) {
+  const regex = /(\d+\.)|(\d+)/g;
+  let match;
+  let lastIndex = 0;
+  let modifiedString = "";
+
+  while ((match = regex.exec(inputString)) !== null) {
+    const matchIndex = match.index;
+    modifiedString += inputString.substring(lastIndex, matchIndex);
+    modifiedString += "\n" + match[0];
+    lastIndex = matchIndex + match[0].length;
+  }
+  modifiedString += inputString.substring(lastIndex);
+  return modifiedString;
+}
+
+let keyData = "";
+const saveKeyData = "MYKEY";
+const prevKey = localStorage.getItem(saveKeyData);
+if (prevKey !== null) {
+  keyData = JSON.parse(prevKey);
+}
 
 export function BasicPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
@@ -29,6 +54,12 @@ export function BasicPage() {
   ]);
   const [careers, setCareers] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
+  const [key, setKey] = useState<string>(keyData);
+
+  function handleSubmit() {
+    localStorage.setItem(saveKeyData, JSON.stringify(key));
+    window.location.reload();
+  }
 
   const updateSubmitted = (bool: boolean) => {
     setSubmitted(bool);
@@ -59,6 +90,10 @@ export function BasicPage() {
     setCurrentQuestion((prevQuestion) => prevQuestion - 1);
   };
 
+  function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
+    setKey(event.target.value);
+  }
+
   const resetQuiz = () => {
     setCurrentQuestion(1);
     setNumAnswered(0);
@@ -81,8 +116,12 @@ export function BasicPage() {
         messages: [
           {
             role: "system",
-            content:
-              "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire.",
+            content: `You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire. Go to New Line after every career. Every Time you answer, your answer must be in this format: 
+            1.___Career One___: Then explain why in short simple sentences, avoid corporate jargon. 
+            2.___Career Two___: Then explain why in short simple sentences, avoid corporate jargon. 
+            3.___Career Three___: Then explain why in short simple sentences, avoid corporate jargon. 
+            4.___Career Four___: Then explain why in short simple sentences, avoid corporate jargon. 
+            5.___Career Five___: Then explain why in short simple sentences, avoid corporate jargon.`,
           },
           {
             role: "user",
@@ -104,7 +143,7 @@ export function BasicPage() {
     }
   }
 
-  const handleSubmit = () => {
+  const handleSubmitAnswers = () => {
     updateSubmitted(true);
     results(resultArray);
     console.log(careers);
@@ -274,7 +313,7 @@ export function BasicPage() {
             <h2>You Have Answered All Questions, Go to Last Page to Submit!</h2>{" "}
           </center>
         ) : (
-          <hr></hr>
+          <></>
         )}
       </div>
 
@@ -302,14 +341,47 @@ export function BasicPage() {
       {submitted ? (
         <center>
           {loading ? (
-            <p>loading your results</p>
+            <div>
+              <img
+                src={loadingbar}
+                className="loading-image"
+                alt="loadingImg"
+              ></img>
+              <p>Loading your Results!</p>
+            </div>
           ) : (
-            <p>Here are your results: {careers}</p>
+            <div className="resultBox">
+              <h3>These Careers Are Best Suited For You</h3>
+              <p>{addNewLineBeforeNumbers(careers)}</p>{" "}
+            </div>
           )}
         </center>
       ) : (
         ""
       )}
+
+      <div className="footer">
+        <p>
+          <div>
+            <Form className="api-key-form">
+              <Form.Label className="center-label">API Key</Form.Label>
+              <Form.Control
+                className="api-input"
+                type="password"
+                placeholder="Insert API Key Here"
+                onChange={changeKey}
+              ></Form.Control>
+              <div>
+                <Button className="Submit-Button" onClick={handleSubmitAnswers}>
+                  Submit
+                </Button>
+              </div>
+              Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James
+              Healy, and Matthew Montalvo
+            </Form>
+          </div>
+        </p>
+      </div>
     </>
   );
 }
