@@ -1,4 +1,4 @@
- import { Button, Form} from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { BasicQuestions } from "../components/BasicQuestions";
 import { useState } from "react";
 import { ProgressBar } from "../components/progressBar";
@@ -9,7 +9,25 @@ import job2 from "../images/job2.jpg";
 import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
+import loadingbar from "../images/loadingbar.gif";
+
 import OpenAI from "openai";
+
+function addNewLineBeforeNumbers(inputString: string) {
+  const regex = /(\d+\.)|(\d+)/g;
+  let match;
+  let lastIndex = 0;
+  let modifiedString = "";
+
+  while ((match = regex.exec(inputString)) !== null) {
+    const matchIndex = match.index;
+    modifiedString += inputString.substring(lastIndex, matchIndex);
+    modifiedString += "\n" + match[0];
+    lastIndex = matchIndex + match[0].length;
+  }
+  modifiedString += inputString.substring(lastIndex);
+  return modifiedString;
+}
 
 let keyData = "";
 const saveKeyData = "MYKEY";
@@ -22,7 +40,18 @@ export function BasicPage() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [numAnswered, setNumAnswered] = useState<number>(0);
-  const [resultArray, setResultArray] = useState<string[]>(["","","","","","","","","",""]);
+  const [resultArray, setResultArray] = useState<string[]>([
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
   const [careers, setCareers] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [key, setKey] = useState<string>(keyData);
@@ -34,21 +63,21 @@ export function BasicPage() {
 
   const updateSubmitted = (bool: boolean) => {
     setSubmitted(bool);
-  }
+  };
 
   const updateLoading = (bool: boolean) => {
     setLoading(bool);
-  }
+  };
 
   const updateCareers = (response: string) => {
     setCareers(response);
-  }
+  };
 
   const updateResultArray = (answer: string, num: number) => {
     const tempArray = [...resultArray];
-    tempArray.splice(num, 1, answer)
+    tempArray.splice(num, 1, answer);
     setResultArray(tempArray);
-  }
+  };
 
   const updateNumAnswered = (value: number) => {
     setNumAnswered(numAnswered + value);
@@ -75,37 +104,46 @@ export function BasicPage() {
   async function results(answers: string[]) {
     console.log(answers);
     let Key = localStorage.getItem("MYKEY");
-    if(Key !== null) {
+    if (Key !== null) {
       Key = JSON.parse(Key);
     }
-    if(Key === null) {
+    if (Key === null) {
       throw new Error("API key not found");
     }
-    const openai = new OpenAI({apiKey: Key, dangerouslyAllowBrowser: true});
+    const openai = new OpenAI({ apiKey: Key, dangerouslyAllowBrowser: true });
     try {
-    const completion = await openai.chat.completions.create({
-      messages: [
-        {role: "system", content: "You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire."},
-        {role: "user", content: `The questions are as follows: Question 1: How much experience do you have with working?; Question 2: How comfortable are you with public speaking?; Question 3: About how much money would you like to earn?; Question 4: Which one of these words best describes you?; Question 5: How much would you like your job to help people?; Question 6: How many hours would you like to work; Question 7: How good are you at planning?; Question 8: Which of the following sounds the most interesting?; Question 9: How much are you willing to do any sort of manual labor?; Question 10: What would you rather do with your free time? Generate possible career choices for someone who responded to the quiz questions. Their answers are for those questions are stored in this array: ${answers}.`},
-      ],
-      model: "gpt-4-turbo",
-    })
-    if(completion.choices[0].message.content !== null) {
-      updateCareers(completion.choices[0].message.content);
+      const completion = await openai.chat.completions.create({
+        messages: [
+          {
+            role: "system",
+            content: `You are a helpful assistant. Your answers will be used as the results of an ideal career questionnaire. Go to New Line after every career. Every Time you answer, your answer must be in this format: 
+            1.___Career One___: Then explain why in short simple sentences, avoid corporate jargon. 
+            2.___Career Two___: Then explain why in short simple sentences, avoid corporate jargon. 
+            3.___Career Three___: Then explain why in short simple sentences, avoid corporate jargon. 
+            4.___Career Four___: Then explain why in short simple sentences, avoid corporate jargon. 
+            5.___Career Five___: Then explain why in short simple sentences, avoid corporate jargon.`,
+          },
+          {
+            role: "user",
+            content: `The questions are as follows: Question 1: How much experience do you have with working?; Question 2: How comfortable are you with public speaking?; Question 3: About how much money would you like to earn?; Question 4: Which one of these words best describes you?; Question 5: How much would you like your job to help people?; Question 6: How many hours would you like to work; Question 7: How good are you at planning?; Question 8: Which of the following sounds the most interesting?; Question 9: How much are you willing to do any sort of manual labor?; Question 10: What would you rather do with your free time? Generate possible career choices for someone who responded to the quiz questions. Their answers are for those questions are stored in this array: ${answers}.`,
+          },
+        ],
+        model: "gpt-4-turbo",
+      });
+      if (completion.choices[0].message.content !== null) {
+        updateCareers(completion.choices[0].message.content);
+        updateLoading(false);
+      } else {
+        updateCareers("No careers found");
+        updateLoading(false);
+      }
+    } catch {
+      updateCareers("An error occured while searching for careers");
       updateLoading(false);
-
-    } else {
-      updateCareers("No careers found");
-      updateLoading(false);
-
     }
-  } catch {
-    updateCareers("An error occured while searching for careers");
-    updateLoading(false);
-  }
   }
 
-  const handleSubmitAnswers = () => { 
+  const handleSubmitAnswers = () => {
     updateSubmitted(true);
     results(resultArray);
     console.log(careers);
@@ -224,58 +262,58 @@ export function BasicPage() {
           updateResultArray={updateResultArray}
         ></BasicQuestions>
 
-      <BasicQuestions
-        question="Which of the following sounds the most interesting?"
-        questionNumber={8}
-        image={job3}
-        answers={[
-          "Electronic & Programs",
-          "History & Culture",
-          "Biology & Anatomy",
-          "Sports & Fitness",
-        ]}
-        currentQuestion={currentQuestion}
-        updateNumAnswered={updateNumAnswered}
-        updateResultArray={updateResultArray}
-      ></BasicQuestions>
+        <BasicQuestions
+          question="Which of the following sounds the most interesting?"
+          questionNumber={8}
+          image={job3}
+          answers={[
+            "Electronic & Programs",
+            "History & Culture",
+            "Biology & Anatomy",
+            "Sports & Fitness",
+          ]}
+          currentQuestion={currentQuestion}
+          updateNumAnswered={updateNumAnswered}
+          updateResultArray={updateResultArray}
+        ></BasicQuestions>
 
-      <BasicQuestions
-        question="How much are you willing to do any sort of manual labor?"
-        questionNumber={9}
-        image={job4}
-        answers={[
-          "I would prefer to do manual labor in my job",
-          "I am fine with some manual labor in my job",
-          "I would prefer not to have manual labor in my job",
-          "I will never want to do any manual labor in my job",
-        ]}
-        currentQuestion={currentQuestion}
-        updateNumAnswered={updateNumAnswered}
-        updateResultArray={updateResultArray}
-      ></BasicQuestions>
+        <BasicQuestions
+          question="How much are you willing to do any sort of manual labor?"
+          questionNumber={9}
+          image={job4}
+          answers={[
+            "I would prefer to do manual labor in my job",
+            "I am fine with some manual labor in my job",
+            "I would prefer not to have manual labor in my job",
+            "I will never want to do any manual labor in my job",
+          ]}
+          currentQuestion={currentQuestion}
+          updateNumAnswered={updateNumAnswered}
+          updateResultArray={updateResultArray}
+        ></BasicQuestions>
 
-      <BasicQuestions
-        question="What would you rather do with your free time?"
-        questionNumber={10}
-        image={job5}
-        answers={[
-          "Learn a new skill",
-          "Relax",
-          "Have fun with a hobby",
-          "Spend the time with friends/loved ones",
-        ]}
-        currentQuestion={currentQuestion}
-        updateNumAnswered={updateNumAnswered}
-        updateResultArray={updateResultArray}
-      ></BasicQuestions>
+        <BasicQuestions
+          question="What would you rather do with your free time?"
+          questionNumber={10}
+          image={job5}
+          answers={[
+            "Learn a new skill",
+            "Relax",
+            "Have fun with a hobby",
+            "Spend the time with friends/loved ones",
+          ]}
+          currentQuestion={currentQuestion}
+          updateNumAnswered={updateNumAnswered}
+          updateResultArray={updateResultArray}
+        ></BasicQuestions>
       </div>
       <div>
-        {(numAnswered === 100)&&(!submitted)&&(currentQuestion!==10) ? (
+        {numAnswered === 100 && !submitted && currentQuestion !== 10 ? (
           <center>
             <h2>You Have Answered All Questions, Go to Last Page to Submit!</h2>{" "}
           </center>
         ) : (
-          <hr></hr>
+          <></>
         )}
       </div>
 
@@ -298,21 +336,30 @@ export function BasicPage() {
           )}
           {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
         </div>
-      
       </div>
-      
+
       {submitted ? (
         <center>
           {loading ? (
-            <p>loading your results</p>
+            <div>
+              <img
+                src={loadingbar}
+                className="loading-image"
+                alt="loadingImg"
+              ></img>
+              <p>Loading your Results!</p>
+            </div>
           ) : (
-            <p>Here are your results: {careers}</p>
-          )
-          }
+            <div className="resultBox">
+              <h3>These Careers Are Best Suited For You</h3>
+              <p>{addNewLineBeforeNumbers(careers)}</p>{" "}
+            </div>
+          )}
         </center>
       ) : (
         ""
       )}
+
       <div className="footer">
       <p>
       <div>
