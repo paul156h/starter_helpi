@@ -330,7 +330,7 @@ export function BasicPage() {
           {currentQuestion < 10 ? (
             <Button onClick={handleNextQuestion}>Next</Button>
           ) : (
-            <Button onClick={handleSubmit} disabled={numAnswered !== 100}>
+            <Button onClick={handleSubmitAnswers} disabled={numAnswered !== 100}>
               Submit
             </Button>
           )}
@@ -361,26 +361,23 @@ export function BasicPage() {
       )}
 
       <div className="footer">
-        <p>
-          <div>
-            <Form className="api-key-form">
-              <Form.Label className="center-label">API Key</Form.Label>
-              <Form.Control
-                className="api-input"
-                type="password"
-                placeholder="Insert API Key Here"
-                onChange={changeKey}
-              ></Form.Control>
-              <div>
-                <Button className="Submit-Button" onClick={handleSubmitAnswers}>
-                  Submit
-                </Button>
-              </div>
-              Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James
-              Healy, and Matthew Montalvo
-            </Form>
-          </div>
-        </p>
+      <p>
+      <div>
+      <Form className="api-key-form">
+        <Form.Label className="center-label">API Key:</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Insert API Key Here"
+          onChange={changeKey}
+        ></Form.Control>
+        
+        <div>
+        <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
+        </div>
+      Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James Healy, and Matthew Montalvo 
+      </Form>
+      </div>
+      </p>
       </div>
     </>
   );
