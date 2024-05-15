@@ -172,7 +172,7 @@ export function BasicPage() {
     //The Basic Page will have questions be answered in mulitple choice form
     <>
       <div className="basic-title">
-        <h1>Welcome To Our Basic Questions</h1>
+        <h1>Welcome To Our Basic Quiz</h1>
       </div>
 
       {!submitted ? (

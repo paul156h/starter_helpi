@@ -168,7 +168,7 @@ export function DetailedPage() {
   return (
     <>
       <div className="detailed-title">
-        <h1>Welcome To Our Detailed Questions</h1>
+        <h1>Welcome To Our Detailed Quiz</h1>
       </div>
       {!submitted ? (
         <>
@@ -304,7 +304,7 @@ export function DetailedPage() {
           {!readyForResults ? (
             <>
               {loading ? (
-                <div>
+                <div className="loadingScreen1">
                   <img
                     src={loadingbar}
                     className="loading-image"
@@ -320,7 +320,7 @@ export function DetailedPage() {
                     alt="checkmarkimg"
                   ></img>
                   <h2>Results Created, Click the Button to View!</h2>
-                  <div>
+                  <div className="loadingScreen2">
                     <Button
                       className="resultBtn"
                       onClick={updateReadyForResults}
@@ -341,7 +341,11 @@ export function DetailedPage() {
               </div>
 
               <div>
-                {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
+                {submitted && (
+                  <Button className="resetButton" onClick={resetQuiz}>
+                    Reset Quiz
+                  </Button>
+                )}
               </div>
             </>
           )}
