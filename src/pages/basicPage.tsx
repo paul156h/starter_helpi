@@ -369,7 +369,7 @@ export function BasicPage() {
           {!readyForResults ? (
             <>
               {loading ? (
-                <div>
+                <div className="loadingScreen1">
                   <img
                     src={loadingbar}
                     className="loading-image"
@@ -385,8 +385,13 @@ export function BasicPage() {
                     alt="checkmarkimg"
                   ></img>
                   <h2>Results Created, Click the Button to View!</h2>
-                  <div>
-                    <Button onClick={updateReadyForResults}>See Results</Button>
+                  <div className="loadingScreen2">
+                    <Button
+                      className="resultBtn"
+                      onClick={updateReadyForResults}
+                    >
+                      See Results
+                    </Button>
                   </div>
                 </>
               )}
@@ -401,7 +406,11 @@ export function BasicPage() {
               </div>
 
               <div>
-                {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
+                {submitted && (
+                  <Button className="resetButton" onClick={resetQuiz}>
+                    Reset Quiz
+                  </Button>
+                )}
               </div>
             </>
           )}
@@ -413,8 +422,9 @@ export function BasicPage() {
         <p>
           <div>
             <Form className="api-key-form">
-              <Form.Label className="center-label">API Key:</Form.Label>
+              <Form.Label className="center-label">API Key</Form.Label>
               <Form.Control
+                className="api-input"
                 type="password"
                 placeholder="Insert API Key Here"
                 onChange={changeKey}
