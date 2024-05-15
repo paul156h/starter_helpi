@@ -69,6 +69,7 @@ export function BasicPage() {
     "",
   ]);
   const [careers, setCareers] = useState<string>("");
+  const [readyForResults, setReadyForResults] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [key, setKey] = useState<string>(keyData);
 
@@ -80,6 +81,9 @@ export function BasicPage() {
   const updateSubmitted = (bool: boolean) => {
     setSubmitted(bool);
   };
+  const updateReadyForResults = (bool:boolean) => {
+    setReadyForResults(bool);
+  }
 
   const updateLoading = (bool: boolean) => {
     setLoading(bool);
@@ -358,8 +362,12 @@ export function BasicPage() {
               {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
             </div>
           </div></>
-      ) : (
+      ) : (/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         <center>
+
+          {!readyForResults ? (
+          <>
+
           {loading ? (
             <div>
               <img
@@ -370,16 +378,26 @@ export function BasicPage() {
               <p>Loading your Results!</p>
             </div>
           ) : (
-            <><div className="resultBox">
-                  <h3>These Careers Are Best Suited For You</h3>
-                  {careers.split("\n").map((career, index) => (
-                    <p key={index}>{career}</p>
-                  ))}
-                </div><div className="resetButton">
-                {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
-                  </div></>
+            "Ready for Results"
           )}
+        
+          </>
+          ) : (
+            <>
+            <div className="resultBox">
+            <h3>These Careers Are Best Suited For You</h3>
+            {careers.split("\n").map((career, index) => (
+              <p key={index}>{career}</p>
+            ))}
+          </div>
+
+          <div className="resetButton">
+          {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
+            </div></>
+          )}
+
         </center>
+
       )}
       {console.log(careers)}
 
