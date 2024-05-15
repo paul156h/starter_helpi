@@ -13,6 +13,23 @@ import loadingbar from "../images/loadingbar.gif";
 
 import OpenAI from "openai";
 
+function addNewLineBeforeNumbers(inputString: string): string {
+  const stringWithoutStars = inputString.replace(/\*\*/g, "");
+  const regex = /(\d+\.)|(\d+)/g;
+  let match;
+  let lastIndex = 0;
+  let modifiedString = "";
+
+  while ((match = regex.exec(stringWithoutStars)) !== null) {
+    const matchIndex = match.index;
+    modifiedString += stringWithoutStars.substring(lastIndex, matchIndex);
+    modifiedString += match[0];
+    lastIndex = matchIndex + match[0].length;
+  }
+  modifiedString += stringWithoutStars.substring(lastIndex);
+  return modifiedString;
+}
+
 let keyData = "";
 const saveKeyData = "MYKEY";
 const prevKey = localStorage.getItem(saveKeyData);
@@ -98,13 +115,19 @@ export function DetailedPage() {
           },
           {
             role: "user",
-            content: `The questions are as follows: Question 1: What was your favorite and least favorite subjects in high school/college?; Question 2: How much of an impact will the amount of money you could potentially earn from your career impact your decision?; Question 3: Would you rather be the leader a team or be one of the workers of a team?; Question 4: Would you want to create a difference in the world with your job or are you content with just getting your job done?; Question 5: Would you rather have a job where you are constantly communicating with customers or one where you can keep to yourself?; Question 6: What part of the world would you like to live while working?; Question 7: How many hours a day are you willing to work(including unpaid overtime)?; Question 8: What is your level of expertise with computers and electronics?; Question 9: Would you be willing to have a career with something that includes a lot of manual labor?; Question 10: Would you like to make your own work schedule and work off your own terms or are you content with having a predetermined schedule every week? Generate possible career choices for someone who responded to the quiz questions in the form of a list. Their answers are for those questions are stored in this array: ${answers}.`,
+            content: `Take in all of the answers and analyze it and Only List 5 Jobs that best Suits the user after given all of the answers. The questions are as follows: Question 1: What was your favorite and least favorite subjects in high school/college?; Question 2: How much of an impact will the amount of money you could potentially earn from your career impact your decision?; Question 3: Would you rather be the leader a team or be one of the workers of a team?; Question 4: Would you want to create a difference in the world with your job or are you content with just getting your job done?; Question 5: Would you rather have a job where you are constantly communicating with customers or one where you can keep to yourself?; Question 6: What part of the world would you like to live while working?; Question 7: How many hours a day are you willing to work(including unpaid overtime)?; Question 8: What is your level of expertise with computers and electronics?; Question 9: Would you be willing to have a career with something that includes a lot of manual labor?; Question 10: Would you like to make your own work schedule and work off your own terms or are you content with having a predetermined schedule every week? Generate possible career choices for someone who responded to the quiz questions in the form of a list. Their answers are for those questions are stored in this array: ${answers}.`,
           },
         ],
         model: "gpt-4-turbo",
       });
       if (completion.choices[0].message.content !== null) {
-        updateCareers(completion.choices[0].message.content);
+        // Remove "**" from the content before formatting
+        const contentWithoutStars =
+          completion.choices[0].message.content.replace(/\*\*/g, "");
+
+        // Format careers with new lines before each career suggestion
+        const formattedCareers = addNewLineBeforeNumbers(contentWithoutStars);
+        updateCareers(formattedCareers);
         updateLoading(false);
       } else {
         updateCareers("No careers found");
@@ -261,30 +284,39 @@ export function DetailedPage() {
               <p>Loading your Results</p>
             </div>
           ) : (
-            <p>Here are your results: {careers}</p>
+            <div className="resultBox">
+              <h3>These Careers Are Best Suited For You</h3>
+              {careers.split("\n").map((career, index) => (
+                <p key={index}>{career}</p>
+              ))}
+            </div>
           )}
         </center>
       ) : (
         ""
       )}
+
       <div className="footer">
-      <p>
-      <div>
-      <Form className="api-key-form">
-        <Form.Label className="center-label">API Key:</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Insert API Key Here"
-          onChange={changeKey}
-        ></Form.Control>
-        
-        <div>
-        <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
-        </div>
-      Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James Healy, and Matthew Montalvo 
-      </Form>
-      </div>
-      </p>
+        <p>
+          <div>
+            <Form className="api-key-form">
+              <Form.Label className="center-label">API Key</Form.Label>
+              <Form.Control
+                className="api-input"
+                type="password"
+                placeholder="Insert API Key Here"
+                onChange={changeKey}
+              ></Form.Control>
+              <div>
+                <Button className="Submit-Button" onClick={handleSubmit}>
+                  Submit
+                </Button>
+              </div>
+              Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James
+              Healy, and Matthew Montalvo
+            </Form>
+          </div>
+        </p>
       </div>
     </>
   );

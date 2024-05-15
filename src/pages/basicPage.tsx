@@ -14,34 +14,19 @@ import loadingbar from "../images/loadingbar.gif";
 import OpenAI from "openai";
 
 function addNewLineBeforeNumbers(inputString: string): string {
-  // Remove all occurrences of "**" from the input string
   const stringWithoutStars = inputString.replace(/\*\*/g, "");
-
-  // Regular expression to match "1.", "2.", "3.", "4.", "5" with optional period
   const regex = /(\d+\.)|(\d+)/g;
-
-  // Execute the regex on the string without stars
   let match;
   let lastIndex = 0;
   let modifiedString = "";
 
   while ((match = regex.exec(stringWithoutStars)) !== null) {
-    // Get the index of the matched substring
     const matchIndex = match.index;
-
-    // Append the substring from the last index to the current match index
     modifiedString += stringWithoutStars.substring(lastIndex, matchIndex);
-
-    // Add a <br> tag before the matched substring
     modifiedString += match[0];
-
-    // Update the last index
     lastIndex = matchIndex + match[0].length;
   }
-
-  // Append the remaining part of the string
   modifiedString += stringWithoutStars.substring(lastIndex);
-
   return modifiedString;
 }
 
@@ -352,7 +337,10 @@ export function BasicPage() {
           {currentQuestion < 10 ? (
             <Button onClick={handleNextQuestion}>Next</Button>
           ) : (
-            <Button onClick={handleSubmitAnswers} disabled={numAnswered !== 100}>
+            <Button
+              onClick={handleSubmitAnswers}
+              disabled={numAnswered !== 100}
+            >
               Submit
             </Button>
           )}
@@ -386,23 +374,26 @@ export function BasicPage() {
       {console.log(careers)}
 
       <div className="footer">
-      <p>
-      <div>
-      <Form className="api-key-form">
-        <Form.Label className="center-label">API Key:</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Insert API Key Here"
-          onChange={changeKey}
-        ></Form.Control>
-        
-        <div>
-        <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
-        </div>
-      Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James Healy, and Matthew Montalvo 
-      </Form>
-      </div>
-      </p>
+        <p>
+          <div>
+            <Form className="api-key-form">
+              <Form.Label className="center-label">API Key</Form.Label>
+              <Form.Control
+                className="api-input"
+                type="password"
+                placeholder="Insert API Key Here"
+                onChange={changeKey}
+              ></Form.Control>
+              <div>
+                <Button className="Submit-Button" onClick={handleSubmit}>
+                  Submit
+                </Button>
+              </div>
+              Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James
+              Healy, and Matthew Montalvo
+            </Form>
+          </div>
+        </p>
       </div>
     </>
   );
