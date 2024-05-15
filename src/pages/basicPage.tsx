@@ -10,6 +10,7 @@ import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
 import loadingbar from "../images/loadingbar.gif";
+import checkmark from "../images/checkmark.png";
 
 import OpenAI from "openai";
 
@@ -81,8 +82,8 @@ export function BasicPage() {
   const updateSubmitted = (bool: boolean) => {
     setSubmitted(bool);
   };
-  const updateReadyForResults = (bool:boolean) => {
-    setReadyForResults(bool);
+  const updateReadyForResults = () => {
+    setReadyForResults(!readyForResults);
   }
 
   const updateLoading = (bool: boolean) => {
@@ -119,6 +120,7 @@ export function BasicPage() {
     setNumAnswered(0);
     setLoading(true);
     setSubmitted(false);
+    updateReadyForResults();
   };
 
   async function results(answers: string[]) {
@@ -181,10 +183,12 @@ export function BasicPage() {
       <div className="basic-title">
         <h1>Welcome To Our Basic Questions</h1>
       </div>
-      <ProgressBar numAnswered={numAnswered}></ProgressBar>
+  
 
       {!submitted ? (
-        <><div className="question">
+        <>
+        <ProgressBar numAnswered={numAnswered}></ProgressBar>
+        <div className="question">
           <BasicQuestions
             question="How much experience do you have with working?"
             questionNumber={1}
@@ -375,10 +379,21 @@ export function BasicPage() {
                 className="loading-image"
                 alt="loadingImg"
               ></img>
-              <p>Loading your Results!</p>
+              <h2>Give Us a Second, We are Loading Your Results!</h2>
+            
             </div>
           ) : (
-            "Ready for Results"
+            <>
+            <img
+                src={loadingbar}
+                className="loading-image"
+                alt="loadingImg"
+              ></img>
+            <h2>Results Created, Click the Button to View!</h2>
+            <div>
+              <Button onClick={updateReadyForResults}>See Results</Button>
+            </div>
+            </>
           )}
         
           </>
@@ -391,7 +406,7 @@ export function BasicPage() {
             ))}
           </div>
 
-          <div className="resetButton">
+          <div>
           {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
             </div></>
           )}

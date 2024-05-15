@@ -10,6 +10,7 @@ import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
 import loadingbar from "../images/loadingbar.gif";
+import checkmark from "../images/checkmark.png";
 
 import OpenAI from "openai";
 
@@ -124,12 +125,11 @@ export function DetailedPage() {
 
   return (
     <>
-
+    <div className="detailed-title">
+          <h1>Welcome To Our Detailed Questions</h1>
+    </div>
       {!submitted ? (
         <>
-        <div className="detailed-title">
-          <h1>Welcome To Our Detailed Questions</h1>
-        </div>
         <ProgressBar numAnswered={numAnswered}></ProgressBar>
         <div className="question">
           <DetailedQuestions
