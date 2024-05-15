@@ -6,9 +6,15 @@ import "./detailedPage.css";
 
 import job1 from "../images/job1.jpg";
 import job2 from "../images/job2.jpg";
-import job3 from "../images/job3.jpg";
-import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
+import job6 from "../images/job6.png";
+import job7 from "../images/job7.png";
+import job8 from "../images/job8.png";
+import job9 from "../images/job9.png";
+import job10 from "../images/job10.png";
+import job11 from "../images/job11.png";
+import job12 from "../images/job12.png";
+
 import loadingbar from "../images/loadingbar.gif";
 import checkmark from "../images/checkmark.png";
 
@@ -159,7 +165,7 @@ export function DetailedPage() {
             question="How much of an impact will the amount of money you could potentially earn from your career impact your decision?"
             questionNumber={2}
             currentQuestion={currentQuestion}
-            image={job2}
+            image={job8}
             updateNumAnswered={updateNumAnswered}
             updateResultArray={updateResultArray}
           ></DetailedQuestions>
@@ -168,7 +174,7 @@ export function DetailedPage() {
             question="Would you rather be the leader a team or be one of the workers of a team?"
             questionNumber={3}
             currentQuestion={currentQuestion}
-            image={job3}
+            image={job6}
             updateNumAnswered={updateNumAnswered}
             updateResultArray={updateResultArray}
           ></DetailedQuestions>
@@ -177,7 +183,7 @@ export function DetailedPage() {
             question="Would you want to create a difference in the world with your job or are you content with just getting your job done?"
             questionNumber={4}
             currentQuestion={currentQuestion}
-            image={job4}
+            image={job9}
             updateNumAnswered={updateNumAnswered}
             updateResultArray={updateResultArray}
           ></DetailedQuestions>
@@ -186,7 +192,7 @@ export function DetailedPage() {
             question="Would you rather have a job where you are constantly communicating with customers or one where you can keep to yourself?"
             questionNumber={5}
             currentQuestion={currentQuestion}
-            image={job5}
+            image={job7}
             updateNumAnswered={updateNumAnswered}
             updateResultArray={updateResultArray}
           ></DetailedQuestions>
@@ -195,7 +201,7 @@ export function DetailedPage() {
             question="What part of the world would you like to live while working?"
             questionNumber={6}
             currentQuestion={currentQuestion}
-            image={job1}
+            image={job12}
             updateNumAnswered={updateNumAnswered}
             updateResultArray={updateResultArray}
           ></DetailedQuestions>
@@ -213,7 +219,7 @@ export function DetailedPage() {
             question="What is your level of expertise with computers and electronics?"
             questionNumber={8}
             currentQuestion={currentQuestion}
-            image={job3}
+            image={job5}
             updateNumAnswered={updateNumAnswered}
             updateResultArray={updateResultArray}
           ></DetailedQuestions>
@@ -222,7 +228,7 @@ export function DetailedPage() {
             question="Would you be willing to have a career with something that includes a lot of manual labor?"
             questionNumber={9}
             currentQuestion={currentQuestion}
-            image={job4}
+            image={job11}
             updateNumAnswered={updateNumAnswered}
             updateResultArray={updateResultArray}
           ></DetailedQuestions>
@@ -231,7 +237,7 @@ export function DetailedPage() {
             question="Would you like to make your own work schedule and work off your own terms or are you content with having a predetermined schedule every week?"
             questionNumber={10}
             currentQuestion={currentQuestion}
-            image={job5}
+            image={job10}
             updateNumAnswered={updateNumAnswered}
             updateResultArray={updateResultArray}
           ></DetailedQuestions>
