@@ -8,12 +8,13 @@ import job2 from "../images/job2.jpg";
 import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
-import job6 from "../images/job6.jpg";
-import job7 from "../images/job7.jpg";
-import job8 from "../images/job8.jpg";
-import job9 from "../images/job9.jpg";
-import job10 from "../images/job10.jpg";
-import job11 from "../images/job11.jpg";
+import job6 from "../images/job6.png";
+import job7 from "../images/job7.png";
+import job8 from "../images/job8.png";
+import job9 from "../images/job9.png";
+import job10 from "../images/job10.png";
+import job11 from "../images/job11.png";
+
 import loadingbar from "../images/loadingbar.gif";
 import checkmark from "../images/checkmark.png";
 
