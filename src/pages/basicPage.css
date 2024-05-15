@@ -9,6 +9,11 @@
   width: 350px;
 }
 
+.checkmark-image{
+  height: 20vh;
+  width: 350px;
+}
+
 .basic-title {
   display: flex;
   justify-content: center;
@@ -119,14 +124,4 @@
   color: #fff;
   padding-top: 5px;
   line-height: 0.7cm;
-}
-.resetButton {
-  background-color: #fa991c;
-  margin: 0 1rem;
-  border: none;
-  padding: 0.6rem 1.3rem;
-  border-radius: 0.3rem;
-  cursor: pointer;
-  color: #fff;
-  transition: background-color 0.2s ease-in;
 }

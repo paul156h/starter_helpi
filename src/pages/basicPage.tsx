@@ -4,12 +4,19 @@ import { useState } from "react";
 import { ProgressBar } from "../components/progressBar";
 import "./basicPage.css";
 
-import job1 from "../images/job1.jpg";
 import job2 from "../images/job2.jpg";
 import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
+import job6 from "../images/job6.png";
+import job7 from "../images/job7.png";
+import job8 from "../images/job8.png";
+import job9 from "../images/job9.png";
+import job10 from "../images/job10.png";
+import job11 from "../images/job11.png";
+
 import loadingbar from "../images/loadingbar.gif";
+import checkmark from "../images/checkmark.png";
 
 import OpenAI from "openai";
 
@@ -69,6 +76,7 @@ export function BasicPage() {
     "",
   ]);
   const [careers, setCareers] = useState<string>("");
+  const [readyForResults, setReadyForResults] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [key, setKey] = useState<string>(keyData);
 
@@ -80,6 +88,9 @@ export function BasicPage() {
   const updateSubmitted = (bool: boolean) => {
     setSubmitted(bool);
   };
+  const updateReadyForResults = () => {
+    setReadyForResults(!readyForResults);
+  }
 
   const updateLoading = (bool: boolean) => {
     setLoading(bool);
@@ -115,6 +126,7 @@ export function BasicPage() {
     setNumAnswered(0);
     setLoading(true);
     setSubmitted(false);
+    updateReadyForResults();
   };
 
   async function results(answers: string[]) {
@@ -177,14 +189,16 @@ export function BasicPage() {
       <div className="basic-title">
         <h1>Welcome To Our Basic Questions</h1>
       </div>
-      <ProgressBar numAnswered={numAnswered}></ProgressBar>
+  
 
       {!submitted ? (
-        <><div className="question">
+        <>
+        <ProgressBar numAnswered={numAnswered}></ProgressBar>
+        <div className="question">
           <BasicQuestions
             question="How much experience do you have with working?"
             questionNumber={1}
-            image={job1}
+            image={job6}
             answers={[
               "I have had several different jobs at different places",
               "I have only had a 2-3 different jobs",
@@ -199,7 +213,7 @@ export function BasicPage() {
           <BasicQuestions
             question="How comfortable are you with public speaking?"
             questionNumber={2}
-            image={job2}
+            image={job7}
             answers={[
               "I'm extremely comfortable and am willing to do it",
               "I'm fine with it whenever I have to do it",
@@ -213,8 +227,8 @@ export function BasicPage() {
 
           <BasicQuestions
             question="About how much money would you like to earn?"
-            image={job3}
             questionNumber={3}
+            image={job8}
             answers={[
               "I want to become really, really rich",
               "I would like to be able to buy whatever I want and still live a comfortable life",
@@ -244,7 +258,7 @@ export function BasicPage() {
           <BasicQuestions
             question="How much would you like your job to help people?"
             questionNumber={5}
-            image={job5}
+            image={job9}
             answers={[
               "I want it to be my sole purpose",
               "I would really like if my job helped others in need",
@@ -259,7 +273,7 @@ export function BasicPage() {
           <BasicQuestions
             question="How many hours would you like to work"
             questionNumber={6}
-            image={job1}
+            image={job5}
             answers={[
               "I'm fine with whatever I am assigned, even if I have to work overtime",
               "I would like to work a 9-5 (or any other 8 hour period)",
@@ -274,7 +288,7 @@ export function BasicPage() {
           <BasicQuestions
             question="How good are you at planning?"
             questionNumber={7}
-            image={job2}
+            image={job10}
             answers={[
               "I usually have a schedule planning literally every part of my day out",
               "I prioritize and and keep track of big events but not about the daily tasks",
@@ -304,7 +318,7 @@ export function BasicPage() {
           <BasicQuestions
             question="How much are you willing to do any sort of manual labor?"
             questionNumber={9}
-            image={job4}
+            image={job11}
             answers={[
               "I would prefer to do manual labor in my job",
               "I am fine with some manual labor in my job",
@@ -319,7 +333,7 @@ export function BasicPage() {
           <BasicQuestions
             question="What would you rather do with your free time?"
             questionNumber={10}
-            image={job5}
+            image={job2}
             answers={[
               "Learn a new skill",
               "Relax",
@@ -360,6 +374,9 @@ export function BasicPage() {
           </div></>
       ) : (
         <center>
+          {!readyForResults ? (
+          <>
+
           {loading ? (
             <div>
               <img
@@ -367,19 +384,41 @@ export function BasicPage() {
                 className="loading-image"
                 alt="loadingImg"
               ></img>
-              <p>Loading your Results!</p>
+              <h2>Give Us a Second, We are Loading Your Results!</h2>
+            
             </div>
           ) : (
-            <><div className="resultBox">
-                  <h3>These Careers Are Best Suited For You</h3>
-                  {careers.split("\n").map((career, index) => (
-                    <p key={index}>{career}</p>
-                  ))}
-                </div><div className="resetButton">
-                {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
-                  </div></>
+            <>
+            <img
+                src={checkmark}
+                className="checkmark-image"
+                alt="checkmarkimg"
+              ></img>
+            <h2>Results Created, Click the Button to View!</h2>
+            <div>
+              <Button onClick={updateReadyForResults}>See Results</Button>
+            </div>
+            
+            </>
           )}
+        
+          </>
+          ) : (
+            <>
+            <div className="resultBox">
+            <h3>These Careers Are Best Suited For You</h3>
+            {careers.split("\n").map((career, index) => (
+              <p key={index}>{career}</p>
+            ))}
+          </div>
+
+          <div>
+          {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
+            </div></>
+          )}
+
         </center>
+
       )}
       {console.log(careers)}
 
@@ -397,7 +436,7 @@ export function BasicPage() {
         <div>
         <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
         </div>
-      Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James Healy, and Matthew Montalvo 
+      Copyright 2024 - Designed by Nazmul Hossain, Brandon Cell, James Healy, and Matthew Montalvo 
       </Form>
       </div>
       </p>

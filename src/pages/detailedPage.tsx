@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import { DetailedQuestions } from "../components/DetailedQuestions";
 import { Button, Form } from "react-bootstrap";
-import "./detailedPage.css";
 import { ProgressBar } from "../components/progressBar";
+import "./detailedPage.css";
 
 import job1 from "../images/job1.jpg";
 import job2 from "../images/job2.jpg";
-import job3 from "../images/job3.jpg";
-import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
+import job6 from "../images/job6.png";
+import job7 from "../images/job7.png";
+import job8 from "../images/job8.png";
+import job9 from "../images/job9.png";
+import job10 from "../images/job10.png";
+import job11 from "../images/job11.png";
+import job12 from "../images/job12.png";
+
 import loadingbar from "../images/loadingbar.gif";
+import checkmark from "../images/checkmark.png";
 
 import OpenAI from "openai";
 
@@ -38,6 +45,7 @@ export function DetailedPage() {
     "",
   ]);
   const [careers, setCareers] = useState<string>("");
+  const [readyForResults, setReadyForResults] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [key, setKey] = useState<string>(keyData);
 
@@ -49,6 +57,10 @@ export function DetailedPage() {
   const updateSubmitted = (bool: boolean) => {
     setSubmitted(bool);
   };
+
+  const updateReadyForResults = () => {
+    setReadyForResults(!readyForResults);
+  }
 
   const updateLoading = (bool: boolean) => {
     setLoading(bool);
@@ -73,10 +85,19 @@ export function DetailedPage() {
   const handlePrevQuestion = () => {
     setCurrentQuestion((prevQuestion) => prevQuestion - 1);
   };
+  
 
   function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
     setKey(event.target.value);
   }
+
+  const resetQuiz = () => {
+    setCurrentQuestion(1);
+    setNumAnswered(0);
+    setLoading(true);
+    setSubmitted(false);
+    updateReadyForResults();
+  };
 
   async function results(answers: string[]) {
     console.log(answers);
@@ -124,12 +145,11 @@ export function DetailedPage() {
 
   return (
     <>
-
+    <div className="detailed-title">
+          <h1>Welcome To Our Detailed Questions</h1>
+    </div>
       {!submitted ? (
         <>
-        <div className="detailed-title">
-          <h1>Welcome To Our Detailed Questions</h1>
-        </div>
         <ProgressBar numAnswered={numAnswered}></ProgressBar>
         <div className="question">
           <DetailedQuestions
@@ -145,7 +165,7 @@ export function DetailedPage() {
             question="How much of an impact will the amount of money you could potentially earn from your career impact your decision?"
             questionNumber={2}
             currentQuestion={currentQuestion}
-            image={job2}
+            image={job8}
             updateNumAnswered={updateNumAnswered}
             updateResultArray={updateResultArray}
           ></DetailedQuestions>
@@ -154,7 +174,7 @@ export function DetailedPage() {
             question="Would you rather be the leader a team or be one of the workers of a team?"
             questionNumber={3}
             currentQuestion={currentQuestion}
-            image={job3}
+            image={job6}
             updateNumAnswered={updateNumAnswered}
             updateResultArray={updateResultArray}
           ></DetailedQuestions>
@@ -163,7 +183,7 @@ export function DetailedPage() {
             question="Would you want to create a difference in the world with your job or are you content with just getting your job done?"
             questionNumber={4}
             currentQuestion={currentQuestion}
-            image={job4}
+            image={job9}
             updateNumAnswered={updateNumAnswered}
             updateResultArray={updateResultArray}
           ></DetailedQuestions>
@@ -172,7 +192,7 @@ export function DetailedPage() {
             question="Would you rather have a job where you are constantly communicating with customers or one where you can keep to yourself?"
             questionNumber={5}
             currentQuestion={currentQuestion}
-            image={job5}
+            image={job7}
             updateNumAnswered={updateNumAnswered}
             updateResultArray={updateResultArray}
           ></DetailedQuestions>
@@ -181,7 +201,7 @@ export function DetailedPage() {
             question="What part of the world would you like to live while working?"
             questionNumber={6}
             currentQuestion={currentQuestion}
-            image={job1}
+            image={job12}
             updateNumAnswered={updateNumAnswered}
             updateResultArray={updateResultArray}
           ></DetailedQuestions>
@@ -199,7 +219,7 @@ export function DetailedPage() {
             question="What is your level of expertise with computers and electronics?"
             questionNumber={8}
             currentQuestion={currentQuestion}
-            image={job3}
+            image={job5}
             updateNumAnswered={updateNumAnswered}
             updateResultArray={updateResultArray}
           ></DetailedQuestions>
@@ -208,7 +228,7 @@ export function DetailedPage() {
             question="Would you be willing to have a career with something that includes a lot of manual labor?"
             questionNumber={9}
             currentQuestion={currentQuestion}
-            image={job4}
+            image={job11}
             updateNumAnswered={updateNumAnswered}
             updateResultArray={updateResultArray}
           ></DetailedQuestions>
@@ -217,7 +237,7 @@ export function DetailedPage() {
             question="Would you like to make your own work schedule and work off your own terms or are you content with having a predetermined schedule every week?"
             questionNumber={10}
             currentQuestion={currentQuestion}
-            image={job5}
+            image={job10}
             updateNumAnswered={updateNumAnswered}
             updateResultArray={updateResultArray}
           ></DetailedQuestions>
@@ -254,6 +274,9 @@ export function DetailedPage() {
         </>
       ) : (
         <center>
+          {!readyForResults ? (
+          <>
+
           {loading ? (
             <div>
               <img
@@ -261,10 +284,37 @@ export function DetailedPage() {
                 className="loading-image"
                 alt="loadingImg"
               ></img>
-              <p>Loading your Results</p>
+              <h2>Give Us a Second, We are Loading Your Results!</h2>
+            
             </div>
           ) : (
-            <p>Here are your results: {careers}</p>
+            <>
+            <img
+                src={checkmark}
+                className="checkmark-image"
+                alt="checkmarkimg"
+              ></img>
+            <h2>Results Created, Click the Button to View!</h2>
+            <div>
+              <Button onClick={updateReadyForResults}>See Results</Button>
+            </div>
+            
+            </>
+          )}
+        
+          </>
+          ) : (
+            <>
+            <div className="resultBox">
+            <h3>These Careers Are Best Suited For You</h3>
+            {careers.split("\n").map((career, index) => (
+              <p key={index}>{career}</p>
+            ))}
+          </div>
+
+          <div>
+          {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
+            </div></>
           )}
         </center>
       )}
@@ -282,7 +332,7 @@ export function DetailedPage() {
         <div>
         <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
         </div>
-      Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James Healy, and Matthew Montalvo 
+      Copyright 2024 - Designed by Nazmul Hossain, Brandon Cell, James Healy, and Matthew Montalvo 
       </Form>
       </div>
       </p>
