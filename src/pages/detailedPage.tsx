@@ -39,6 +39,7 @@ export function DetailedPage() {
     "",
   ]);
   const [careers, setCareers] = useState<string>("");
+  const [readyForResults, setReadyForResults] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [key, setKey] = useState<string>(keyData);
 
@@ -50,6 +51,10 @@ export function DetailedPage() {
   const updateSubmitted = (bool: boolean) => {
     setSubmitted(bool);
   };
+
+  const updateReadyForResults = () => {
+    setReadyForResults(!readyForResults);
+  }
 
   const updateLoading = (bool: boolean) => {
     setLoading(bool);
@@ -74,10 +79,19 @@ export function DetailedPage() {
   const handlePrevQuestion = () => {
     setCurrentQuestion((prevQuestion) => prevQuestion - 1);
   };
+  
 
   function changeKey(event: React.ChangeEvent<HTMLInputElement>) {
     setKey(event.target.value);
   }
+
+  const resetQuiz = () => {
+    setCurrentQuestion(1);
+    setNumAnswered(0);
+    setLoading(true);
+    setSubmitted(false);
+    updateReadyForResults();
+  };
 
   async function results(answers: string[]) {
     console.log(answers);
@@ -254,6 +268,9 @@ export function DetailedPage() {
         </>
       ) : (
         <center>
+          {!readyForResults ? (
+          <>
+
           {loading ? (
             <div>
               <img
@@ -261,10 +278,37 @@ export function DetailedPage() {
                 className="loading-image"
                 alt="loadingImg"
               ></img>
-              <p>Loading your Results</p>
+              <h2>Give Us a Second, We are Loading Your Results!</h2>
+            
             </div>
           ) : (
-            <p>Here are your results: {careers}</p>
+            <>
+            <img
+                src={checkmark}
+                className="checkmark-image"
+                alt="checkmarkimg"
+              ></img>
+            <h2>Results Created, Click the Button to View!</h2>
+            <div>
+              <Button onClick={updateReadyForResults}>See Results</Button>
+            </div>
+            
+            </>
+          )}
+        
+          </>
+          ) : (
+            <>
+            <div className="resultBox">
+            <h3>These Careers Are Best Suited For You</h3>
+            {careers.split("\n").map((career, index) => (
+              <p key={index}>{career}</p>
+            ))}
+          </div>
+
+          <div>
+          {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
+            </div></>
           )}
         </center>
       )}
@@ -282,7 +326,7 @@ export function DetailedPage() {
         <div>
         <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
         </div>
-      Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James Healy, and Matthew Montalvo 
+      Copyright 2024 - Designed by Nazmul Hossain, Brandon Cell, James Healy, and Matthew Montalvo 
       </Form>
       </div>
       </p>

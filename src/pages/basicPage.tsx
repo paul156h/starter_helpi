@@ -366,9 +366,8 @@ export function BasicPage() {
               {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
             </div>
           </div></>
-      ) : (/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      ) : (
         <center>
-
           {!readyForResults ? (
           <>
 
@@ -385,14 +384,15 @@ export function BasicPage() {
           ) : (
             <>
             <img
-                src={loadingbar}
-                className="loading-image"
-                alt="loadingImg"
+                src={checkmark}
+                className="checkmark-image"
+                alt="checkmarkimg"
               ></img>
             <h2>Results Created, Click the Button to View!</h2>
             <div>
               <Button onClick={updateReadyForResults}>See Results</Button>
             </div>
+            
             </>
           )}
         
@@ -430,7 +430,7 @@ export function BasicPage() {
         <div>
         <Button className="Submit-Button" onClick={handleSubmit}>Submit</Button>
         </div>
-      Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James Healy, and Matthew Montalvo 
+      Copyright 2024 - Designed by Nazmul Hossain, Brandon Cell, James Healy, and Matthew Montalvo 
       </Form>
       </div>
       </p>

@@ -129,7 +129,7 @@ export function HomePage() {
                   Submit
                 </Button>
               </div>
-              Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James
+              Copyright 2024 - Designed by Nazmul Hossain, Brandon Cell, James
               Healy, and Matthew Montalvo
             </Form>
           </div>
