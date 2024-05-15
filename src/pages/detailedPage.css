@@ -4,11 +4,18 @@
   box-sizing: border-box;
 }
 
+.detailed-title h1 {
+  color: #fff;
+  font-size: 25px;
+  margin-top: -40px;
+  z-index: 10;
+}
+
 .loading-image {
   height: 20vh;
   width: 350px;
 }
-.checkmark-image{
+.checkmark-image {
   height: 20vh;
   width: 350px;
 }
