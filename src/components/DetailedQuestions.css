@@ -31,16 +31,3 @@
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
-
-.answer-input-box {
-  margin-top: 15px;
-  width: 400px;
-  height: 40px;
-  border-radius: 30px;
-  padding: 4px 10px;
-  font-size: 18px;
-}
-
-.answer-input-box::placeholder {
-  color: #1c768f;
-}

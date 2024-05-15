@@ -4,12 +4,19 @@ import { useState } from "react";
 import { ProgressBar } from "../components/progressBar";
 import "./basicPage.css";
 
-import job1 from "../images/job1.jpg";
 import job2 from "../images/job2.jpg";
 import job3 from "../images/job3.jpg";
 import job4 from "../images/job4.jpg";
 import job5 from "../images/job5.jpg";
+import job6 from "../images/job6.png";
+import job7 from "../images/job7.png";
+import job8 from "../images/job8.png";
+import job9 from "../images/job9.png";
+import job10 from "../images/job10.png";
+import job11 from "../images/job11.png";
+
 import loadingbar from "../images/loadingbar.gif";
+import checkmark from "../images/checkmark.png";
 
 import OpenAI from "openai";
 
@@ -54,6 +61,7 @@ export function BasicPage() {
     "",
   ]);
   const [careers, setCareers] = useState<string>("");
+  const [readyForResults, setReadyForResults] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [key, setKey] = useState<string>(keyData);
 
@@ -64,6 +72,9 @@ export function BasicPage() {
 
   const updateSubmitted = (bool: boolean) => {
     setSubmitted(bool);
+  };
+  const updateReadyForResults = () => {
+    setReadyForResults(!readyForResults);
   };
 
   const updateLoading = (bool: boolean) => {
@@ -100,6 +111,7 @@ export function BasicPage() {
     setNumAnswered(0);
     setLoading(true);
     setSubmitted(false);
+    updateReadyForResults();
   };
 
   async function results(answers: string[]) {
@@ -162,214 +174,238 @@ export function BasicPage() {
       <div className="basic-title">
         <h1>Welcome To Our Basic Questions</h1>
       </div>
-      <ProgressBar numAnswered={numAnswered}></ProgressBar>
-      <div className="question">
-        <BasicQuestions
-          question="How much experience do you have with working?"
-          questionNumber={1}
-          image={job1}
-          answers={[
-            "I have had several different jobs at different places",
-            "I have only had a 2-3 different jobs",
-            "I have only had one singlular job my whole life",
-            "I have never had a job before",
-          ]}
-          currentQuestion={currentQuestion}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></BasicQuestions>
 
-        <BasicQuestions
-          question="How comfortable are you with public speaking?"
-          questionNumber={2}
-          image={job2}
-          answers={[
-            "I'm extremely comfortable and am willing to do it",
-            "I'm fine with it whenever I have to do it",
-            "I would rather not have to do it",
-            "I cannot get myself to do this even if I tried",
-          ]}
-          currentQuestion={currentQuestion}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></BasicQuestions>
+      {!submitted ? (
+        <>
+          <ProgressBar numAnswered={numAnswered}></ProgressBar>
+          <div className="question">
+            <BasicQuestions
+              question="How much experience do you have with working?"
+              questionNumber={1}
+              image={job6}
+              answers={[
+                "I have had several different jobs at different places",
+                "I have only had a 2-3 different jobs",
+                "I have only had one singlular job my whole life",
+                "I have never had a job before",
+              ]}
+              currentQuestion={currentQuestion}
+              updateNumAnswered={updateNumAnswered}
+              updateResultArray={updateResultArray}
+            ></BasicQuestions>
 
-        <BasicQuestions
-          question="About how much money would you like to earn?"
-          image={job3}
-          questionNumber={3}
-          answers={[
-            "I want to become really, really rich",
-            "I would like to be able to buy whatever I want and still live a comfortable life",
-            "I'm fine with any amount as long as I live comfortably",
-            "Money doesn't have an impact on my decision",
-          ]}
-          currentQuestion={currentQuestion}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></BasicQuestions>
+            <BasicQuestions
+              question="How comfortable are you with public speaking?"
+              questionNumber={2}
+              image={job7}
+              answers={[
+                "I'm extremely comfortable and am willing to do it",
+                "I'm fine with it whenever I have to do it",
+                "I would rather not have to do it",
+                "I cannot get myself to do this even if I tried",
+              ]}
+              currentQuestion={currentQuestion}
+              updateNumAnswered={updateNumAnswered}
+              updateResultArray={updateResultArray}
+            ></BasicQuestions>
 
-        <BasicQuestions
-          question="Which one of these words best describes you?"
-          questionNumber={4}
-          image={job4}
-          answers={[
-            "Center of Attention",
-            "Participating",
-            "In the crowd",
-            "Alone",
-          ]}
-          currentQuestion={currentQuestion}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></BasicQuestions>
+            <BasicQuestions
+              question="About how much money would you like to earn?"
+              questionNumber={3}
+              image={job8}
+              answers={[
+                "I want to become really, really rich",
+                "I would like to be able to buy whatever I want and still live a comfortable life",
+                "I'm fine with any amount as long as I live comfortably",
+                "Money doesn't have an impact on my decision",
+              ]}
+              currentQuestion={currentQuestion}
+              updateNumAnswered={updateNumAnswered}
+              updateResultArray={updateResultArray}
+            ></BasicQuestions>
 
-        <BasicQuestions
-          question="How much would you like your job to help people?"
-          questionNumber={5}
-          image={job5}
-          answers={[
-            "I want it to be my sole purpose",
-            "I would really like if my job helped others in need",
-            "I would be fine if helping people was a side effect of me doing my job",
-            "I couldn't care less how my actions may impact someone",
-          ]}
-          currentQuestion={currentQuestion}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></BasicQuestions>
+            <BasicQuestions
+              question="Which one of these words best describes you?"
+              questionNumber={4}
+              image={job4}
+              answers={[
+                "Center of Attention",
+                "Participating",
+                "In the crowd",
+                "Alone",
+              ]}
+              currentQuestion={currentQuestion}
+              updateNumAnswered={updateNumAnswered}
+              updateResultArray={updateResultArray}
+            ></BasicQuestions>
 
-        <BasicQuestions
-          question="How many hours would you like to work"
-          questionNumber={6}
-          image={job1}
-          answers={[
-            "I'm fine with whatever I am assigned, even if I have to work overtime",
-            "I would like to work a 9-5 (or any other 8 hour period)",
-            "I would prefer to work a lot less than 8 hours a day",
-            "I would rather create my own hours and work to my own schedule",
-          ]}
-          currentQuestion={currentQuestion}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></BasicQuestions>
+            <BasicQuestions
+              question="How much would you like your job to help people?"
+              questionNumber={5}
+              image={job9}
+              answers={[
+                "I want it to be my sole purpose",
+                "I would really like if my job helped others in need",
+                "I would be fine if helping people was a side effect of me doing my job",
+                "I couldn't care less how my actions may impact someone",
+              ]}
+              currentQuestion={currentQuestion}
+              updateNumAnswered={updateNumAnswered}
+              updateResultArray={updateResultArray}
+            ></BasicQuestions>
 
-        <BasicQuestions
-          question="How good are you at planning?"
-          questionNumber={7}
-          image={job2}
-          answers={[
-            "I usually have a schedule planning literally every part of my day out",
-            "I prioritize and and keep track of big events but not about the daily tasks",
-            "I try to keep my plan organized but usually don't do a good job with it",
-            "I don't keep a schedule and I deal with things as they come",
-          ]}
-          currentQuestion={currentQuestion}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></BasicQuestions>
+            <BasicQuestions
+              question="How many hours would you like to work"
+              questionNumber={6}
+              image={job5}
+              answers={[
+                "I'm fine with whatever I am assigned, even if I have to work overtime",
+                "I would like to work a 9-5 (or any other 8 hour period)",
+                "I would prefer to work a lot less than 8 hours a day",
+                "I would rather create my own hours and work to my own schedule",
+              ]}
+              currentQuestion={currentQuestion}
+              updateNumAnswered={updateNumAnswered}
+              updateResultArray={updateResultArray}
+            ></BasicQuestions>
 
-        <BasicQuestions
-          question="Which of the following sounds the most interesting?"
-          questionNumber={8}
-          image={job3}
-          answers={[
-            "Electronic & Programs",
-            "History & Culture",
-            "Biology & Anatomy",
-            "Sports & Fitness",
-          ]}
-          currentQuestion={currentQuestion}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></BasicQuestions>
+            <BasicQuestions
+              question="How good are you at planning?"
+              questionNumber={7}
+              image={job10}
+              answers={[
+                "I usually have a schedule planning literally every part of my day out",
+                "I prioritize and and keep track of big events but not about the daily tasks",
+                "I try to keep my plan organized but usually don't do a good job with it",
+                "I don't keep a schedule and I deal with things as they come",
+              ]}
+              currentQuestion={currentQuestion}
+              updateNumAnswered={updateNumAnswered}
+              updateResultArray={updateResultArray}
+            ></BasicQuestions>
 
-        <BasicQuestions
-          question="How much are you willing to do any sort of manual labor?"
-          questionNumber={9}
-          image={job4}
-          answers={[
-            "I would prefer to do manual labor in my job",
-            "I am fine with some manual labor in my job",
-            "I would prefer not to have manual labor in my job",
-            "I will never want to do any manual labor in my job",
-          ]}
-          currentQuestion={currentQuestion}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></BasicQuestions>
+            <BasicQuestions
+              question="Which of the following sounds the most interesting?"
+              questionNumber={8}
+              image={job3}
+              answers={[
+                "Electronic & Programs",
+                "History & Culture",
+                "Biology & Anatomy",
+                "Sports & Fitness",
+              ]}
+              currentQuestion={currentQuestion}
+              updateNumAnswered={updateNumAnswered}
+              updateResultArray={updateResultArray}
+            ></BasicQuestions>
 
-        <BasicQuestions
-          question="What would you rather do with your free time?"
-          questionNumber={10}
-          image={job5}
-          answers={[
-            "Learn a new skill",
-            "Relax",
-            "Have fun with a hobby",
-            "Spend the time with friends/loved ones",
-          ]}
-          currentQuestion={currentQuestion}
-          updateNumAnswered={updateNumAnswered}
-          updateResultArray={updateResultArray}
-        ></BasicQuestions>
-      </div>
-      <div>
-        {numAnswered === 100 && !submitted && currentQuestion !== 10 ? (
-          <center>
-            <h2>You Have Answered All Questions, Go to Last Page to Submit!</h2>{" "}
-          </center>
-        ) : (
-          <></>
-        )}
-      </div>
+            <BasicQuestions
+              question="How much are you willing to do any sort of manual labor?"
+              questionNumber={9}
+              image={job11}
+              answers={[
+                "I would prefer to do manual labor in my job",
+                "I am fine with some manual labor in my job",
+                "I would prefer not to have manual labor in my job",
+                "I will never want to do any manual labor in my job",
+              ]}
+              currentQuestion={currentQuestion}
+              updateNumAnswered={updateNumAnswered}
+              updateResultArray={updateResultArray}
+            ></BasicQuestions>
 
-      <div className="next-container">
-        <div className="prev">
-          {currentQuestion > 1 ? (
-            <Button onClick={handlePrevQuestion}>Previous</Button>
-          ) : (
-            <hr></hr>
-          )}
-        </div>
+            <BasicQuestions
+              question="What would you rather do with your free time?"
+              questionNumber={10}
+              image={job2}
+              answers={[
+                "Learn a new skill",
+                "Relax",
+                "Have fun with a hobby",
+                "Spend the time with friends/loved ones",
+              ]}
+              currentQuestion={currentQuestion}
+              updateNumAnswered={updateNumAnswered}
+              updateResultArray={updateResultArray}
+            ></BasicQuestions>
+          </div>
+          <div>
+            {numAnswered === 100 && !submitted && currentQuestion !== 10 ? (
+              <center>
+                <h2>
+                  You Have Answered All Questions, Go to Last Page to Submit!
+                </h2>{" "}
+              </center>
+            ) : (
+              <></>
+            )}
+          </div>
+          <div className="next-container">
+            <div className="prev">
+              {currentQuestion > 1 ? (
+                <Button onClick={handlePrevQuestion}>Previous</Button>
+              ) : (
+                <hr></hr>
+              )}
+            </div>
 
-        <div className="next">
-          {currentQuestion < 10 ? (
-            <Button onClick={handleNextQuestion}>Next</Button>
-          ) : (
-            <Button
-              onClick={handleSubmitAnswers}
-              disabled={numAnswered !== 100}
-            >
-              Submit
-            </Button>
-          )}
-          {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
-        </div>
-      </div>
-
-      {submitted ? (
+            <div className="next">
+              {currentQuestion < 10 ? (
+                <Button onClick={handleNextQuestion}>Next</Button>
+              ) : (
+                <Button
+                  onClick={handleSubmitAnswers}
+                  disabled={numAnswered !== 100}
+                >
+                  Submit
+                </Button>
+              )}
+              {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
+            </div>
+          </div>
+        </>
+      ) : (
         <center>
-          {loading ? (
-            <div>
-              <img
-                src={loadingbar}
-                className="loading-image"
-                alt="loadingImg"
-              ></img>
-              <p>Loading your Results!</p>
-            </div>
+          {!readyForResults ? (
+            <>
+              {loading ? (
+                <div>
+                  <img
+                    src={loadingbar}
+                    className="loading-image"
+                    alt="loadingImg"
+                  ></img>
+                  <h2>Give Us a Second, We are Loading Your Results!</h2>
+                </div>
+              ) : (
+                <>
+                  <img
+                    src={checkmark}
+                    className="checkmark-image"
+                    alt="checkmarkimg"
+                  ></img>
+                  <h2>Results Created, Click the Button to View!</h2>
+                  <div>
+                    <Button onClick={updateReadyForResults}>See Results</Button>
+                  </div>
+                </>
+              )}
+            </>
           ) : (
-            <div className="resultBox">
-              <h3>These Careers Are Best Suited For You</h3>
-              {careers.split("\n").map((career, index) => (
-                <p key={index}>{career}</p>
-              ))}
-            </div>
+            <>
+              <div className="resultBox">
+                <h3>These Careers Are Best Suited For You</h3>
+                {careers.split("\n").map((career, index) => (
+                  <p key={index}>{career}</p>
+                ))}
+              </div>
+
+              <div>
+                {submitted && <Button onClick={resetQuiz}>Reset Quiz</Button>}
+              </div>
+            </>
           )}
         </center>
-      ) : (
-        ""
       )}
       {console.log(careers)}
 
@@ -377,9 +413,8 @@ export function BasicPage() {
         <p>
           <div>
             <Form className="api-key-form">
-              <Form.Label className="center-label">API Key</Form.Label>
+              <Form.Label className="center-label">API Key:</Form.Label>
               <Form.Control
-                className="api-input"
                 type="password"
                 placeholder="Insert API Key Here"
                 onChange={changeKey}
@@ -389,7 +424,7 @@ export function BasicPage() {
                   Submit
                 </Button>
               </div>
-              Copyright 2024; Designed by Nazmul Hossain, Brandon Cell, James
+              Copyright 2024 - Designed by Nazmul Hossain, Brandon Cell, James
               Healy, and Matthew Montalvo
             </Form>
           </div>
