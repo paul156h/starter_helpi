@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { DetailedQuestions } from "../components/DetailedQuestions";
 import { Button, Form } from "react-bootstrap";
-import "./detailedPage.css";
 import { ProgressBar } from "../components/progressBar";
+import "./detailedPage.css";
 
 import job1 from "../images/job1.jpg";
 import job2 from "../images/job2.jpg";
