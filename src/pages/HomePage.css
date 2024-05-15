@@ -12,6 +12,9 @@
   padding: 10px;
   font-weight: 900;
 }
+.title h1 {
+  color: #1c768f;
+}
 .body {
   display: flex;
   justify-content: center;

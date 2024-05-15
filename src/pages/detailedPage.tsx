@@ -321,7 +321,12 @@ export function DetailedPage() {
                   ></img>
                   <h2>Results Created, Click the Button to View!</h2>
                   <div>
-                    <Button onClick={updateReadyForResults}>See Results</Button>
+                    <Button
+                      className="resultBtn"
+                      onClick={updateReadyForResults}
+                    >
+                      See Results
+                    </Button>
                   </div>
                 </>
               )}
