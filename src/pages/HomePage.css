@@ -129,7 +129,7 @@
 /*---------BASIC Info Slide--------------*/
 .basicInfoPage {
   min-height: 100vh;
-  width: 85%;
+  width: 84%;
   padding: 3rem 0;
   margin-left: auto;
   margin-right: auto;
@@ -159,7 +159,7 @@
 
 .BasicInfoImg {
   margin-bottom: auto;
-  width: 40%;
+  width: 41%;
 }
 
 .BasicInfoImg img {

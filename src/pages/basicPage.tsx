@@ -365,7 +365,7 @@ export function BasicPage() {
           </div>
         </>
       ) : (
-        <center>
+        <center className="Result">
           {!readyForResults ? (
             <>
               {loading ? (

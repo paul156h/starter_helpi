@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import "./HomePage.css";
-import job3 from "../images/job3.jpg";
-import job4 from "../images/job4.jpg";
 import { Link } from "react-router-dom";
+import job14 from "../images/job14.jpeg";
+import job15 from "../images/job15.jpg";
 
 let keyData = "";
 const saveKeyData = "MYKEY";
@@ -89,14 +89,14 @@ export function HomePage() {
           </div>
 
           <div className="BasicInfoImg">
-            <img src={job3} alt="giveImage"></img>
+            <img src={job15} alt="giveImage"></img>
           </div>
         </div>
       </div>
       <div className="detailedInfoPage">
         <div className="detailedInfoBox">
           <div className="detailedInfoImg">
-            <img src={job4} alt="giveImage"></img>
+            <img src={job14} alt="giveImage"></img>
           </div>
           <div className="detailedInfo">
             <h1>Detailed Questions Page</h1>

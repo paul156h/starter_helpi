@@ -4,16 +4,16 @@ import { Button, Form } from "react-bootstrap";
 import { ProgressBar } from "../components/progressBar";
 import "./detailedPage.css";
 
-import job1 from "../images/job1.jpg";
 import job2 from "../images/job2.jpg";
-import job5 from "../images/job5.jpg";
-import job6 from "../images/job6.png";
 import job7 from "../images/job7.png";
 import job8 from "../images/job8.png";
 import job9 from "../images/job9.png";
 import job10 from "../images/job10.png";
 import job11 from "../images/job11.png";
 import job12 from "../images/job12.png";
+import job16 from "../images/job16.jpg";
+import job17 from "../images/job17.jpg";
+import job18 from "../images/job18.webp";
 
 import loadingbar from "../images/loadingbar.gif";
 import checkmark from "../images/checkmark.png";
@@ -135,7 +135,7 @@ export function DetailedPage() {
           },
           {
             role: "user",
-            content: `Take in all of the answers and analyze it and Only List 5 Jobs that best Suits the user after given all of the answers. The questions are as follows: Question 1: What was your favorite and least favorite subjects in high school/college?; Question 2: How much of an impact will the amount of money you could potentially earn from your career impact your decision?; Question 3: Would you rather be the leader a team or be one of the workers of a team?; Question 4: Would you want to create a difference in the world with your job or are you content with just getting your job done?; Question 5: Would you rather have a job where you are constantly communicating with customers or one where you can keep to yourself?; Question 6: What part of the world would you like to live while working?; Question 7: How many hours a day are you willing to work(including unpaid overtime)?; Question 8: What is your level of expertise with computers and electronics?; Question 9: Would you be willing to have a career with something that includes a lot of manual labor?; Question 10: Would you like to make your own work schedule and work off your own terms or are you content with having a predetermined schedule every week? Generate possible career choices for someone who responded to the quiz questions in the form of a list. Their answers are for those questions are stored in this array: ${answers}.`,
+            content: `Take in all of the answers and analyze it and Only List 5 Jobs that best Suits the user after given all of the answers. The questions are as follows: Question 1: What was your favorite and least favorite subjects in high school/college?; Question 2: How much of an impact is money in your career decision?; Question 3: Would you rather be the leader a team or be one of the workers of a team?; Question 4: Would you want to create a difference in the world with your job or are you content with just getting your job done?; Question 5: Would you rather have a job where you are constantly communicating with customers or one where you can keep to yourself?; Question 6: What part of the world would you like to live while working?; Question 7: How many hours a day are you willing to work(including unpaid overtime)?; Question 8: What is your level of expertise with computers and electronics?; Question 9: Would you be willing to have a career with something that includes a lot of manual labor?; What is ideal work schedule? Generate possible career choices for someone who responded to the quiz questions in the form of a list. Their answers are for those questions are stored in this array: ${answers}.`,
           },
         ],
         model: "gpt-4-turbo",
@@ -178,13 +178,13 @@ export function DetailedPage() {
               question="What were your favorite and least favorite subjects in high school/college?"
               questionNumber={1}
               currentQuestion={currentQuestion}
-              image={job1}
+              image={job17}
               updateNumAnswered={updateNumAnswered}
               updateResultArray={updateResultArray}
             ></DetailedQuestions>
 
             <DetailedQuestions
-              question="How much of an impact will the amount of money you could potentially earn from your career impact your decision?"
+              question="How much of an impact is money in your career decision?"
               questionNumber={2}
               currentQuestion={currentQuestion}
               image={job8}
@@ -196,7 +196,7 @@ export function DetailedPage() {
               question="Would you rather be the leader a team or be one of the workers of a team?"
               questionNumber={3}
               currentQuestion={currentQuestion}
-              image={job6}
+              image={job18}
               updateNumAnswered={updateNumAnswered}
               updateResultArray={updateResultArray}
             ></DetailedQuestions>
@@ -241,7 +241,7 @@ export function DetailedPage() {
               question="What is your level of expertise with computers and electronics?"
               questionNumber={8}
               currentQuestion={currentQuestion}
-              image={job5}
+              image={job16}
               updateNumAnswered={updateNumAnswered}
               updateResultArray={updateResultArray}
             ></DetailedQuestions>
@@ -256,7 +256,7 @@ export function DetailedPage() {
             ></DetailedQuestions>
 
             <DetailedQuestions
-              question="Would you like to make your own work schedule and work off your own terms or are you content with having a predetermined schedule every week?"
+              question="What is ideal work schedule?"
               questionNumber={10}
               currentQuestion={currentQuestion}
               image={job10}
