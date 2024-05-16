@@ -100,7 +100,7 @@
       at runCLI (node_modules/@jest/core/build/cli/index.js:173:3)
 
 FAIL src/App.test.tsx
-  ✕ renders learn react link (124 ms)
+  ✕ renders learn react link (123 ms)
 
   ● renders learn react link
 
@@ -242,7 +242,7 @@ FAIL src/App.test.tsx
                 [36m>[39m
                   [36m<img[39m
                     [33malt[39m=[32m"giveImage"[39m
-                    [33msrc[39m=[32m"job3.jpg"[39m
+                    [33msrc[39m=[32m"job15.jpg"[39m
                   [36m/>[39m
                 [36m</div>[39m
               [36m</div>[39m
@@ -258,7 +258,7 @@ FAIL src/App.test.tsx
                 [36m>[39m
                   [36m<img[39m
                     [33malt[39m=[32m"giveImage"[39m
-                    [33msrc[39m=[32m"job4.jpg"[39m
+                    [33msrc[39m=[32m"job14.jpeg"[39m
                   [36m/>[39m
                 [36m</div>[39m
                 [36m<div[39m
@@ -359,5 +359,5 @@ All files               |   11.21 |     4.05 |   13.79 |   11.42 |
 Test Suites: 1 failed, 1 total
 Tests:       1 failed, 1 total
 Snapshots:   0 total
-Time:        3.263 s
+Time:        3.118 s
 Ran all test suites.
